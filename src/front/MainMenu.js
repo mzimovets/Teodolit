@@ -31,7 +31,17 @@ const MainMenu = () => {
   };
   return (
     <div className="mainContainer">
-      <Title level={2}>Тренажер по проложению теодолитного хода</Title>
+      <div className="noselect" style={{ paddingTop: "152px" }}>
+        <Title
+          level={1}
+          style={{ margin: "0px", paddingLeft: "100px", fontSize: "84px" }}
+        >
+          Тренажер
+        </Title>
+        <Title level={3} style={{ margin: "0px", paddingLeft: "100px" }}>
+          по проложению теодолитного хода
+        </Title>
+      </div>
       <img class="teodolit-img" src="teod.png" />
       <div className="authWindow">
         <div className="auth">
@@ -43,7 +53,7 @@ const MainMenu = () => {
           >
             <Form.Item
               name="username"
-              rules={[{ required: true, message: "Введите ваше имя!" }]}
+              rules={[{ required: true, message: "Введите имя!" }]}
             >
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
@@ -52,7 +62,7 @@ const MainMenu = () => {
             </Form.Item>
             <Form.Item
               name="password"
-              rules={[{ required: true, message: "Введите ваш пароль!" }]}
+              rules={[{ required: true, message: "Введите пароль!" }]}
             >
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -60,21 +70,20 @@ const MainMenu = () => {
                 placeholder="Пароль"
               />
             </Form.Item>
-            <Form.Item>
+            {/* <Form.Item>
               <Form.Item
                 name="remember"
                 valuePropName="checked"
                 noStyle
               ></Form.Item>
-            </Form.Item>
+            </Form.Item> */}
 
             <Form.Item>
               <Button
                 type="primary"
                 htmlType="submit"
-                className="login-form-button"
+                className="login-form-button center-btn"
                 style={{
-                  marginLeft: "174px",
                   backgroundColor: "black",
                   width: "102px",
                 }}
