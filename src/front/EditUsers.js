@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Button, Modal } from "antd";
 
-const AddUsers = () => {
+const EditUsers = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -32,4 +32,4 @@ const AddUsers = () => {
   );
 };
 
-export { AddUsers };
+export { EditUsers };

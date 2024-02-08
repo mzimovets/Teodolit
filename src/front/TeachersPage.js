@@ -9,7 +9,7 @@ import {
   Input,
   Tag,
 } from "antd";
-import { UserAddOutlined, DownOutlined } from "@ant-design/icons";
+import { UserAddOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
 const TeacherPage = () => {
@@ -28,9 +28,27 @@ const TeacherPage = () => {
     setIsModalOpen(false);
   };
 
+  //
+
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const showModalEdit = () => {
+    setIsEditOpen(true);
+  };
+
+  const handleOkEdit = () => {
+    setIsEditOpen(false);
+    console.log("нажато");
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditOpen(false);
+  };
+
+  //
+
   const items = [
-    { label: "Фамилия", value: "SecondName" },
-    { label: "Группа", value: "aboba" },
+    { label: "Фамилия", value: "secondName" },
+    { label: "Группа", value: "group" },
   ];
 
   const [selectedItem, setSelectedItem] = useState(items[0]);
@@ -130,6 +148,16 @@ const TeacherPage = () => {
       title: "Пароль",
       dataIndex: "password",
       key: "password",
+    },
+    {
+      title: "",
+      dataIndex: "/",
+      key: "button",
+      render: () => (
+        <Button type="primary" onClick={showModalEdit}>
+          <UserOutlined />
+        </Button>
+      ),
     },
   ];
 
@@ -255,13 +283,17 @@ const TeacherPage = () => {
             </Form.Item>
           </Form>
         </Modal>
-        <Dropdown overlay={menu} trigger={["click"]} placement="bottom">
+        <div
+          style={{
+            display: "flex",
+            paddingTop: "6px",
+          }}
+        >
+          Сортировка:{" "}
+        </div>
+        <Dropdown overlay={menu} trigger={["click"]} placement="bottom" arrow>
           <a onClick={(e) => e.preventDefault()}>
-            <Space
-              className="list-sort"
-              style={{ paddingTop: "6px", fontWeight: "" }}
-            >
-              Сортировка:{" "}
+            <Space className="list-sort" style={{ paddingTop: "6px" }}>
               <span style={{ fontWeight: "bold" }}>{selectedItem.label}</span>
               <DownOutlined style={{ fontSize: "14px" }} />
             </Space>
@@ -274,6 +306,109 @@ const TeacherPage = () => {
         columns={columns}
         pagination={false}
       />
+      {/* Абиба */}
+      <Modal
+        title="Редактировать учетную запись"
+        open={isEditOpen}
+        onOk={handleOkEdit}
+        onCancel={handleCancelEdit}
+        okText="Сохранить"
+        cancelText="Отмена"
+      >
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          style={{
+            maxWidth: 600,
+            paddingRight: "74px",
+            marginTop: "24px",
+          }}
+        >
+          <Form.Item
+            label="Фамилия"
+            name="Фамилия"
+            rules={[
+              {
+                required: true,
+                message: "Введите фамилию!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Имя"
+            name="Имя"
+            rules={[
+              {
+                required: true,
+                message: "Введите имя!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Отчество"
+            name="Отчество"
+            rules={[
+              {
+                // нужна проверка, но фамилия не обязательна
+                required: false,
+                message: "Введите отчество!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Группа"
+            name="Группа"
+            rules={[
+              {
+                required: true,
+                message: "Введите группу!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Логин"
+            name="Логин"
+            rules={[
+              {
+                required: true,
+                message: "Введите логин!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Пароль"
+            name="Пароль"
+            rules={[
+              {
+                required: true,
+                message: "Введите пароль!",
+              },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };
