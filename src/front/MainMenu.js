@@ -87,9 +87,9 @@ const MainMenu = () => {
                   backgroundColor: "black",
                   width: "102px",
                 }}
-                onClick={logIn}
+                // onClick={logIn}
               >
-                Войти
+                <a href="http://localhost:3000/teacherPage">Войти</a>
               </Button>
             </Form.Item>
           </Form>

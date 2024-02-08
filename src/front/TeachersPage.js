@@ -57,18 +57,28 @@ const TeacherPage = () => {
       secondName: "Алексеевич",
       group: "ПИ-202",
       login: "zimMaks",
-      password: "1234",
+      password: "36345fgf45",
       status: "Зачет",
     },
     {
       key: "2",
-      lastName: "Mike",
-      name: "Mike",
-      secondName: "Mike",
-      group: "Mike",
-      login: "Mike",
-      password: "Mike",
-      status: "Mike",
+      lastName: "Пономарев",
+      name: "Александр",
+      secondName: "Владимирович",
+      group: "ПИ-202",
+      login: "ponomarAlex",
+      password: "2234fdgt24",
+      status: "Зачет",
+    },
+    {
+      key: "3",
+      lastName: "Филиппов",
+      name: "Максим",
+      secondName: "Владимирович",
+      group: "ПИ-202",
+      login: "filippovMaks",
+      password: "5534dgfd424",
+      status: "Зачет",
     },
   ];
 
@@ -110,6 +120,11 @@ const TeacherPage = () => {
           </Tag>
         );
       },
+    },
+    {
+      title: "Логин",
+      dataIndex: "login",
+      key: "login",
     },
     {
       title: "Пароль",
