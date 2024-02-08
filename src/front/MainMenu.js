@@ -53,11 +53,11 @@ const MainMenu = () => {
           >
             <Form.Item
               name="username"
-              rules={[{ required: true, message: "Введите имя!" }]}
+              rules={[{ required: true, message: "Введите логин!" }]}
             >
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Имя"
+                placeholder="Логин"
               />
             </Form.Item>
             <Form.Item
