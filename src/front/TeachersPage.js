@@ -9,10 +9,18 @@ import {
   Input,
   Tag,
 } from "antd";
-import { UserAddOutlined, DownOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  UserAddOutlined,
+  DownOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  CaretDownOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import { useState } from "react";
 
 const TeacherPage = () => {
+  // Состояние открытия/ закрытия модального окна добавления новой учетной записи
   const [isModalOpen, setIsModalOpen] = useState(false);
   console.log(isModalOpen);
   const showModal = () => {
@@ -28,7 +36,7 @@ const TeacherPage = () => {
     setIsModalOpen(false);
   };
 
-  //
+  // Состояние открытия/ закрытия модального окна редактирования учетной записи
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const showModalEdit = () => {
@@ -44,7 +52,24 @@ const TeacherPage = () => {
     setIsEditOpen(false);
   };
 
-  //
+  // Состояние открытия/ закрытия модального окна удаления учетной записи
+
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  console.log(isDeleteOpen);
+  const showModalDelete = () => {
+    setIsDeleteOpen(true);
+  };
+
+  const handleDelete = () => {
+    setIsDeleteOpen(false);
+    console.log("нажато");
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteOpen(false);
+  };
+
+  // Выбор режима сортировки данных таблицы
 
   const items = [
     { label: "Фамилия", value: "secondName" },
@@ -62,11 +87,23 @@ const TeacherPage = () => {
       onClick={({ key }) => handleMenuClick(items.find((i) => i.value === key))}
     >
       {items.map((item) => (
-        <Menu.Item key={item.value}>{item.label}</Menu.Item>
+        <Menu.Item key={item.value}>
+          <span style={{ fontWeight: "600" }}>{item.label}</span>
+        </Menu.Item>
       ))}
     </Menu>
   );
 
+  // Переменные для размера кнопок
+  const sizeLarge = "large";
+  const sizeMedium = "middle";
+  const sizeSmall = "small";
+
+  // Переменная для компонента поиска
+  const { Search } = Input;
+  const onSearch = (value, _e, info) => console.log(info?.source, value);
+
+  // Таблица
   const dataSource = [
     {
       key: "1",
@@ -130,6 +167,7 @@ const TeacherPage = () => {
       title: "Статус",
       dataIndex: "status",
       key: "status",
+      // Теги, статус
       render: (status, item) => {
         console.log(status, item);
         return (
@@ -153,16 +191,38 @@ const TeacherPage = () => {
       title: "",
       dataIndex: "/",
       key: "button",
+      // Кнопки редактирования и удаления
       render: () => (
-        <Button type="primary" onClick={showModalEdit}>
-          <UserOutlined />
-        </Button>
+        <div style={{ display: "flex", gap: "12px" }}>
+          {/* Редактирование */}
+          <Button
+            type="primary"
+            value="large"
+            shape="circle"
+            size={sizeLarge}
+            onClick={showModalEdit}
+          >
+            <EditOutlined />
+          </Button>
+
+          {/* ПОМЕНЯТЬ СОСТОЯНИЕ!!! */}
+          {/* Удаление */}
+          <Button
+            type="primary"
+            danger
+            shape="circle"
+            size={sizeLarge}
+            onClick={showModalDelete}
+          >
+            <DeleteOutlined />
+          </Button>
+        </div>
       ),
     },
   ];
 
   return (
-    <div style={{ margin: "20px" }}>
+    <div className="noselect" style={{ margin: "20px" }}>
       <div style={{ display: "flex", gap: "12px" }}>
         <Button
           onClick={showModal}
@@ -173,7 +233,8 @@ const TeacherPage = () => {
             fontWeight: "bold",
             marginBottom: "10px",
             marginLeft: "44px",
-            borderRadius: "10px",
+            borderRadius: "7px",
+            height: "33px",
           }}
         >
           <div style={{ display: "flex", gap: "6px" }}>
@@ -234,7 +295,6 @@ const TeacherPage = () => {
               name="Отчество"
               rules={[
                 {
-                  // нужна проверка, но фамилия не обязательна
                   required: false,
                   message: "Введите отчество!",
                 },
@@ -283,30 +343,70 @@ const TeacherPage = () => {
             </Form.Item>
           </Form>
         </Modal>
+
         <div
           style={{
-            display: "flex",
-            paddingTop: "6px",
+            marginTop: "0px",
+            height: "24px",
+            borderStyle: "solid",
+            borderWidth: "1px",
+            borderColor: "#d9d9d9",
+            borderRadius: "6px",
+            padding: "4px 11px",
+            textAlign: "center",
           }}
         >
           Сортировка:{" "}
         </div>
-        <Dropdown overlay={menu} trigger={["click"]} placement="bottom" arrow>
-          <a onClick={(e) => e.preventDefault()}>
-            <Space className="list-sort" style={{ paddingTop: "6px" }}>
-              <span style={{ fontWeight: "bold" }}>{selectedItem.label}</span>
-              <DownOutlined style={{ fontSize: "14px" }} />
-            </Space>
-          </a>
-        </Dropdown>
+        {/* Стрелка */}
+
+        <span>
+          <Dropdown
+            overlay={menu}
+            trigger={["click"]}
+            placement="bottom"
+            arrow="true"
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <Space className="list-sort" style={{ paddingTop: "6px" }}>
+                <Button className="button-sort" type="primary">
+                  <span style={{ fontWeight: "bold" }}>
+                    {selectedItem.label} <CaretDownOutlined />
+                  </span>
+                </Button>
+              </Space>
+            </a>
+          </Dropdown>
+        </span>
+
+        <Search
+          className="search-input"
+          placeholder="Найти"
+          onSearch={onSearch}
+          enterButton
+          style={{
+            width: "290px",
+          }}
+        />
+        <div style={{ marginTop: "-3px", paddingLeft: "676px" }}>
+          <Button type="primary" shape="circle" size={sizeLarge}>
+            <a className="logOutButton" href="http://localhost:3000/">
+              <LogoutOutlined
+                style={{
+                  fontSize: "24px",
+                }}
+              />
+            </a>
+          </Button>
+        </div>
       </div>
+
       <Table
         style={{ width: "94%", margin: "auto" }}
         dataSource={dataSource}
         columns={columns}
         pagination={false}
       />
-      {/* Абиба */}
       <Modal
         title="Редактировать учетную запись"
         open={isEditOpen}
@@ -360,7 +460,6 @@ const TeacherPage = () => {
             name="Отчество"
             rules={[
               {
-                // нужна проверка, но фамилия не обязательна
                 required: false,
                 message: "Введите отчество!",
               },
@@ -408,6 +507,37 @@ const TeacherPage = () => {
             <Input.Password />
           </Form.Item>
         </Form>
+      </Modal>
+
+      {/* Удаление */}
+      <Modal
+        className="deleteModal"
+        title={<div style={{ width: "242px" }}>Удалить учетную запись?</div>}
+        open={isDeleteOpen}
+        onOk={handleDelete}
+        onCancel={handleCancelDelete}
+        okText="Удалить"
+        cancelText="Отмена"
+        okButtonProps={{
+          type: "primary",
+          danger: true,
+        }}
+      >
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          style={{
+            width: "200px",
+            maxWidth: 600,
+            paddingRight: "74px",
+            marginTop: "24px",
+          }}
+        ></Form>
       </Modal>
     </div>
   );
