@@ -10,30 +10,31 @@ import {
   Tag,
 } from "antd";
 import {
-  UserAddOutlined,
-  DownOutlined,
   EditOutlined,
   DeleteOutlined,
   CaretDownOutlined,
   LogoutOutlined,
+  EyeOutlined,
+  EyeInvisibleOutlined,
 } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ModalAddUser } from "./ModalAddUser";
+import { DeleteUserButton } from "./DeleteUserButton";
 
 const TeacherPage = () => {
-  // Состояние открытия/ закрытия модального окна добавления новой учетной записи
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log(isModalOpen);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+  // Выбор режима сортировки данных таблицы
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-    console.log("нажато");
-  };
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const items = [
+    { label: "Фамилия", value: "secondName" },
+    { label: "Группа", value: "group" },
+  ];
+
+  const [selectedItem, setSelectedItem] = useState(items[0]);
+
+  const handleMenuClick = (item) => {
+    setSelectedItem(item);
   };
 
   // Состояние открытия/ закрытия модального окна редактирования учетной записи
@@ -55,9 +56,11 @@ const TeacherPage = () => {
   // Состояние открытия/ закрытия модального окна удаления учетной записи
 
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [selectedItemToDelete, setSelectedItemToDelete] = useState();
   console.log(isDeleteOpen);
-  const showModalDelete = () => {
+  const showModalDelete = (id) => {
     setIsDeleteOpen(true);
+    setSelectedItemToDelete(id);
   };
 
   const handleDelete = () => {
@@ -67,19 +70,6 @@ const TeacherPage = () => {
 
   const handleCancelDelete = () => {
     setIsDeleteOpen(false);
-  };
-
-  // Выбор режима сортировки данных таблицы
-
-  const items = [
-    { label: "Фамилия", value: "secondName" },
-    { label: "Группа", value: "group" },
-  ];
-
-  const [selectedItem, setSelectedItem] = useState(items[0]);
-
-  const handleMenuClick = (item) => {
-    setSelectedItem(item);
   };
 
   const menu = (
@@ -103,6 +93,27 @@ const TeacherPage = () => {
   const { Search } = Input;
   const onSearch = (value, _e, info) => console.log(info?.source, value);
 
+  const [tableData, setTableData] = useState();
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = () => {
+    fetch("/users")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        const preparedData = JSON.parse(data.result).map((item, index) => {
+          return {
+            ...item,
+            key: index + 1,
+          };
+        });
+        setTableData(preparedData);
+        console.log("preparedData = ", preparedData);
+      });
+  };
   // Таблица
   const dataSource = [
     {
@@ -169,10 +180,9 @@ const TeacherPage = () => {
       key: "status",
       // Теги, статус
       render: (status, item) => {
-        console.log(status, item);
         return (
           <Tag color={"blue"} key={status}>
-            {status.toUpperCase()}
+            {status?.toUpperCase()}
           </Tag>
         );
       },
@@ -186,13 +196,43 @@ const TeacherPage = () => {
       title: "Пароль",
       dataIndex: "password",
       key: "password",
+      render: (password, item) => {
+        return (
+          <div className="noselect">
+            <Input.Password
+              value={password}
+              readOnly
+              style={{ width: "50%", border: "none", boxShadow: "none" }}
+              iconRender={(visible) =>
+                visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
+              }
+              suffix={
+                <div
+                  style={{
+                    right: "10px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
+                  onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                >
+                  {isPasswordVisible ? (
+                    <EyeOutlined />
+                  ) : (
+                    <EyeInvisibleOutlined />
+                  )}
+                </div>
+              }
+            />
+          </div>
+        );
+      },
     },
     {
       title: "",
       dataIndex: "/",
       key: "button",
       // Кнопки редактирования и удаления
-      render: () => (
+      render: (_, item) => (
         <div style={{ display: "flex", gap: "12px" }}>
           {/* Редактирование */}
           <Button
@@ -212,7 +252,9 @@ const TeacherPage = () => {
             danger
             shape="circle"
             size={sizeLarge}
-            onClick={showModalDelete}
+            onClick={() => {
+              showModalDelete(item._id);
+            }}
           >
             <DeleteOutlined />
           </Button>
@@ -224,125 +266,7 @@ const TeacherPage = () => {
   return (
     <div className="noselect" style={{ margin: "20px" }}>
       <div style={{ display: "flex", gap: "12px" }}>
-        <Button
-          onClick={showModal}
-          className="button-add-users"
-          type="primary"
-          style={{
-            fontFamily: "Roboto",
-            fontWeight: "bold",
-            marginBottom: "10px",
-            marginLeft: "44px",
-            borderRadius: "7px",
-            height: "33px",
-          }}
-        >
-          <div style={{ display: "flex", gap: "6px" }}>
-            <UserAddOutlined style={{ fontSize: "20px" }} />
-            <div style={{ fontSize: "14px" }}>Добавить</div>
-          </div>
-        </Button>
-        <Modal
-          title="Добавить новую учетную запись"
-          open={isModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          okText="Добавить"
-          cancelText="Отмена"
-        >
-          <Form
-            name="basic"
-            labelCol={{
-              span: 8,
-            }}
-            wrapperCol={{
-              span: 16,
-            }}
-            style={{
-              maxWidth: 600,
-              paddingRight: "74px",
-              marginTop: "24px",
-            }}
-          >
-            <Form.Item
-              label="Фамилия"
-              name="Фамилия"
-              rules={[
-                {
-                  required: true,
-                  message: "Введите фамилию!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Имя"
-              name="Имя"
-              rules={[
-                {
-                  required: true,
-                  message: "Введите имя!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Отчество"
-              name="Отчество"
-              rules={[
-                {
-                  required: false,
-                  message: "Введите отчество!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Группа"
-              name="Группа"
-              rules={[
-                {
-                  required: true,
-                  message: "Введите группу!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Логин"
-              name="Логин"
-              rules={[
-                {
-                  required: true,
-                  message: "Введите логин!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-
-            <Form.Item
-              label="Пароль"
-              name="Пароль"
-              rules={[
-                {
-                  required: true,
-                  message: "Введите пароль!",
-                },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item>
-          </Form>
-        </Modal>
+        <ModalAddUser loadData={loadData} />
 
         <div
           style={{
@@ -352,32 +276,34 @@ const TeacherPage = () => {
             borderWidth: "1px",
             borderColor: "#d9d9d9",
             borderRadius: "6px",
-            padding: "4px 11px",
+            padding: "4px 0px 4px 11px",
             textAlign: "center",
           }}
         >
-          Сортировка:{" "}
+          Сортировка: {/* Стрелка */}
+          <span style={{ paddingLeft: "6px" }}>
+            <Dropdown
+              overlay={menu}
+              trigger={["click"]}
+              placement="bottom"
+              arrow="true"
+            >
+              <a onClick={(e) => e.preventDefault()}>
+                <Space className="list-sort">
+                  <Button
+                    className="button-sort"
+                    type="primary"
+                    style={{ width: "120px" }}
+                  >
+                    <span style={{ fontWeight: "bold" }}>
+                      {selectedItem.label} <CaretDownOutlined />
+                    </span>
+                  </Button>
+                </Space>
+              </a>
+            </Dropdown>
+          </span>
         </div>
-        {/* Стрелка */}
-
-        <span>
-          <Dropdown
-            overlay={menu}
-            trigger={["click"]}
-            placement="bottom"
-            arrow="true"
-          >
-            <a onClick={(e) => e.preventDefault()}>
-              <Space className="list-sort" style={{ paddingTop: "6px" }}>
-                <Button className="button-sort" type="primary">
-                  <span style={{ fontWeight: "bold" }}>
-                    {selectedItem.label} <CaretDownOutlined />
-                  </span>
-                </Button>
-              </Space>
-            </a>
-          </Dropdown>
-        </span>
 
         <Search
           className="search-input"
@@ -386,10 +312,11 @@ const TeacherPage = () => {
           enterButton
           style={{
             width: "290px",
+            paddingLeft: "8px",
           }}
         />
-        <div style={{ marginTop: "-3px", paddingLeft: "676px" }}>
-          <Button type="primary" shape="circle" size={sizeLarge}>
+        <div style={{ marginTop: "-3px", marginLeft: "auto" }}>
+          <Button type="primary" shape="circle" size={sizeLarge} style={{}}>
             <a className="logOutButton" href="http://localhost:3000/">
               <LogoutOutlined
                 style={{
@@ -403,7 +330,7 @@ const TeacherPage = () => {
 
       <Table
         style={{ width: "94%", margin: "auto" }}
-        dataSource={dataSource}
+        dataSource={tableData}
         columns={columns}
         pagination={false}
       />
@@ -510,35 +437,13 @@ const TeacherPage = () => {
       </Modal>
 
       {/* Удаление */}
-      <Modal
-        className="deleteModal"
-        title={<div style={{ width: "242px" }}>Удалить учетную запись?</div>}
-        open={isDeleteOpen}
-        onOk={handleDelete}
-        onCancel={handleCancelDelete}
-        okText="Удалить"
-        cancelText="Отмена"
-        okButtonProps={{
-          type: "primary",
-          danger: true,
-        }}
-      >
-        <Form
-          name="basic"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          style={{
-            width: "200px",
-            maxWidth: 600,
-            paddingRight: "74px",
-            marginTop: "24px",
-          }}
-        ></Form>
-      </Modal>
+      {isDeleteOpen && (
+        <DeleteUserButton
+          setIsDeleteOpen={setIsDeleteOpen}
+          id={selectedItemToDelete}
+          loadData={loadData}
+        />
+      )}
     </div>
   );
 };

@@ -30,47 +30,48 @@ const MainMenu = () => {
     console.log("Завершили функцию login");
   };
   return (
-    <div className="mainContainer">
-      <div className="noselect" style={{ paddingTop: "152px" }}>
-        <Title
-          level={1}
-          style={{ margin: "0px", paddingLeft: "100px", fontSize: "84px" }}
-        >
-          Тренажер
-        </Title>
-        <Title level={3} style={{ margin: "0px", paddingLeft: "100px" }}>
-          по проложению теодолитного хода
-        </Title>
-      </div>
-      <img class="teodolit-img" src="teod.png" />
-      <div className="authWindow">
-        <div className="auth">
-          <Form
-            name="normal_login"
-            className="login-form"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
+    <div style={{ overflow: "hidden", height: "740px", position: "relative" }}>
+      <div className="mainContainer">
+        <div className="noselect" style={{ paddingTop: "152px" }}>
+          <Title
+            level={1}
+            style={{ margin: "0px", paddingLeft: "100px", fontSize: "84px" }}
           >
-            <Form.Item
-              name="username"
-              rules={[{ required: true, message: "Введите логин!" }]}
+            Тренажер
+          </Title>
+          <Title level={3} style={{ margin: "0px", paddingLeft: "100px" }}>
+            по проложению теодолитного хода
+          </Title>
+        </div>
+        <img class="teodolit-img" src="teod.png" />
+        <div className="authWindow">
+          <div className="auth">
+            <Form
+              name="normal_login"
+              className="login-form"
+              initialValues={{ remember: true }}
+              onFinish={onFinish}
             >
-              <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Логин"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: "Введите пароль!" }]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Пароль"
-              />
-            </Form.Item>
-            {/* <Form.Item>
+              <Form.Item
+                name="username"
+                rules={[{ required: true, message: "Введите логин!" }]}
+              >
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Логин"
+                />
+              </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[{ required: true, message: "Введите пароль!" }]}
+              >
+                <Input
+                  prefix={<LockOutlined className="site-form-item-icon" />}
+                  type="password"
+                  placeholder="Пароль"
+                />
+              </Form.Item>
+              {/* <Form.Item>
               <Form.Item
                 name="remember"
                 valuePropName="checked"
@@ -78,21 +79,22 @@ const MainMenu = () => {
               ></Form.Item>
             </Form.Item> */}
 
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button center-btn"
-                style={{
-                  backgroundColor: "black",
-                  width: "102px",
-                }}
-                // onClick={logIn}
-              >
-                <a href="http://localhost:3000/teacherPage">Войти</a>
-              </Button>
-            </Form.Item>
-          </Form>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button center-btn"
+                  style={{
+                    backgroundColor: "black",
+                    width: "102px",
+                  }}
+                  // onClick={logIn}
+                >
+                  <a href="http://localhost:3000/teacherPage">Войти</a>
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
         </div>
       </div>
     </div>
