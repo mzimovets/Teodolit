@@ -1,8 +1,12 @@
 import { Button, Modal, Form, Input } from "antd";
-import { UserAddOutlined } from "@ant-design/icons";
+import { UserAddOutlined, SignatureOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 
 const ModalAddUser = (props) => {
+  const sizeLarge = "large";
+  const sizeMedium = "middle";
+  const sizeSmall = "small";
+
   // Состояние открытия/ закрытия модального окна добавления новой учетной записи
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -201,7 +205,12 @@ const ModalAddUser = (props) => {
               },
             ]}
           >
-            <Input.Password />
+            <span style={{ display: "flex", gap: "12px" }}>
+              <Input.Password style={{}} />
+              <Button type="primary" size={sizeLarge}>
+                <SignatureOutlined style={{ fontSize: "18px" }} />
+              </Button>
+            </span>
           </Form.Item>
         </Form>
       </Modal>

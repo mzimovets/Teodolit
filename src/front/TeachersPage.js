@@ -26,6 +26,10 @@ const TeacherPage = () => {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
+  const handlePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   const items = [
     { label: "Фамилия", value: "secondName" },
     { label: "Группа", value: "group" },
@@ -193,7 +197,22 @@ const TeacherPage = () => {
       key: "login",
     },
     {
-      title: "Пароль",
+      title: (
+        <div className="noselect" style={{ display: "flex", gap: "12px" }}>
+          <span>Пароль</span>
+          <div
+            style={{
+              borderColor: "#b3b3b3 !important",
+              right: "10px",
+              top: "50%",
+              textAlign: "center",
+            }}
+            onClick={handlePasswordVisibility}
+          >
+            {isPasswordVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+          </div>
+        </div>
+      ),
       dataIndex: "password",
       key: "password",
       render: (password, item) => {
@@ -206,22 +225,7 @@ const TeacherPage = () => {
               iconRender={(visible) =>
                 visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
               }
-              suffix={
-                <div
-                  style={{
-                    right: "10px",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                  }}
-                  onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-                >
-                  {isPasswordVisible ? (
-                    <EyeOutlined />
-                  ) : (
-                    <EyeInvisibleOutlined />
-                  )}
-                </div>
-              }
+              visibilityToggle={false}
             />
           </div>
         );
