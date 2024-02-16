@@ -323,15 +323,11 @@ const TeacherPage = () => {
       key: 'address',
     },
     {
-      title: 'Логин',
+      title: 'Кол-во попыток (?)',
       dataIndex: 'address',
       key: 'address',
     },
-    {
-      title: 'Пароль',
-      dataIndex: 'address',
-      key: 'address',
-    },
+    
   ];
   
 
@@ -418,9 +414,12 @@ const TeacherPage = () => {
         footer={null}
       >
 
-        <div className="noselect"style={{display: "flex", gap: "10px", textAlign: "center", marginBottom: "14px", marginTop: "24px"}}><span style={{fontWeight: "bold"}}>Пароль:</span><Input.Password 
+        <div className="noselect"style={{display: "flex", gap: "10px", textAlign: "center", marginBottom: "14px", marginTop: "24px", padding: "4px"}}>
+          <span style={{fontWeight: "bold", display: "flex", gap: "10px"}}>Логин<Input variant="borderless"
+        readOnly value="Тут должен быть логин"/></span>
+          <span style={{fontWeight: "bold"}}>Пароль:</span><Input.Password 
         // value={password} 
-        value={123}
+        value="а тут пароль"
         variant="borderless"
         readOnly
         style={{width: "200px"}}/></div>
