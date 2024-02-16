@@ -40,7 +40,7 @@ const MainMenu = () => {
             Тренажер
           </Title>
           <Title level={3} style={{ margin: "0px", paddingLeft: "100px" }}>
-            по проложению теодолитного хода
+            по дисциплине "Геодезия"
           </Title>
         </div>
         <img class="teodolit-img" src="teod.png" />
