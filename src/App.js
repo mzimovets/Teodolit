@@ -6,6 +6,8 @@ import * as ReactDOM from "react-dom/client";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
+import { EditUsers } from "./front/EditUsers";
+import { TopicsPage } from "./front/TopicsPage";
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
       <Routes>
         <Route path="" element={<MainMenu />} />
         <Route path="/teacherPage" element={<TeacherPage />} />
+        <Route path="/editUsers" element={<EditUsers />} />
         <Route path="/topicsPage" element={<TopicsPage />} />
       </Routes>
     </BrowserRouter>
