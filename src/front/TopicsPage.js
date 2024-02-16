@@ -14,15 +14,15 @@ import { Tree } from "antd";
 
 const treeData = [
   {
-    title: "parent 1",
+    title: "Глава 1",
     key: "0-0",
     children: [
       {
-        title: "parent 1-0",
+        title: "1. Правила обращения с теодолитом",
         key: "0-0-0",
         children: [
           {
-            title: "leaf",
+            title: "Тест по теме №1",
             key: "0-0-0-0",
           },
           {
