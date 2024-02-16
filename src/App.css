@@ -1,10 +1,10 @@
 body {
-  overflow: hidden;
   font-family: 'Roboto', sans-serif;
 }
 
 .mainContainer {
   width: 100%;
+  height: 100vh;
 }
 
 .teodolit-img {
@@ -49,4 +49,79 @@ body {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+/* TeachersPage */
+
+.list-sort {
+  font-family: 'Roboto', sans-serif;
+}
+
+.ant-btn-primary{
+  background: black;
+}
+
+.ant-btn-primary:hover{
+  background: rgb(86, 86, 86) !important;
+}
+
+.button-add-users:focus, .button-add-users:active{
+  outline: none;
+}
+
+.deleteModal .ant-modal-content {
+  width: 320px;
+  margin: auto;
+}
+
+.ant-btn-dangerous:hover {
+  background: rgb(235, 23, 23) !important; 
+}
+
+.ant-dropdown-trigger .ant-dropdown-open {
+  height: 36px;
+}
+
+.search-input {
+  border-color: rgb(149, 149, 149) !important; /* Default border color */
+}
+
+.search-input :hover {
+  border-color: #b3b3b3 !important; /* Hover border color */
+  
+}
+
+.search-input :focus {
+  border-color: #b3b3b3 !important;
+  
+}
+
+.ant-input:focus {
+  border-color: #b3b3b3 !important;
+}
+
+.button-sort {
+  margin-top: -4px;
+  
+}
+
+
+
+
+/* SideNav.js */
+.sideNav ul {
+  list-style: none;
+  padding: 24px;
+  margin: 0;
+}
+
+.sideNav a {
+  text-decoration: none;
+  line-height: 32px;
+  color: #6b6b6b;
+  font-size: 18px;
+}
+
+.sideNav a:active, a :focus {
+  color: #74b83f;
 }
