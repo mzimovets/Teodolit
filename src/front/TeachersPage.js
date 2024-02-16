@@ -16,6 +16,7 @@ import {
   LogoutOutlined,
   EyeOutlined,
   EyeInvisibleOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { ModalAddUser } from "./ModalAddUser";
@@ -56,6 +57,20 @@ const TeacherPage = () => {
   const handleCancelEdit = () => {
     setIsEditOpen(false);
   };
+  
+  // Состояние открытия/ закрытия модального окна профиля учетной записи
+  const [isUserOpen, setIsUserOpen] = useState(false)
+  const showModalUser = () => {
+    setIsUserOpen(true)
+  }
+
+  const handleOkUser = () => {
+    setIsUserOpen(false)
+  }
+  const handleCancelUser  = () => {
+    setIsUserOpen(false)
+    
+  }
 
   // Состояние открытия/ закрытия модального окна удаления учетной записи
 
@@ -118,7 +133,7 @@ const TeacherPage = () => {
         console.log("preparedData = ", preparedData);
       });
   };
-  // Таблица
+  // Общая таблица
   const dataSource = [
     {
       key: "1",
@@ -215,17 +230,20 @@ const TeacherPage = () => {
       ),
       dataIndex: "password",
       key: "password",
+      width: "250px",
       render: (password, item) => {
         return (
           <div className="noselect">
             <Input.Password
               value={password}
               readOnly
-              style={{ width: "50%", border: "none", boxShadow: "none" }}
+              style={{ width: "100%", border: "none", boxShadow: "none" }}
               iconRender={(visible) =>
-                visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
+                // visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
+                <></>
               }
-              visibilityToggle={false}
+              visibilityToggle={{visible: isPasswordVisible}}
+              
             />
           </div>
         );
@@ -235,9 +253,18 @@ const TeacherPage = () => {
       title: "",
       dataIndex: "/",
       key: "button",
-      // Кнопки редактирования и удаления
+      // Кнопки профиля, редактирования и удаления
       render: (_, item) => (
-        <div style={{ display: "flex", gap: "12px" }}>
+        <div style={{ display: "flex", gap: "24px"}}>
+          {/* Профиль */}
+          <Button type="primary"
+          value="large"
+          shape="circle"
+          size={sizeLarge}
+          onClick={showModalUser}
+          >
+          <UserOutlined />
+          </Button>
           {/* Редактирование */}
           <Button
             type="primary"
@@ -266,6 +293,47 @@ const TeacherPage = () => {
       ),
     },
   ];
+
+  // Таблица профиля
+  const dataSourceUser= [
+    {
+      name: 'Mike',
+      topics: 'Пройденные темы'
+      
+    },
+    {
+      key: '2',
+      name: 'John',
+      age: 42,
+      address: '10 Downing Street',
+    },
+  ];
+  
+  const columnsUser = [
+    
+    
+    {
+      title: 'Тема',
+      dataIndex: 'address',
+      key: 'address',
+    },
+    {
+      title: 'Статус',
+      dataIndex: 'address',
+      key: 'address',
+    },
+    {
+      title: 'Логин',
+      dataIndex: 'address',
+      key: 'address',
+    },
+    {
+      title: 'Пароль',
+      dataIndex: 'address',
+      key: 'address',
+    },
+  ];
+  
 
   return (
     <div className="noselect" style={{ margin: "20px" }}>
@@ -338,6 +406,27 @@ const TeacherPage = () => {
         columns={columns}
         pagination={false}
       />
+{/* Профиль модальное окно*/}
+<Modal
+        title={<span style={{padding: "4px"}}>Здесь должно быть ФИО и группа учащегося</span>}
+        open={isUserOpen}
+        onOk={handleOkUser}
+        onCancel={handleCancelUser}
+        okText="Сохранить"
+        cancelText="Отмена"
+        width={1120}
+        footer={null}
+      >
+
+        <div className="noselect"style={{display: "flex", gap: "10px", textAlign: "center", marginBottom: "14px", marginTop: "24px"}}><span style={{fontWeight: "bold"}}>Пароль:</span><Input.Password 
+        // value={password} 
+        value={123}
+        variant="borderless"
+        readOnly
+        style={{width: "200px"}}/></div>
+        <Table dataSource={dataSourceUser} columns={columnsUser} pagination={false}/>
+      </Modal>
+
       <Modal
         title="Редактировать учетную запись"
         open={isEditOpen}
@@ -439,6 +528,8 @@ const TeacherPage = () => {
           </Form.Item>
         </Form>
       </Modal>
+
+
 
       {/* Удаление */}
       {isDeleteOpen && (
