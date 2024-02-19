@@ -1,11 +1,31 @@
 import { Button, Modal, Form, Input } from "antd";
 import { UserAddOutlined, SignatureOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
+import md5 from 'md5';
 
 const ModalAddUser = (props) => {
   const sizeLarge = "large";
   const sizeMedium = "middle";
   const sizeSmall = "small";
+
+  const [passwordLength, setPasswordLength] = useState(6);
+  const [passwordBut, setPasswordBut] = useState('')
+
+  const generatePassword = () => {
+    const site = '0123456789_';
+
+    const text = site + 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const generatedPassword = md5(text);
+
+    if (generatedPassword.length < passwordLength) {
+      for (let i = generatedPassword.length; i < passwordLength; i++) {
+        generatedPassword += '0';
+      }
+    }
+
+    setPassword(generatedPassword.substring(0, passwordLength));
+  };
+  
 
   // Состояние открытия/ закрытия модального окна добавления новой учетной записи
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -206,8 +226,8 @@ const ModalAddUser = (props) => {
             ]}
           >
             <span style={{ display: "flex", gap: "12px" }}>
-              <Input.Password style={{}} />
-              <Button type="primary" size={sizeLarge}>
+              <Input.Password style={{}} value={password}/>
+              <Button className="generatePasswordButton" type="primary" size={sizeLarge} onClick={generatePassword}>
                 <SignatureOutlined style={{ fontSize: "18px" }} />
               </Button>
             </span>

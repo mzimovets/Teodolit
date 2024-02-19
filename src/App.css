@@ -125,3 +125,7 @@ body {
 .sideNav a:active, a :focus {
   color: #74b83f;
 }
+
+.tree a:active {
+  background-color: #F7F7F7
+}

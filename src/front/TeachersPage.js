@@ -18,12 +18,46 @@ import {
   EyeInvisibleOutlined,
   UserOutlined
 } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, form } from "react";
 import { ModalAddUser } from "./ModalAddUser";
 import { DeleteUserButton } from "./DeleteUserButton";
 
 const TeacherPage = () => {
+
+  
+
+  const [sortKey, setSortKey] = useState("lastName");
+  const [sortOrder, setSortOrder] = useState("ascend");
+
+  const sortData = (data, key, order) => {
+    return data.sort((a, b) => {
+      if (order === "ascend") {
+        if (key === "lastName") {
+          return a.lastName.localeCompare(b.lastName);
+        } else if (key === "group") {
+          return a.group.localeCompare(b.group, undefined, { sensitivity: "accent" });
+        } else {
+          return a[key] > b[key] ? 1 : -1;
+        }
+      } else {
+        if (key === "lastName") {
+          return b.lastName.localeCompare(a.lastName);
+        } else if (key === "group") {
+          return b.group.localeCompare(a.group, undefined, { sensitivity: "accent" });
+        } else {
+          return b[key] > a[key] ? 1 : -1;
+        }
+      }
+    }).map((item, index) => {
+      return {
+        ...item,
+        key: index + 1,
+      };
+    });
+  };
+
   // Выбор режима сортировки данных таблицы
+  const [form] = Form.useForm();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -40,16 +74,22 @@ const TeacherPage = () => {
 
   const handleMenuClick = (item) => {
     setSelectedItem(item);
+    setSortKey(item.value);
+    setSortOrder("ascend");
   };
+
+  const [selectedUser, setSelectedUser] = useState(null)
 
   // Состояние открытия/ закрытия модального окна редактирования учетной записи
 
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const showModalEdit = () => {
+  const showModalEdit = (user) => {
     setIsEditOpen(true);
+    setSelectedUser(user);
   };
 
   const handleOkEdit = () => {
+    form.resetFields();
     setIsEditOpen(false);
     console.log("нажато");
   };
@@ -123,16 +163,13 @@ const TeacherPage = () => {
         return res.json();
       })
       .then((data) => {
-        const preparedData = JSON.parse(data.result).map((item, index) => {
-          return {
-            ...item,
-            key: index + 1,
-          };
-        });
-        setTableData(preparedData);
-        console.log("preparedData = ", preparedData);
+        const preparedData = JSON.parse(data.result);
+        const sortedData = sortData(preparedData, sortKey, sortOrder);
+        setTableData(sortedData);
+        console.log("preparedData = ", sortedData);
       });
   };
+  
   // Общая таблица
   const dataSource = [
     {
@@ -258,9 +295,9 @@ const TeacherPage = () => {
         <div style={{ display: "flex", gap: "24px"}}>
           {/* Профиль */}
           <Button type="primary"
-          value="large"
-          shape="circle"
-          size={sizeLarge}
+            value="large"
+            shape="circle"
+            size={sizeLarge}
           onClick={showModalUser}
           >
           <UserOutlined />
@@ -297,16 +334,11 @@ const TeacherPage = () => {
   // Таблица профиля
   const dataSourceUser= [
     {
-      name: 'Mike',
-      topics: 'Пройденные темы'
-      
+      topic: '1. Особенности строения теодолита',
+      statusTopic: '',
+      numberOfAttempts: '7'
     },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
+    
   ];
   
   const columnsUser = [
@@ -314,20 +346,26 @@ const TeacherPage = () => {
     
     {
       title: 'Тема',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'topic',
+      key: 'topic',
     },
     {
       title: 'Статус',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'statusTopic',
+      key: 'statusTopic',
+      render: (status, item) => {
+        return (
+          <Tag color={"blue"} key={status}>
+            {status?.toUpperCase()}
+          </Tag>
+        );
+      },
     },
     {
       title: 'Кол-во попыток (?)',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'numberOfAttempts',
+      key: 'numberOfAttempts',
     },
-    
   ];
   
 
@@ -401,10 +439,18 @@ const TeacherPage = () => {
         dataSource={tableData}
         columns={columns}
         pagination={false}
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              setSelectedUser(record);
+              showModalUser();
+            },
+          };
+        }}
       />
 {/* Профиль модальное окно*/}
-<Modal
-        title={<span style={{padding: "4px"}}>Здесь должно быть ФИО и группа учащегося</span>}
+        <Modal
+        title={<span style={{padding: "4px"}}>{selectedUser && `${selectedUser.lastName} ${selectedUser.name} ${selectedUser.secondName}  ${selectedUser.group}`}</span>}
         open={isUserOpen}
         onOk={handleOkUser}
         onCancel={handleCancelUser}
@@ -412,19 +458,18 @@ const TeacherPage = () => {
         cancelText="Отмена"
         width={1120}
         footer={null}
-      >
+        >
 
-        <div className="noselect"style={{display: "flex", gap: "10px", textAlign: "center", marginBottom: "14px", marginTop: "24px", padding: "4px"}}>
-          <span style={{fontWeight: "bold", display: "flex", gap: "10px"}}>Логин<Input variant="borderless"
-        readOnly value="Тут должен быть логин"/></span>
-          <span style={{fontWeight: "bold"}}>Пароль:</span><Input.Password 
-        // value={password} 
-        value="а тут пароль"
+        <div className="noselect" style={{display: "flex", gap: "10px",  marginBottom: "14px", marginTop: "24px", padding: "4px"}}>
+          <span style={{fontWeight: "bold", display: "flex", gap: "10px", alignItems: "center"}}>Логин<Input variant="borderless"
+        readOnly value={selectedUser && `${selectedUser.login}`}/></span>
+          <span style={{fontWeight: "bold", display: "flex", alignItems: "center"}}>Пароль:</span><Input.Password 
+        value={selectedUser && `${selectedUser.password}`}
         variant="borderless"
         readOnly
-        style={{width: "200px"}}/></div>
+        style={{width: "164px"}}/></div>
         <Table dataSource={dataSourceUser} columns={columnsUser} pagination={false}/>
-      </Modal>
+      </Modal>  
 
       <Modal
         title="Редактировать учетную запись"
@@ -433,7 +478,7 @@ const TeacherPage = () => {
         onCancel={handleCancelEdit}
         okText="Сохранить"
         cancelText="Отмена"
-      >
+      >{selectedUser && (
         <Form
           name="basic"
           labelCol={{
@@ -451,6 +496,7 @@ const TeacherPage = () => {
           <Form.Item
             label="Фамилия"
             name="Фамилия"
+            initialValue={selectedUser && selectedUser.lastName}
             rules={[
               {
                 required: true,
@@ -464,6 +510,7 @@ const TeacherPage = () => {
           <Form.Item
             label="Имя"
             name="Имя"
+            initialValue={selectedUser && selectedUser.name}
             rules={[
               {
                 required: true,
@@ -477,6 +524,7 @@ const TeacherPage = () => {
           <Form.Item
             label="Отчество"
             name="Отчество"
+            initialValue={selectedUser && selectedUser.secondName}
             rules={[
               {
                 required: false,
@@ -490,6 +538,7 @@ const TeacherPage = () => {
           <Form.Item
             label="Группа"
             name="Группа"
+            initialValue={selectedUser && selectedUser.group}
             rules={[
               {
                 required: true,
@@ -503,6 +552,7 @@ const TeacherPage = () => {
           <Form.Item
             label="Логин"
             name="Логин"
+            initialValue={selectedUser && selectedUser.login}
             rules={[
               {
                 required: true,
@@ -516,6 +566,7 @@ const TeacherPage = () => {
           <Form.Item
             label="Пароль"
             name="Пароль"
+            initialValue={selectedUser && selectedUser.password}
             rules={[
               {
                 required: true,
@@ -526,6 +577,7 @@ const TeacherPage = () => {
             <Input.Password />
           </Form.Item>
         </Form>
+        )}
       </Modal>
 
 
