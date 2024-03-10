@@ -1,0 +1,105 @@
+import React, { useEffect, useRef, useState } from "react";
+import { Typography, Alert, Space, Image, Button, Input } from "antd";
+import { BookOutlined } from "@ant-design/icons";
+import { createReactEditorJS } from "react-editor-js";
+import { EDITOR_JS_TOOLS } from "./tools";
+import { getData, saveData } from "./editorsActions";
+
+const { Title } = Typography;
+
+const ReactEditorJS = createReactEditorJS();
+
+const TopicOne = () => {
+  const [topicId, setTopicId] = useState("topicOne");
+  const [article, setArticle] = useState();
+  const editorCore = useRef(null);
+
+  useEffect(async () => {
+    const article = await getData(topicId);
+    console.log("article got", article);
+    setArticle(article.article);
+  }, []);
+
+  console.log("editor tools", EDITOR_JS_TOOLS, article);
+
+  return (
+    <div style={{ margin: "24px" }}>
+      <Input
+        style={{ width: "250px" }}
+        defaultValue={topicId}
+        onClick={(e) => {
+          console.log("e", e.target.value);
+          setTopicId(e.target.value);
+        }}
+      />
+      <ReactEditorJS
+        // readOnly
+        defaultValue={article}
+        tools={EDITOR_JS_TOOLS}
+        onInitialize={(editor) => {
+          console.log("инициализированно", editor);
+          editorCore.current = editor;
+        }}
+      />
+      <Button
+        onClick={async () => {
+          const data = await editorCore.current.save();
+          console.log("Saved", data, topicId);
+          // отправка на сервер
+          saveData(data, topicId);
+        }}
+      >
+        Save
+      </Button>
+      {/* <Title level={3}>1. Правила обращения с теодолитом</Title>
+      <Alert
+        style={{ width: "80%" }}
+        description={
+          <b style={{ fontSize: "16px" }}>
+            Теодолит – геодезический прибор для определения направлений и
+            измерения вертикальных и горизонтальных углов, а также измерения
+            магнитных азимутов и дальномерных расстояний. <br />
+            Теодолит применяется при геодезических работах, топографических
+            съёмках в строительстве и других видах работ.
+          </b>
+        }
+        type="success"
+        icon={<BookOutlined />}
+        showIcon
+      />
+      <Title level={5} style={{ textIndent: "20px" }}>
+        Полученный прибор закрепляют на штативе или кронштейне становым винтом
+        (рис.1). Выполняют общий осмотр прибора.
+        <br />
+      </Title>
+      <Image.PreviewGroup
+        items={[
+          "https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp",
+          "https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp",
+          "https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp",
+        ]}
+      >
+        <Image
+          width={200}
+          src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
+        />
+      </Image.PreviewGroup>
+
+      <Title level={5} style={{ textIndent: "20px" }}>
+        После закрепления теодолита на штативе следует убедиться в отсутствии
+        механических повреждений металлических и оптических деталей прибора,
+        произвести проверку металлических узлов, обратив внимание на состояние и
+        работу всех винтов прибора, на плавность вращения его отдельных частей
+        <br />
+      </Title>
+      <Title level={5} style={{ textIndent: "20px" }}>
+        Штатив служит для установки теодолита над точкой местности - вершиной
+        измеряемого угла. Высоту штатива изменяют выдвижением ножек, после чего
+        их закрепляют винтами. Наконечники ножек углубляют в грунт, нажимая
+        ногой на их упоры (рис. 2).
+      </Title> */}
+    </div>
+  );
+};
+
+export { TopicOne };

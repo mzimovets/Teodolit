@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .mainContainer {
@@ -12,7 +12,6 @@ body {
   position: absolute;
   top: 100px;
   pointer-events: none;
-
 }
 
 /* .login-form{
@@ -20,7 +19,6 @@ body {
   flex-direction: column;
   justify-content: center;
 } */
-
 
 .authWindow {
   position: absolute;
@@ -43,29 +41,30 @@ body {
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
 /* TeachersPage */
 
 .list-sort {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.ant-btn-primary{
+.ant-btn-primary {
   background: black;
 }
 
-.ant-btn-primary:hover{
+.ant-btn-primary:hover {
   background: rgb(86, 86, 86) !important;
 }
 
-.button-add-users:focus, .button-add-users:active{
+.button-add-users:focus,
+.button-add-users:active {
   outline: none;
 }
 
@@ -75,7 +74,7 @@ body {
 }
 
 .ant-btn-dangerous:hover {
-  background: rgb(235, 23, 23) !important; 
+  background: rgb(235, 23, 23) !important;
 }
 
 .ant-dropdown-trigger .ant-dropdown-open {
@@ -88,12 +87,10 @@ body {
 
 .search-input :hover {
   border-color: #b3b3b3 !important; /* Hover border color */
-  
 }
 
 .search-input :focus {
   border-color: #b3b3b3 !important;
-  
 }
 
 .ant-input:focus {
@@ -102,11 +99,7 @@ body {
 
 .button-sort {
   margin-top: -4px;
-  
 }
-
-
-
 
 /* SideNav.js */
 .sideNav ul {
@@ -122,10 +115,58 @@ body {
   font-size: 18px;
 }
 
-.sideNav a:active, a :focus {
+.sideNav a:active,
+a :focus {
   color: #74b83f;
 }
 
 .tree a:active {
-  background-color: #F7F7F7
+  background-color: #f7f7f7;
+}
+
+.topicsContainer {
+  display: flex;
+  background-color: #ebedee;
+  height: 1200px;
+}
+
+.siderTopic {
+  width: 256px;
+  height: 90vh;
+  background-color: white;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  margin-top: 34px;
+  margin-left: 34px;
+  border-right: 1px solid #f0f0f0;
+  flex-direction: column;
+}
+
+li {
+  list-style-type: none;
+}
+
+.contentWindow {
+  overflow: scroll;
+  background-color: white;
+  width: 78%;
+  height: 90vh;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  margin-top: 34px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.topicsName {
+  display: flex;
+  gap: 6px;
+}
+
+.topicsName:hover,
+.topicsName:focus {
+  color: rgb(114, 114, 114);
 }

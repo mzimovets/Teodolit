@@ -16,44 +16,47 @@ import {
   LogoutOutlined,
   EyeOutlined,
   EyeInvisibleOutlined,
-  UserOutlined
+  UserOutlined,
 } from "@ant-design/icons";
 import { useEffect, useState, form } from "react";
 import { ModalAddUser } from "./ModalAddUser";
 import { DeleteUserButton } from "./DeleteUserButton";
 
 const TeacherPage = () => {
-
-  
-
   const [sortKey, setSortKey] = useState("lastName");
   const [sortOrder, setSortOrder] = useState("ascend");
 
   const sortData = (data, key, order) => {
-    return data.sort((a, b) => {
-      if (order === "ascend") {
-        if (key === "lastName") {
-          return a.lastName.localeCompare(b.lastName);
-        } else if (key === "group") {
-          return a.group.localeCompare(b.group, undefined, { sensitivity: "accent" });
+    return data
+      .sort((a, b) => {
+        if (order === "ascend") {
+          if (key === "lastName") {
+            return a.lastName?.localeCompare(b.lastName);
+          } else if (key === "group") {
+            return a.group.localeCompare(b.group, undefined, {
+              sensitivity: "accent",
+            });
+          } else {
+            return a[key] > b[key] ? 1 : -1;
+          }
         } else {
-          return a[key] > b[key] ? 1 : -1;
+          if (key === "lastName") {
+            return b.lastName.localeCompare(a.lastName);
+          } else if (key === "group") {
+            return b.group.localeCompare(a.group, undefined, {
+              sensitivity: "accent",
+            });
+          } else {
+            return b[key] > a[key] ? 1 : -1;
+          }
         }
-      } else {
-        if (key === "lastName") {
-          return b.lastName.localeCompare(a.lastName);
-        } else if (key === "group") {
-          return b.group.localeCompare(a.group, undefined, { sensitivity: "accent" });
-        } else {
-          return b[key] > a[key] ? 1 : -1;
-        }
-      }
-    }).map((item, index) => {
-      return {
-        ...item,
-        key: index + 1,
-      };
-    });
+      })
+      .map((item, index) => {
+        return {
+          ...item,
+          key: index + 1,
+        };
+      });
   };
 
   // Выбор режима сортировки данных таблицы
@@ -78,12 +81,14 @@ const TeacherPage = () => {
     setSortOrder("ascend");
   };
 
-  const [selectedUser, setSelectedUser] = useState(null)
+  const [selectedUser, setSelectedUser] = useState(null);
 
   // Состояние открытия/ закрытия модального окна редактирования учетной записи
 
   const [isEditOpen, setIsEditOpen] = useState(false);
   const showModalEdit = (user) => {
+    console.log("user", user);
+    console.log("selectedUser", selectedUser);
     setIsEditOpen(true);
     setSelectedUser(user);
   };
@@ -97,20 +102,19 @@ const TeacherPage = () => {
   const handleCancelEdit = () => {
     setIsEditOpen(false);
   };
-  
+
   // Состояние открытия/ закрытия модального окна профиля учетной записи
-  const [isUserOpen, setIsUserOpen] = useState(false)
+  const [isUserOpen, setIsUserOpen] = useState(false);
   const showModalUser = () => {
-    setIsUserOpen(true)
-  }
+    setIsUserOpen(true);
+  };
 
   const handleOkUser = () => {
-    setIsUserOpen(false)
-  }
-  const handleCancelUser  = () => {
-    setIsUserOpen(false)
-    
-  }
+    setIsUserOpen(false);
+  };
+  const handleCancelUser = () => {
+    setIsUserOpen(false);
+  };
 
   // Состояние открытия/ закрытия модального окна удаления учетной записи
 
@@ -169,7 +173,7 @@ const TeacherPage = () => {
         console.log("preparedData = ", sortedData);
       });
   };
-  
+
   // Общая таблица
   const dataSource = [
     {
@@ -275,12 +279,11 @@ const TeacherPage = () => {
               value={password}
               readOnly
               style={{ width: "100%", border: "none", boxShadow: "none" }}
-              iconRender={(visible) =>
+              iconRender={(visible) => (
                 // visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
                 <></>
-              }
-              visibilityToggle={{visible: isPasswordVisible}}
-              
+              )}
+              visibilityToggle={{ visible: isPasswordVisible }}
             />
           </div>
         );
@@ -292,15 +295,19 @@ const TeacherPage = () => {
       key: "button",
       // Кнопки профиля, редактирования и удаления
       render: (_, item) => (
-        <div style={{ display: "flex", gap: "24px"}}>
+        <div style={{ display: "flex", gap: "24px" }}>
           {/* Профиль */}
-          <Button type="primary"
+          <Button
+            type="primary"
             value="large"
             shape="circle"
             size={sizeLarge}
-          onClick={showModalUser}
+            onClick={() => {
+              console.log("item", item);
+              showModalUser();
+            }}
           >
-          <UserOutlined />
+            <UserOutlined />
           </Button>
           {/* Редактирование */}
           <Button
@@ -308,12 +315,13 @@ const TeacherPage = () => {
             value="large"
             shape="circle"
             size={sizeLarge}
-            onClick={showModalEdit}
+            onClick={() => {
+              showModalEdit(item);
+            }}
           >
             <EditOutlined />
           </Button>
 
-          {/* ПОМЕНЯТЬ СОСТОЯНИЕ!!! */}
           {/* Удаление */}
           <Button
             type="primary"
@@ -332,27 +340,24 @@ const TeacherPage = () => {
   ];
 
   // Таблица профиля
-  const dataSourceUser= [
+  const dataSourceUser = [
     {
-      topic: '1. Особенности строения теодолита',
-      statusTopic: '',
-      numberOfAttempts: '7'
+      topic: "1. Особенности строения теодолита",
+      statusTopic: "",
+      numberOfAttempts: "7",
     },
-    
   ];
-  
+
   const columnsUser = [
-    
-    
     {
-      title: 'Тема',
-      dataIndex: 'topic',
-      key: 'topic',
+      title: "Тема",
+      dataIndex: "topic",
+      key: "topic",
     },
     {
-      title: 'Статус',
-      dataIndex: 'statusTopic',
-      key: 'statusTopic',
+      title: "Статус",
+      dataIndex: "statusTopic",
+      key: "statusTopic",
       render: (status, item) => {
         return (
           <Tag color={"blue"} key={status}>
@@ -362,12 +367,11 @@ const TeacherPage = () => {
       },
     },
     {
-      title: 'Кол-во попыток (?)',
-      dataIndex: 'numberOfAttempts',
-      key: 'numberOfAttempts',
+      title: "Кол-во попыток (?)",
+      dataIndex: "numberOfAttempts",
+      key: "numberOfAttempts",
     },
   ];
-  
 
   return (
     <div className="noselect" style={{ margin: "20px" }}>
@@ -439,18 +443,26 @@ const TeacherPage = () => {
         dataSource={tableData}
         columns={columns}
         pagination={false}
-        onRow={(record) => {
-          return {
-            onClick: () => {
-              setSelectedUser(record);
-              showModalUser();
-            },
-          };
-        }}
+        // onRow={(record) => {
+        //   return {
+        //     onClick: () => {
+        //       console.log('кликнули на строкку таблицы')
+        //       setSelectedUser(record);
+        //       showModalUser();
+        //     },
+        //   };
+        // }}
       />
-{/* Профиль модальное окно*/}
-        <Modal
-        title={<span style={{padding: "4px"}}>{selectedUser && `${selectedUser.lastName} ${selectedUser.name} ${selectedUser.secondName}  ${selectedUser.group}`}</span>}
+      {/* Профиль модальное окно*/}
+      {console.log("isUserOpen", isUserOpen)}
+      <Modal
+        key={"htgfjhgfjh"}
+        title={
+          <span style={{ padding: "4px" }}>
+            {selectedUser &&
+              `${selectedUser.lastName} ${selectedUser.name} ${selectedUser.secondName}  ${selectedUser.group}`}
+          </span>
+        }
         open={isUserOpen}
         onOk={handleOkUser}
         onCancel={handleCancelUser}
@@ -458,19 +470,55 @@ const TeacherPage = () => {
         cancelText="Отмена"
         width={1120}
         footer={null}
+      >
+        <div
+          className="noselect"
+          style={{
+            display: "flex",
+            gap: "10px",
+            marginBottom: "14px",
+            marginTop: "24px",
+            padding: "4px",
+          }}
         >
-
-        <div className="noselect" style={{display: "flex", gap: "10px",  marginBottom: "14px", marginTop: "24px", padding: "4px"}}>
-          <span style={{fontWeight: "bold", display: "flex", gap: "10px", alignItems: "center"}}>Логин<Input variant="borderless"
-        readOnly value={selectedUser && `${selectedUser.login}`}/></span>
-          <span style={{fontWeight: "bold", display: "flex", alignItems: "center"}}>Пароль:</span><Input.Password 
-        value={selectedUser && `${selectedUser.password}`}
-        variant="borderless"
-        readOnly
-        style={{width: "164px"}}/></div>
-        <Table dataSource={dataSourceUser} columns={columnsUser} pagination={false}/>
-      </Modal>  
-
+          <span
+            style={{
+              fontWeight: "bold",
+              display: "flex",
+              gap: "10px",
+              alignItems: "center",
+            }}
+          >
+            Логин
+            <Input
+              variant="borderless"
+              readOnly
+              value={selectedUser && `${selectedUser.login}`}
+            />
+          </span>
+          <span
+            style={{
+              fontWeight: "bold",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            Пароль:
+          </span>
+          <Input.Password
+            value={selectedUser && `${selectedUser.password}`}
+            variant="borderless"
+            readOnly
+            style={{ width: "164px" }}
+          />
+        </div>
+        <Table
+          dataSource={dataSourceUser}
+          columns={columnsUser}
+          pagination={false}
+        />
+      </Modal>
+      {console.log("isEditOpen", isEditOpen)}
       <Modal
         title="Редактировать учетную запись"
         open={isEditOpen}
@@ -478,109 +526,111 @@ const TeacherPage = () => {
         onCancel={handleCancelEdit}
         okText="Сохранить"
         cancelText="Отмена"
-      >{selectedUser && (
-        <Form
-          name="basic"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          style={{
-            maxWidth: 600,
-            paddingRight: "74px",
-            marginTop: "24px",
-          }}
-        >
-          <Form.Item
-            label="Фамилия"
-            name="Фамилия"
-            initialValue={selectedUser && selectedUser.lastName}
-            rules={[
-              {
-                required: true,
-                message: "Введите фамилию!",
-              },
-            ]}
+      >
+        {selectedUser && (
+          <Form
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            wrapperCol={{
+              span: 16,
+            }}
+            style={{
+              maxWidth: 600,
+              paddingRight: "74px",
+              marginTop: "24px",
+            }}
           >
-            <Input />
-          </Form.Item>
+            <Form.Item
+              label="Фамилия"
+              name="Фамилия"
+              value={selectedUser.lastName}
+              rules={[
+                {
+                  required: true,
+                  message: "Введите фамилию!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Имя"
+              name="Имя"
+              value={selectedUser.name}
+              rules={[
+                {
+                  required: true,
+                  message: "Введите имя!",
+                },
+              ]}
+            >
+              <Input value={selectedUser.name} />
+            </Form.Item>
 
-          <Form.Item
-            label="Имя"
-            name="Имя"
-            initialValue={selectedUser && selectedUser.name}
-            rules={[
-              {
-                required: true,
-                message: "Введите имя!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
+            {/* <Form.Item
             label="Отчество"
             name="Отчество"
-            initialValue={selectedUser && selectedUser.secondName}
+            id="secondName"
+            initialValue={selectedUser.secondName}
             rules={[
               {
                 required: false,
                 message: "Введите отчество!",
               },
             ]}
-          >
-            <Input />
-          </Form.Item>
+          > */}
+            <div style={{ display: "flex" }}>
+              Отчество:
+              <Input value={selectedUser.secondName} />
+            </div>
+            {/* </Form.Item> */}
 
-          <Form.Item
-            label="Группа"
-            name="Группа"
-            initialValue={selectedUser && selectedUser.group}
-            rules={[
-              {
-                required: true,
-                message: "Введите группу!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+            <Form.Item
+              label="Группа"
+              name="Группа"
+              value={selectedUser.group}
+              rules={[
+                {
+                  required: true,
+                  message: "Введите группу!",
+                },
+              ]}
+            >
+              <Input value={selectedUser.group} />
+            </Form.Item>
 
-          <Form.Item
-            label="Логин"
-            name="Логин"
-            initialValue={selectedUser && selectedUser.login}
-            rules={[
-              {
-                required: true,
-                message: "Введите логин!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+            <Form.Item
+              label="Логин"
+              name="Логин"
+              value={selectedUser.login}
+              rules={[
+                {
+                  required: true,
+                  message: "Введите логин!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-          <Form.Item
-            label="Пароль"
-            name="Пароль"
-            initialValue={selectedUser && selectedUser.password}
-            rules={[
-              {
-                required: true,
-                message: "Введите пароль!",
-              },
-            ]}
-          >
-            <Input.Password />
-          </Form.Item>
-        </Form>
+            <Form.Item
+              label="Пароль"
+              name="Пароль"
+              value={selectedUser.password}
+              rules={[
+                {
+                  required: true,
+                  message: "Введите пароль!",
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+          </Form>
         )}
       </Modal>
-
-
 
       {/* Удаление */}
       {isDeleteOpen && (
