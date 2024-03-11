@@ -117,34 +117,6 @@ const TopicsPage = (props) => {
             </a>
           </li>
         </ul>
-        <div style={{ flexDirection: "column" }}>
-          {/* Кнопка профиля */}
-          <Button
-            type="primary"
-            value="large"
-            shape="circle"
-            size={sizeLarge}
-            style={{ width: "auto" }}
-          >
-            <UserOutlined />
-          </Button>
-          {/* Кнопка выхода */}
-          <Button
-            type="primary"
-            shape="circle"
-            size={sizeLarge}
-            style={{ width: "auto" }}
-            onClick={() => {
-              showModalExit();
-            }}
-          >
-            <LogoutOutlined
-              style={{
-                fontSize: "24px",
-              }}
-            />
-          </Button>
-        </div>
         <Modal
           className="deleteModal"
           title={<div style={{ width: "242px" }}>Выйти из учетной записи?</div>}
@@ -177,6 +149,44 @@ const TopicsPage = (props) => {
       </div>
       <div class="create-line"></div>
       <div className="contentWindow">
+        <div
+          style={{
+            display: "flex",
+            gap: "6px",
+            position: "absolute",
+            top: "50px",
+            left: "1314px",
+          }}
+        >
+          <div>
+            <Button
+              type="primary"
+              value="large"
+              shape="circle"
+              size={sizeLarge}
+              style={{}}
+            >
+              <UserOutlined />
+            </Button>
+          </div>
+          <div>
+            <Button
+              type="primary"
+              shape="circle"
+              size={sizeLarge}
+              style={{}}
+              onClick={() => {
+                showModalExit();
+              }}
+            >
+              <LogoutOutlined
+                style={{
+                  fontSize: "24px",
+                }}
+              />
+            </Button>
+          </div>
+        </div>
         <TopicOne />
         <Row gutter={16}>
           <Col span={12}>

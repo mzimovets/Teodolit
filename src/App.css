@@ -127,7 +127,8 @@ a :focus {
 .topicsContainer {
   display: flex;
   background-color: #ebedee;
-  height: 1200px;
+  height: 1000px;
+  overflow: "hidden";
 }
 
 .siderTopic {

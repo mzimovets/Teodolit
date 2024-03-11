@@ -1,4 +1,5 @@
 const saveData = async (data, topicId) => {
+  console.log('data', data, topicId)
   const res = await fetch(`/topic/${topicId}`, {
     method: "post",
     headers: {
