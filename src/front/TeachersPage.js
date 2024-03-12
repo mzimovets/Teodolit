@@ -21,42 +21,27 @@ import {
 import { useEffect, useState, form } from "react";
 import { ModalAddUser } from "./ModalAddUser";
 import { DeleteUserButton } from "./DeleteUserButton";
+import _ from "lodash";
 
 const TeacherPage = () => {
-  const [sortKey, setSortKey] = useState("lastName");
+  const items = [
+    { label: "Фамилия", value: "secondName" },
+    { label: "Группа", value: "group" },
+  ];
+
+  const [sortKey, setSortKey] = useState(items[0]);
   const [sortOrder, setSortOrder] = useState("ascend");
 
-  const sortData = (data, key, order) => {
-    return data
-      .sort((a, b) => {
-        if (order === "ascend") {
-          if (key === "lastName") {
-            return a.lastName?.localeCompare(b.lastName);
-          } else if (key === "group") {
-            return a.group.localeCompare(b.group, undefined, {
-              sensitivity: "accent",
-            });
-          } else {
-            return a[key] > b[key] ? 1 : -1;
-          }
-        } else {
-          if (key === "lastName") {
-            return b.lastName.localeCompare(a.lastName);
-          } else if (key === "group") {
-            return b.group.localeCompare(a.group, undefined, {
-              sensitivity: "accent",
-            });
-          } else {
-            return b[key] > a[key] ? 1 : -1;
-          }
-        }
-      })
-      .map((item, index) => {
-        return {
-          ...item,
-          key: index + 1,
-        };
-      });
+  const sortData = (data) => {
+    console.log(
+      "data",
+      data,
+      "sortKey",
+      sortKey.value,
+      "_.",
+      _.sortedUniqBy(data, sortKey.value)
+    );
+    return _.sortedUniqBy(data, sortKey.value);
   };
 
   // Выбор режима сортировки данных таблицы
@@ -68,16 +53,8 @@ const TeacherPage = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const items = [
-    { label: "Фамилия", value: "secondName" },
-    { label: "Группа", value: "group" },
-  ];
-
-  const [selectedItem, setSelectedItem] = useState(items[0]);
-
   const handleMenuClick = (item) => {
-    setSelectedItem(item);
-    setSortKey(item.value);
+    setSortKey(item);
     setSortOrder("ascend");
   };
 
@@ -154,7 +131,15 @@ const TeacherPage = () => {
 
   // Переменная для компонента поиска
   const { Search } = Input;
-  const onSearch = (value, _e, info) => console.log(info?.source, value);
+  const onSearch = (e) => {
+    const value = e.target.value;
+    const filteredResult = tableData.filter(
+      (item) => item.lastName.indexOf(value) !== -1
+    );
+    setFilteredData(filteredResult);
+  };
+
+  const [filteredData, setFilteredData] = useState();
 
   const [tableData, setTableData] = useState();
   useEffect(() => {
@@ -398,7 +383,15 @@ const TeacherPage = () => {
               placement="bottom"
               arrow="true"
             >
-              <a onClick={(e) => e.preventDefault()}>
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                  const result = sortData(
+                    filteredData !== undefined ? filteredData : tableData
+                  );
+                  console.log("res", result);
+                }}
+              >
                 <Space className="list-sort">
                   <Button
                     className="button-sort"
@@ -406,7 +399,7 @@ const TeacherPage = () => {
                     style={{ width: "120px" }}
                   >
                     <span style={{ fontWeight: "bold" }}>
-                      {selectedItem.label} <CaretDownOutlined />
+                      {sortKey.label} <CaretDownOutlined />
                     </span>
                   </Button>
                 </Space>
@@ -415,15 +408,17 @@ const TeacherPage = () => {
           </span>
         </div>
 
-        <Search
+        <Input
           className="search-input"
-          placeholder="Найти"
-          onSearch={onSearch}
-          enterButton
+          placeholder="Поиск по фамилии"
+          // onSearch={onSearch}
+          // enterButton
           style={{
             width: "290px",
+            height: "33px",
             paddingLeft: "8px",
           }}
+          onChange={onSearch}
         />
         <div style={{ marginTop: "-3px", marginLeft: "auto" }}>
           <Button type="primary" shape="circle" size={sizeLarge} style={{}}>
@@ -440,7 +435,7 @@ const TeacherPage = () => {
 
       <Table
         style={{ width: "94%", margin: "auto" }}
-        dataSource={tableData}
+        dataSource={filteredData !== undefined ? filteredData : tableData}
         columns={columns}
         pagination={false}
         // onRow={(record) => {

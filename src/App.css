@@ -157,17 +157,25 @@ li {
   margin-top: 34px;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-}
-
 .topicsName {
   display: flex;
   gap: 6px;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
 }
 
-.topicsName:hover,
-.topicsName:focus {
-  color: rgb(114, 114, 114);
+/* .topicsName:hover,
+.topicsName:focus,
+.topicsName:active,
+.topicsName.selected {
+  color: #ff6800 !important;
+} */
+
+.selected {
+  color: #ff6800;
+}
+
+.bookIcon {
+  font-size: 20px;
 }

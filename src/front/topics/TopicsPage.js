@@ -9,6 +9,7 @@ import {
   BookOutlined,
   LogoutOutlined,
   ClockCircleOutlined,
+  AuditOutlined,
 } from "@ant-design/icons";
 
 import { TopicOne } from "./TopicOne";
@@ -55,65 +56,140 @@ const siderStyle = {
 const TopicsPage = (props) => {
   const navigateOk = useNavigate(); // Использование хука useNavigate
 
-  const handleOk = () => {
-    // Переход на другую страницу
-    navigateOk("http://localhost:3000/");
-  };
-
   const [exitBtn, setExitBtn] = useState(false);
   const showModalExit = () => {
     setExitBtn(true);
   };
   const handleExit = () => {
     setExitBtn(false);
+    navigateOk("/");
   };
 
   const handleCancelExit = () => {
-    setExitBtn(true);
+    setExitBtn(false);
   };
 
   const ReactEditorJS = createReactEditorJS();
   const navigate = useNavigate();
   console.log("Topic props");
 
+  const selectedTopic = (page) => {
+    console.log("window.location:", window.location, page);
+    return window.location.pathname === page
+      ? "topicsName selected"
+      : "topicsName";
+  };
+
   return (
     <div className="topicsContainer">
       <div className="siderTopic">
         <ul style={{ paddingTop: "10%", paddingLeft: "20%", fontSize: "18px" }}>
-          <li style={{ paddingBottom: "12px" }}>
-            <a className="topicsName" href="/topicsPage/topicOne">
-              <BookOutlined />
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicOne")}
+              href="/topicsPage/topicOne"
+            >
+              <BookOutlined className="bookIcon" />
               Тема №1
             </a>
           </li>
-          <li style={{ paddingBottom: "12px" }}>
-            <a className="topicsName" href="/topicsPage/topicTwo">
-              <BookOutlined />
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicOne")}
+              href="/topicsPage/topicOne"
+            >
+              <AuditOutlined className="bookIcon" />
+              Тест №1
+            </a>
+          </li>
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicTwo")}
+              href="/topicsPage/topicTwo"
+            >
+              <BookOutlined className="bookIcon" />
               Тема №2
             </a>
           </li>
-          <li style={{ paddingBottom: "12px" }}>
-            <a className="topicsName" href="/topicsPage/topicThree">
-              <BookOutlined />
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicOne")}
+              href="/topicsPage/topicOne"
+            >
+              <AuditOutlined className="bookIcon" />
+              Тест №2
+            </a>
+          </li>
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicThree")}
+              href="/topicsPage/topicThree"
+            >
+              <BookOutlined className="bookIcon" />
               Тема №3
             </a>
           </li>
-          <li style={{ paddingBottom: "12px" }}>
-            <a className="topicsName" href="/topicsPage/topicFour">
-              <BookOutlined />
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicOne")}
+              href="/topicsPage/topicOne"
+            >
+              <AuditOutlined className="bookIcon" />
+              Тест №3
+            </a>
+          </li>
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicFour")}
+              href="/topicsPage/topicFour"
+            >
+              <BookOutlined className="bookIcon" />
               Тема №4
             </a>
           </li>
-          <li style={{ paddingBottom: "12px" }}>
-            <a className="topicsName" href="/topicsPage/topicFive">
-              <BookOutlined />
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicOne")}
+              href="/topicsPage/topicOne"
+            >
+              <AuditOutlined className="bookIcon" />
+              Тест №4
+            </a>
+          </li>
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicFive")}
+              href="/topicsPage/topicFive"
+            >
+              <BookOutlined className="bookIcon" />
               Тема №5
             </a>
           </li>
-          <li style={{ paddingBottom: "12px" }}>
-            <a className="topicsName" href="/topicsPage/topicSeven">
-              <BookOutlined />
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicOne")}
+              href="/topicsPage/topicOne"
+            >
+              <AuditOutlined className="bookIcon" />
+              Тест №5
+            </a>
+          </li>
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicSeven")}
+              href="/topicsPage/topicSeven"
+            >
+              <BookOutlined className="bookIcon" />
               Тема №6
+            </a>
+          </li>
+          <li style={{ paddingBottom: "16px" }}>
+            <a
+              className={selectedTopic("/topicsPage/topicOne")}
+              href="/topicsPage/topicOne"
+            >
+              <AuditOutlined className="bookIcon" />
+              Тест №7
             </a>
           </li>
         </ul>
@@ -121,7 +197,7 @@ const TopicsPage = (props) => {
           className="deleteModal"
           title={<div style={{ width: "242px" }}>Выйти из учетной записи?</div>}
           open={exitBtn}
-          onOk={handleOk}
+          onOk={handleExit}
           onCancel={handleCancelExit}
           okText="Выйти"
           cancelText="Отмена"
@@ -158,34 +234,35 @@ const TopicsPage = (props) => {
             left: "1314px",
           }}
         >
-          <div>
-            <Button
-              type="primary"
-              value="large"
-              shape="circle"
-              size={sizeLarge}
-              style={{}}
-            >
-              <UserOutlined />
-            </Button>
-          </div>
-          <div>
-            <Button
-              type="primary"
-              shape="circle"
-              size={sizeLarge}
-              style={{}}
-              onClick={() => {
-                showModalExit();
+          {/* Кнопка профиля */}
+          <Button
+            type="primary"
+            value="large"
+            shape="circle"
+            size={sizeLarge}
+            style={{ zIndex: "3" }}
+            onClick={() => {
+              showModalExit();
+            }}
+          >
+            <UserOutlined />
+          </Button>
+          {/* Кнопка выхода */}
+          <Button
+            type="primary"
+            shape="circle"
+            size={sizeLarge}
+            style={{ zIndex: "3" }}
+            onClick={() => {
+              showModalExit();
+            }}
+          >
+            <LogoutOutlined
+              style={{
+                fontSize: "24px",
               }}
-            >
-              <LogoutOutlined
-                style={{
-                  fontSize: "24px",
-                }}
-              />
-            </Button>
-          </div>
+            />
+          </Button>
         </div>
         <TopicOne />
         <Row gutter={16}>
