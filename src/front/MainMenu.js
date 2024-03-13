@@ -30,7 +30,7 @@ const MainMenu = () => {
     console.log("Завершили функцию login");
   };
   return (
-    <div style={{ overflow: "hidden", height: "740px", position: "relative" }}>
+    <div style={{ overflow: "hidden", height: "813px", position: "relative" }}>
       <div className="mainContainer">
         <div className="noselect" style={{ paddingTop: "152px" }}>
           <Title

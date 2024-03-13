@@ -2,9 +2,14 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.body {
+  overflow-y: hidden;
+}
+
 .mainContainer {
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 }
 
 .teodolit-img {
@@ -128,7 +133,6 @@ a :focus {
   display: flex;
   background-color: #ebedee;
   height: 1000px;
-  overflow: "hidden";
 }
 
 .siderTopic {

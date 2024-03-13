@@ -420,7 +420,7 @@ const TeacherPage = () => {
           }}
           onChange={onSearch}
         />
-        <div style={{ marginTop: "-3px", marginLeft: "auto" }}>
+        <div style={{ marginTop: "-4px", marginLeft: "590px" }}>
           <Button type="primary" shape="circle" size={sizeLarge} style={{}}>
             <a className="logOutButton" href="http://localhost:3000/">
               <LogoutOutlined

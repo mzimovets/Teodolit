@@ -2,8 +2,8 @@ import * as ReactDOM from "react-dom/client";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   UserOutlined,
   BookOutlined,
@@ -55,6 +55,13 @@ const siderStyle = {
 
 const TopicsPage = (props) => {
   const navigateOk = useNavigate(); // Использование хука useNavigate
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname);
+    if (location.pathname.includes("topicsPage"))
+      document.body.classList.add("body");
+  });
 
   const [exitBtn, setExitBtn] = useState(false);
   const showModalExit = () => {
@@ -68,6 +75,20 @@ const TopicsPage = (props) => {
   const handleCancelExit = () => {
     setExitBtn(false);
   };
+
+  // Состояние открытия/ закрытия модального окна профиля учетной записи студента
+  const [isUserOpenProfile, setIsUserOpenProfile] = useState(false);
+  const showModalUserProfile = () => {
+    setIsUserOpenProfile(true);
+  };
+
+  const handleOkUserProfile = () => {
+    setIsUserOpenProfile(false);
+  };
+  const handleCancelUserProfile = () => {
+    setIsUserOpenProfile(false);
+  };
+  //
 
   const ReactEditorJS = createReactEditorJS();
   const navigate = useNavigate();
@@ -95,29 +116,11 @@ const TopicsPage = (props) => {
           </li>
           <li style={{ paddingBottom: "16px" }}>
             <a
-              className={selectedTopic("/topicsPage/topicOne")}
-              href="/topicsPage/topicOne"
-            >
-              <AuditOutlined className="bookIcon" />
-              Тест №1
-            </a>
-          </li>
-          <li style={{ paddingBottom: "16px" }}>
-            <a
               className={selectedTopic("/topicsPage/topicTwo")}
               href="/topicsPage/topicTwo"
             >
               <BookOutlined className="bookIcon" />
               Тема №2
-            </a>
-          </li>
-          <li style={{ paddingBottom: "16px" }}>
-            <a
-              className={selectedTopic("/topicsPage/topicOne")}
-              href="/topicsPage/topicOne"
-            >
-              <AuditOutlined className="bookIcon" />
-              Тест №2
             </a>
           </li>
           <li style={{ paddingBottom: "16px" }}>
@@ -131,29 +134,11 @@ const TopicsPage = (props) => {
           </li>
           <li style={{ paddingBottom: "16px" }}>
             <a
-              className={selectedTopic("/topicsPage/topicOne")}
-              href="/topicsPage/topicOne"
-            >
-              <AuditOutlined className="bookIcon" />
-              Тест №3
-            </a>
-          </li>
-          <li style={{ paddingBottom: "16px" }}>
-            <a
               className={selectedTopic("/topicsPage/topicFour")}
               href="/topicsPage/topicFour"
             >
               <BookOutlined className="bookIcon" />
               Тема №4
-            </a>
-          </li>
-          <li style={{ paddingBottom: "16px" }}>
-            <a
-              className={selectedTopic("/topicsPage/topicOne")}
-              href="/topicsPage/topicOne"
-            >
-              <AuditOutlined className="bookIcon" />
-              Тест №4
             </a>
           </li>
           <li style={{ paddingBottom: "16px" }}>
@@ -167,11 +152,11 @@ const TopicsPage = (props) => {
           </li>
           <li style={{ paddingBottom: "16px" }}>
             <a
-              className={selectedTopic("/topicsPage/topicOne")}
-              href="/topicsPage/topicOne"
+              className={selectedTopic("/topicsPage/topicSix")}
+              href="/topicsPage/topicSix"
             >
-              <AuditOutlined className="bookIcon" />
-              Тест №5
+              <BookOutlined className="bookIcon" />
+              Тема №6
             </a>
           </li>
           <li style={{ paddingBottom: "16px" }}>
@@ -180,16 +165,7 @@ const TopicsPage = (props) => {
               href="/topicsPage/topicSeven"
             >
               <BookOutlined className="bookIcon" />
-              Тема №6
-            </a>
-          </li>
-          <li style={{ paddingBottom: "16px" }}>
-            <a
-              className={selectedTopic("/topicsPage/topicOne")}
-              href="/topicsPage/topicOne"
-            >
-              <AuditOutlined className="bookIcon" />
-              Тест №7
+              Тема №7
             </a>
           </li>
         </ul>
