@@ -134,7 +134,8 @@ const TeacherPage = () => {
   const onSearch = (e) => {
     const value = e.target.value;
     const filteredResult = tableData.filter(
-      (item) => item.lastName.indexOf(value) !== -1
+      (item) =>
+        item.lastName.toLowerCase().indexOf(value.toLowerCase().trim()) !== -1
     );
     setFilteredData(filteredResult);
   };

@@ -183,3 +183,11 @@ li {
 .bookIcon {
   font-size: 20px;
 }
+
+.cdx-input.image-tool__caption {
+  border: none;
+  text-align: center;
+  box-shadow: none !important;
+  font-weight: 700;
+  font-style: italic;
+}
