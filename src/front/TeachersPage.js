@@ -8,6 +8,7 @@ import {
   Form,
   Input,
   Tag,
+  Select,
 } from "antd";
 import {
   EditOutlined,
@@ -25,7 +26,7 @@ import _ from "lodash";
 
 const TeacherPage = () => {
   const items = [
-    { label: "Фамилия", value: "secondName" },
+    { label: "Фамилия", value: "lastName" },
     { label: "Группа", value: "group" },
   ];
 
@@ -33,15 +34,10 @@ const TeacherPage = () => {
   const [sortOrder, setSortOrder] = useState("ascend");
 
   const sortData = (data) => {
-    console.log(
-      "data",
-      data,
-      "sortKey",
-      sortKey.value,
-      "_.",
-      _.sortedUniqBy(data, sortKey.value)
-    );
-    return _.sortedUniqBy(data, sortKey.value);
+    const result = _.orderBy(data, [sortKey.value]);
+    console.log("data", data, "sortKey", sortKey.value, "_.", result);
+    setTableData(result);
+    return result;
   };
 
   // Выбор режима сортировки данных таблицы
@@ -199,6 +195,9 @@ const TeacherPage = () => {
       title: "№",
       dataIndex: "key",
       key: "key",
+      render: (field, item, index) => {
+        return index + 1 + "";
+      },
     },
     {
       title: "Фамилия",
@@ -290,6 +289,7 @@ const TeacherPage = () => {
             size={sizeLarge}
             onClick={() => {
               console.log("item", item);
+              setSelectedUser(item);
               showModalUser();
             }}
           >
@@ -378,6 +378,17 @@ const TeacherPage = () => {
         >
           Сортировка: {/* Стрелка */}
           <span style={{ paddingLeft: "6px" }}>
+            {/* <Select
+              defaultValue={items[0]}
+              onChange={(e) => {
+                const result = sortData(
+                  filteredData !== undefined ? filteredData : tableData
+                );
+                console.log("res", result);
+                setTableData(result);
+              }}
+              options={items}
+            /> */}
             <Dropdown
               overlay={menu}
               trigger={["click"]}
@@ -386,11 +397,12 @@ const TeacherPage = () => {
             >
               <a
                 onClick={(e) => {
-                  e.preventDefault();
+                  // e.preventDefault();
                   const result = sortData(
                     filteredData !== undefined ? filteredData : tableData
                   );
                   console.log("res", result);
+                  setTableData(result);
                 }}
               >
                 <Space className="list-sort">
@@ -434,6 +446,10 @@ const TeacherPage = () => {
         </div>
       </div>
 
+      {console.log(
+        "filteredData !== undefined ? filteredData : tableData",
+        filteredData !== undefined ? filteredData : tableData
+      )}
       <Table
         style={{ width: "94%", margin: "auto" }}
         dataSource={filteredData !== undefined ? filteredData : tableData}
@@ -452,7 +468,7 @@ const TeacherPage = () => {
       {/* Профиль модальное окно*/}
       {console.log("isUserOpen", isUserOpen)}
       <Modal
-        key={"htgfjhgfjh"}
+        key={""}
         title={
           <span style={{ padding: "4px" }}>
             {selectedUser &&

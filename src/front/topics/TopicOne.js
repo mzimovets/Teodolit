@@ -19,6 +19,8 @@ const TopicOne = () => {
   const [isArticleFetched, setIsArticleFetched] = useState(false);
   const editorCore = useRef(null);
 
+  const [isTimerEnd, setTimerEnd] = useState(false);
+
   useEffect(async () => {
     const articleRes = await getData(topicId);
     console.log("article got", articleRes);
@@ -27,12 +29,16 @@ const TopicOne = () => {
       setIsEdit(true);
     }
     setIsArticleFetched(true);
+    setTimeout(() => {
+      setTimerEnd(true);
+    }, 1000 * 60 * 5); //5 мин
   }, []);
 
   console.log("editor tools", article, article?.blocks, editorCore.current);
 
   return (
     <div style={{ margin: "24px" }}>
+      <Button disabled={!isTimerEnd}>TEST</Button>
       {/* <Input
         style={{ width: "250px" }}
         defaultValue={topicId}
