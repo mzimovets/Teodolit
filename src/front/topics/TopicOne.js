@@ -16,12 +16,17 @@ const TopicOne = () => {
   console.log("match", match);
   const [article, setArticle] = useState();
   const [isEdit, setIsEdit] = useState(false);
+  const [isArticleFetched, setIsArticleFetched] = useState(false);
   const editorCore = useRef(null);
 
   useEffect(async () => {
     const articleRes = await getData(topicId);
     console.log("article got", articleRes);
     setArticle(articleRes?.article);
+    if (articleRes === null) {
+      setIsEdit(true);
+    }
+    setIsArticleFetched(true);
   }, []);
 
   console.log("editor tools", article, article?.blocks, editorCore.current);
@@ -38,23 +43,44 @@ const TopicOne = () => {
       /> */}
 
       {/* У ReactEditorJS почему-то не работает перерисовка, поэтому отображаем его когда данные загрузились */}
-      {article?.blocks && (
-        <ReactEditorJS
-          enableReInitialize={true}
-          readOnly
-          defaultValue={{
-            time: 0,
-            blocks: article?.blocks,
-          }}
-          tools={EDITOR_JS_TOOLS}
-          onInitialize={(editor) => {
-            console.log("инициализированно", editor);
-            editorCore.current = editor;
-          }}
-        />
-      )}
+      {/* {article?.blocks &&
+        } */}
 
-      {!isEdit && (
+      {isArticleFetched &&
+        (isEdit ? (
+          <>
+            Edit mode {`${isEdit}`}
+            {
+              <ReactEditorJS
+                enableReInitialize={true}
+                defaultValue={{
+                  time: 0,
+                  blocks: article?.blocks || [],
+                }}
+                tools={EDITOR_JS_TOOLS}
+                onInitialize={(editor) => {
+                  console.log("инициализированно", editor);
+                  editorCore.current = editor;
+                }}
+              />
+            }
+          </>
+        ) : (
+          <ReactEditorJS
+            enableReInitialize={true}
+            readOnly
+            defaultValue={{
+              time: 0,
+              blocks: article?.blocks,
+            }}
+            tools={EDITOR_JS_TOOLS}
+            onInitialize={(editor) => {
+              console.log("инициализированно", editor);
+              editorCore.current = editor;
+            }}
+          />
+        ))}
+      {/* {!isEdit && (
         <>
           Edit mode
           {
@@ -72,23 +98,23 @@ const TopicOne = () => {
             />
           }
         </>
-      )}
+      )} */}
 
       <Button
         onClick={async () => {
-          // if(isEdit){
-          const data = await editorCore.current.save();
-          console.log("Saved", data, topicId, article?.blocks);
-          // отправка на сервер
-          saveData(data, topicId);
-          //   setIsEdit(false)
-          // } else {
-          //   setIsEdit(true)
-          // }
+          if (isEdit) {
+            const data = await editorCore.current.save();
+            console.log("Saved", data, topicId, article?.blocks);
+            // отправка на сервер
+            saveData(data, topicId);
+            setIsEdit(false);
+          } else {
+            setIsEdit(true);
+          }
         }}
       >
-        Save
-        {/* {isEdit ? 'Save': 'Edit'} */}
+        {/* Save */}
+        {isEdit ? "Save" : "Edit"}
       </Button>
       {/* <Title level={3}>1. Правила обращения с теодолитом</Title>
       <Alert
