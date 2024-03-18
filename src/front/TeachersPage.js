@@ -25,7 +25,7 @@ import { DeleteUserButton } from "./DeleteUserButton";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 
-const TeacherPage = () => {
+const TeacherPage = (props) => {
   const navigateOk = useNavigate();
 
   const items = [

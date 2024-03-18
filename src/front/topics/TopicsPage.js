@@ -16,7 +16,17 @@ import { TopicOne } from "./TopicOne";
 
 import { createReactEditorJS } from "react-editor-js";
 import CheckList from "@editorjs/checklist";
-import { Layout, Button, Modal, Form, Col, Row, Statistic } from "antd";
+import {
+  Layout,
+  Button,
+  Modal,
+  Form,
+  Col,
+  Row,
+  Statistic,
+  Input,
+  Table,
+} from "antd";
 const { Countdown } = Statistic;
 const deadline = Date.now() + 300000; // Dayjs is also OK
 
@@ -56,6 +66,18 @@ const siderStyle = {
 const TopicsPage = (props) => {
   const navigateOk = useNavigate(); // Использование хука useNavigate
   const location = useLocation();
+
+  const [isUserModalWindowOpen, setIsUserModalWindowOpen] = useState(false);
+  const showModalUserWindow = () => {
+    setIsUserModalWindowOpen(true);
+  };
+
+  const handleOkUserWindow = () => {
+    setIsUserModalWindowOpen(false);
+  };
+  const handleCancelUserWindow = () => {
+    setIsUserModalWindowOpen(false);
+  };
 
   useEffect(() => {
     console.log(location.pathname);
@@ -190,18 +212,18 @@ const TopicsPage = (props) => {
           ></Form>
         </Modal>
         {/* Сделать props для добавлении модального окна в кнопку профиля */}
-        {/* {console.log("isUserOpen", isUserOpen)}
+        {console.log("isUserOpen", props.isUserOpen)}
         <Modal
           key={""}
           title={
             <span style={{ padding: "4px" }}>
-              {selectedUser &&
-                `${selectedUser.lastName} ${selectedUser.name} ${selectedUser.secondName}  ${selectedUser.group}`}
+              {props.selectedUser &&
+                `${props.selectedUser.lastName} ${props.selectedUser.name} ${props.selectedUser.secondName}  ${props.selectedUser.group}`}
             </span>
           }
-          open={isUserOpen}
-          onOk={handleOkUser}
-          onCancel={handleCancelUser}
+          open={isUserModalWindowOpen}
+          onOk={handleOkUserWindow}
+          onCancel={handleCancelUserWindow}
           okText="Сохранить"
           cancelText="Отмена"
           width={1120}
@@ -229,7 +251,7 @@ const TopicsPage = (props) => {
               <Input
                 variant="borderless"
                 readOnly
-                value={selectedUser && `${selectedUser.login}`}
+                value={props.selectedUser && `${props.selectedUser.login}`}
               />
             </span>
             <span
@@ -242,18 +264,18 @@ const TopicsPage = (props) => {
               Пароль:
             </span>
             <Input.Password
-              value={selectedUser && `${selectedUser.password}`}
+              value={props.selectedUser && `${props.selectedUser.password}`}
               variant="borderless"
               readOnly
               style={{ width: "164px" }}
             />
           </div>
           <Table
-            dataSource={dataSourceUser}
-            columns={columnsUser}
+            dataSource={props.dataSourceUser}
+            columns={props.columnsUser}
             pagination={false}
           />
-        </Modal> */}
+        </Modal>
       </div>
       <div class="create-line"></div>
       <div className="contentWindow">
@@ -274,7 +296,7 @@ const TopicsPage = (props) => {
             size={sizeLarge}
             style={{ zIndex: "3" }}
             onClick={() => {
-              showModalExit();
+              showModalUserWindow();
             }}
           >
             <UserOutlined />
