@@ -124,21 +124,157 @@ const ModalAddUser = (props) => {
         okText="Добавить"
         cancelText="Отмена"
       >
-        {/* <Form
-          name="basic"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
+        <div
           style={{
-            maxWidth: 600,
-            paddingRight: "74px",
-            marginTop: "24px",
+            display: "flex",
+            marginBottom: "22px",
           }}
-        > */}
-        <Form.Item
+        >
+          <span style={{ color: "red", marginLeft: "40px" }}>*</span>
+          <span
+            style={{
+              width: "72px",
+              textAlign: "right",
+              marginRight: "10px",
+            }}
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
+          >
+            Фамилия :
+          </span>
+          <Input
+            style={{ marginLeft: "8px", width: "250px" }}
+            value={lastName}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+
+            marginBottom: "22px",
+          }}
+        >
+          <span style={{ color: "red", marginLeft: "72px" }}>*</span>
+          <span
+            style={{
+              width: "40px",
+              textAlign: "right",
+              marginRight: "10px",
+            }}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          >
+            Имя :
+          </span>
+          <Input style={{ marginLeft: "8px", width: "250px" }} value={name} />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+
+            marginBottom: "22px",
+          }}
+        >
+          <span
+            style={{
+              width: "120px",
+              textAlign: "right",
+              marginRight: "10px",
+            }}
+            onChange={(e) => {
+              setSecondName(e.target.value);
+            }}
+          >
+            Отчество :
+          </span>
+          <Input
+            style={{ marginLeft: "8px", width: "250px" }}
+            value={secondName}
+          />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+
+            marginBottom: "22px",
+          }}
+        >
+          <span style={{ color: "red", marginLeft: "54px" }}>*</span>
+          <span
+            style={{
+              width: "60px",
+              textAlign: "right",
+              marginRight: "10px",
+            }}
+            onChange={(e) => {
+              setGroup(e.target.value);
+            }}
+          >
+            Группа :
+          </span>
+          <Input style={{ marginLeft: "8px", width: "250px" }} value={group} />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+
+            marginBottom: "22px",
+          }}
+        >
+          <span style={{ color: "red", marginLeft: "60px" }}>*</span>
+          <span
+            style={{
+              width: "54px",
+              textAlign: "right",
+              marginRight: "10px",
+            }}
+            onChange={(e) => {
+              setLogin(e.target.value);
+            }}
+          >
+            Логин :
+          </span>
+          <Input style={{ marginLeft: "8px", width: "250px" }} value={login} />
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+
+            marginBottom: "22px",
+          }}
+        >
+          <span style={{ color: "red", marginLeft: "50px" }}>*</span>
+          <span
+            style={{
+              width: "64px",
+              textAlign: "right",
+              marginRight: "10px",
+            }}
+            onChange={(e) => {
+              if (e.target.value.length <= 8) {
+                setPassword(e.target.value);
+              }
+            }}
+          >
+            Пароль :
+          </span>
+          <Input.Password
+            style={{ marginLeft: "8px", width: "250px" }}
+            value={password}
+          />
+        </div>
+        <p style={{ color: "red", width: "70%", margin: "auto" }}>
+          {formHasError && "Пожалуйста, заполните все обязательные поля!"}
+        </p>
+
+        {/* <Form.Item
           label="Фамилия"
           name="Фамилия"
           value={lastName}
@@ -153,9 +289,9 @@ const ModalAddUser = (props) => {
           ]}
         >
           <Input value={lastName} />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item
+        {/* <Form.Item
           label="Имя"
           name="Имя"
           value={name}
@@ -170,9 +306,9 @@ const ModalAddUser = (props) => {
           ]}
         >
           <Input />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item
+        {/* <Form.Item
           label="Отчество"
           name="Отчество"
           value={secondName}
@@ -187,9 +323,9 @@ const ModalAddUser = (props) => {
           ]}
         >
           <Input />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item
+        {/* <Form.Item
           label="Группа"
           name="Группа"
           value={group}
@@ -204,9 +340,9 @@ const ModalAddUser = (props) => {
           ]}
         >
           <Input />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item
+        {/* <Form.Item
           label="Логин"
           name="Логин"
           value={login}
@@ -221,9 +357,9 @@ const ModalAddUser = (props) => {
           ]}
         >
           <Input />
-        </Form.Item>
+        </Form.Item> */}
 
-        <Form.Item
+        {/* <Form.Item
           label="Пароль"
           name="Пароль"
           value={password}
@@ -253,7 +389,7 @@ const ModalAddUser = (props) => {
         </Form.Item>
         <p style={{ color: "red", width: "70%", margin: "auto" }}>
           {formHasError && "Пожалуйста, заполните все обязательные поля!"}
-        </p>
+        </p> */}
         {/* </Form> */}
       </Modal>
     </div>

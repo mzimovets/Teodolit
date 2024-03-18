@@ -159,15 +159,6 @@ const TopicsPage = (props) => {
               Тема №6
             </a>
           </li>
-          <li style={{ paddingBottom: "16px" }}>
-            <a
-              className={selectedTopic("/topicsPage/topicSeven")}
-              href="/topicsPage/topicSeven"
-            >
-              <BookOutlined className="bookIcon" />
-              Тема №7
-            </a>
-          </li>
         </ul>
         <Modal
           className="deleteModal"
@@ -198,6 +189,71 @@ const TopicsPage = (props) => {
             }}
           ></Form>
         </Modal>
+        {/* Сделать props для добавлении модального окна в кнопку профиля */}
+        {/* {console.log("isUserOpen", isUserOpen)}
+        <Modal
+          key={""}
+          title={
+            <span style={{ padding: "4px" }}>
+              {selectedUser &&
+                `${selectedUser.lastName} ${selectedUser.name} ${selectedUser.secondName}  ${selectedUser.group}`}
+            </span>
+          }
+          open={isUserOpen}
+          onOk={handleOkUser}
+          onCancel={handleCancelUser}
+          okText="Сохранить"
+          cancelText="Отмена"
+          width={1120}
+          footer={null}
+        >
+          <div
+            className="noselect"
+            style={{
+              display: "flex",
+              gap: "10px",
+              marginBottom: "14px",
+              marginTop: "24px",
+              padding: "4px",
+            }}
+          >
+            <span
+              style={{
+                fontWeight: "bold",
+                display: "flex",
+                gap: "10px",
+                alignItems: "center",
+              }}
+            >
+              Логин
+              <Input
+                variant="borderless"
+                readOnly
+                value={selectedUser && `${selectedUser.login}`}
+              />
+            </span>
+            <span
+              style={{
+                fontWeight: "bold",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              Пароль:
+            </span>
+            <Input.Password
+              value={selectedUser && `${selectedUser.password}`}
+              variant="borderless"
+              readOnly
+              style={{ width: "164px" }}
+            />
+          </div>
+          <Table
+            dataSource={dataSourceUser}
+            columns={columnsUser}
+            pagination={false}
+          />
+        </Modal> */}
       </div>
       <div class="create-line"></div>
       <div className="contentWindow">
@@ -241,34 +297,6 @@ const TopicsPage = (props) => {
           </Button>
         </div>
         <TopicOne />
-        <Row gutter={16}>
-          <Col span={12}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                paddingLeft: "1000px",
-              }}
-            >
-              <div style={{ marginRight: "8px" }}>
-                <ClockCircleOutlined
-                  style={{
-                    fontSize: "18px",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                />
-              </div>
-              <div>
-                <Countdown
-                  value={deadline}
-                  onFinish={onFinish}
-                  format="mm:ss"
-                />
-              </div>
-            </div>
-          </Col>
-        </Row>
       </div>
     </div>
   );

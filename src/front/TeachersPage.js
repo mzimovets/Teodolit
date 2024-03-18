@@ -22,9 +22,12 @@ import {
 import { useEffect, useState, form } from "react";
 import { ModalAddUser } from "./ModalAddUser";
 import { DeleteUserButton } from "./DeleteUserButton";
+import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 
 const TeacherPage = () => {
+  const navigateOk = useNavigate();
+
   const items = [
     { label: "Фамилия", value: "lastName" },
     { label: "Группа", value: "group" },
@@ -155,6 +158,22 @@ const TeacherPage = () => {
         console.log("preparedData = ", sortedData);
       });
   };
+
+  const [exitBtn, setExitBtn] = useState(false);
+  const showModalExit = () => {
+    setExitBtn(true);
+  };
+  const handleExit = () => {
+    setExitBtn(false);
+    navigateOk("/");
+  };
+
+  const handleCancelExit = () => {
+    setExitBtn(false);
+  };
+
+  // Написать логику для проверки обязательных полей в окне редактирования
+  const [formEditHasError, setFormEditHasError] = useState();
 
   // Общая таблица
   const dataSource = [
@@ -328,9 +347,35 @@ const TeacherPage = () => {
   // Таблица профиля
   const dataSourceUser = [
     {
-      topic: "1. Особенности строения теодолита",
+      topic: "1. Правила обращения с теодолитом",
       statusTopic: "",
-      numberOfAttempts: "7",
+      numberOfAttempts: "",
+    },
+    {
+      topic: "2. Основные части теодолита",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+    {
+      topic: "3. Установка теодолита в рабочее положение",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+    {
+      topic:
+        "4. Устройство и принцип работы технических теодолитов 2Т30П и 4Т30П",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+    {
+      topic: "5. Общие сведения о поверках теодолитов 2Т30П и 4Т30П",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+    {
+      topic: "6. Отсчётные устройства теодолитов 2Т30П и 4Т30П",
+      statusTopic: "",
+      numberOfAttempts: "",
     },
   ];
 
@@ -434,14 +479,20 @@ const TeacherPage = () => {
           onChange={onSearch}
         />
         <div style={{ marginTop: "-4px", marginLeft: "590px" }}>
-          <Button type="primary" shape="circle" size={sizeLarge} style={{}}>
-            <a className="logOutButton" href="http://localhost:3000/">
-              <LogoutOutlined
-                style={{
-                  fontSize: "24px",
-                }}
-              />
-            </a>
+          <Button
+            type="primary"
+            shape="circle"
+            size={sizeLarge}
+            style={{}}
+            onClick={() => {
+              showModalExit();
+            }}
+          >
+            <LogoutOutlined
+              style={{
+                fontSize: "24px",
+              }}
+            />
           </Button>
         </div>
       </div>
@@ -554,7 +605,7 @@ const TeacherPage = () => {
               marginTop: "24px",
             }}
           >
-            <Form.Item
+            {/* <Form.Item
               label="Фамилия"
               name="Фамилия"
               value={selectedUser.lastName}
@@ -566,8 +617,31 @@ const TeacherPage = () => {
               ]}
             >
               <Input />
-            </Form.Item>
-            <Form.Item
+            </Form.Item> */}
+
+            <div
+              style={{
+                display: "flex",
+                marginBottom: "22px",
+              }}
+            >
+              <span style={{ color: "red", marginLeft: "40px" }}>*</span>
+              <span
+                style={{
+                  width: "72px",
+                  textAlign: "right",
+                  marginRight: "10px",
+                }}
+              >
+                Фамилия :
+              </span>
+              <Input
+                style={{ marginLeft: "8px", width: "250px" }}
+                value={selectedUser.lastName}
+              />
+            </div>
+
+            {/* <Form.Item
               label="Имя"
               name="Имя"
               value={selectedUser.name}
@@ -579,7 +653,30 @@ const TeacherPage = () => {
               ]}
             >
               <Input value={selectedUser.name} />
-            </Form.Item>
+            </Form.Item> */}
+
+            <div
+              style={{
+                display: "flex",
+
+                marginBottom: "22px",
+              }}
+            >
+              <span style={{ color: "red", marginLeft: "72px" }}>*</span>
+              <span
+                style={{
+                  width: "40px",
+                  textAlign: "right",
+                  marginRight: "10px",
+                }}
+              >
+                Имя :
+              </span>
+              <Input
+                style={{ marginLeft: "8px", width: "250px" }}
+                value={selectedUser.name}
+              />
+            </div>
 
             {/* <Form.Item
             label="Отчество"
@@ -593,13 +690,30 @@ const TeacherPage = () => {
               },
             ]}
           > */}
-            <div style={{ display: "flex" }}>
-              Отчество:
-              <Input value={selectedUser.secondName} />
+            <div
+              style={{
+                display: "flex",
+
+                marginBottom: "22px",
+              }}
+            >
+              <span
+                style={{
+                  width: "120px",
+                  textAlign: "right",
+                  marginRight: "10px",
+                }}
+              >
+                Отчество :
+              </span>
+              <Input
+                style={{ marginLeft: "8px", width: "250px" }}
+                value={selectedUser.secondName}
+              />
             </div>
             {/* </Form.Item> */}
 
-            <Form.Item
+            {/* <Form.Item
               label="Группа"
               name="Группа"
               value={selectedUser.group}
@@ -611,9 +725,32 @@ const TeacherPage = () => {
               ]}
             >
               <Input value={selectedUser.group} />
-            </Form.Item>
+            </Form.Item> */}
 
-            <Form.Item
+            <div
+              style={{
+                display: "flex",
+
+                marginBottom: "22px",
+              }}
+            >
+              <span style={{ color: "red", marginLeft: "54px" }}>*</span>
+              <span
+                style={{
+                  width: "60px",
+                  textAlign: "right",
+                  marginRight: "10px",
+                }}
+              >
+                Группа :
+              </span>
+              <Input
+                style={{ marginLeft: "8px", width: "250px" }}
+                value={selectedUser.group}
+              />
+            </div>
+
+            {/* <Form.Item
               label="Логин"
               name="Логин"
               value={selectedUser.login}
@@ -625,9 +762,32 @@ const TeacherPage = () => {
               ]}
             >
               <Input />
-            </Form.Item>
+            </Form.Item> */}
 
-            <Form.Item
+            <div
+              style={{
+                display: "flex",
+
+                marginBottom: "22px",
+              }}
+            >
+              <span style={{ color: "red", marginLeft: "60px" }}>*</span>
+              <span
+                style={{
+                  width: "54px",
+                  textAlign: "right",
+                  marginRight: "10px",
+                }}
+              >
+                Логин :
+              </span>
+              <Input
+                style={{ marginLeft: "8px", width: "250px" }}
+                value={selectedUser.login}
+              />
+            </div>
+
+            {/* <Form.Item
               label="Пароль"
               name="Пароль"
               value={selectedUser.password}
@@ -639,9 +799,68 @@ const TeacherPage = () => {
               ]}
             >
               <Input.Password />
-            </Form.Item>
+            </Form.Item> */}
+
+            <div
+              style={{
+                display: "flex",
+
+                marginBottom: "22px",
+              }}
+            >
+              <span style={{ color: "red", marginLeft: "50px" }}>*</span>
+              <span
+                style={{
+                  width: "64px",
+                  textAlign: "right",
+                  marginRight: "10px",
+                }}
+              >
+                Пароль :
+              </span>
+              <Input.Password
+                style={{ marginLeft: "8px", width: "250px" }}
+                value={selectedUser.password}
+              />
+            </div>
+            {/* // Написать логику для проверки обязательных полей в окне редактирования */}
+            <p style={{ color: "red", width: "70%", margin: "auto" }}>
+              {formEditHasError &&
+                "Пожалуйста, заполните все обязательные поля!"}
+            </p>
           </Form>
         )}
+      </Modal>
+
+      {/* Модальное окно выхода из учетной записи преподавателя */}
+      <Modal
+        className="deleteModal"
+        title={<div style={{ width: "242px" }}>Выйти из учетной записи?</div>}
+        open={exitBtn}
+        onOk={handleExit}
+        onCancel={handleCancelExit}
+        okText="Выйти"
+        cancelText="Отмена"
+        okButtonProps={{
+          type: "primary",
+          danger: true,
+        }}
+      >
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          style={{
+            width: "200px",
+            maxWidth: 600,
+            paddingRight: "74px",
+            marginTop: "24px",
+          }}
+        ></Form>
       </Modal>
 
       {/* Удаление */}

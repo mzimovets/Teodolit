@@ -1,12 +1,37 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Typography, Alert, Space, Image, Button, Input } from "antd";
-import { BookOutlined } from "@ant-design/icons";
+import {
+  Typography,
+  Alert,
+  Space,
+  Image,
+  Button,
+  Input,
+  Col,
+  Row,
+  Statistic,
+} from "antd";
+import {
+  BookOutlined,
+  ClockCircleOutlined,
+  AuditOutlined,
+} from "@ant-design/icons";
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./tools";
 import { getData, saveData } from "./editorsActions";
 import { useMatch } from "react-router-dom";
 
 const { Title } = Typography;
+const { Countdown } = Statistic;
+const deadline = Date.now() + 300000; // Dayjs is also OK
+
+const onFinish = () => {
+  console.log("finished!");
+};
+const onChange = (val) => {
+  if (typeof val === "number" && 4.95 * 1000 < val && val < 5 * 1000) {
+    console.log("changed!");
+  }
+};
 
 const ReactEditorJS = createReactEditorJS();
 
@@ -38,7 +63,6 @@ const TopicOne = () => {
 
   return (
     <div style={{ margin: "24px" }}>
-      <Button disabled={!isTimerEnd}>TEST</Button>
       {/* <Input
         style={{ width: "250px" }}
         defaultValue={topicId}
@@ -105,6 +129,43 @@ const TopicOne = () => {
           }
         </>
       )} */}
+
+      <Row gutter={16}>
+        <Col span={12}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              paddingLeft: "764px",
+            }}
+          >
+            <Button
+              type="primary"
+              style={{ marginRight: "24px" }}
+              disabled={!isTimerEnd}
+            >
+              <div style={{ display: "flex", gap: "6px" }}>
+                <AuditOutlined style={{ fontSize: "20px" }} />
+                <span style={{ fontSize: "14px", fontWeight: "bold" }}>
+                  Пройти тест по теме
+                </span>
+              </div>
+            </Button>
+            <div style={{ marginRight: "8px" }}>
+              <ClockCircleOutlined
+                style={{
+                  fontSize: "18px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              />
+            </div>
+            <div>
+              <Countdown value={deadline} onFinish={onFinish} format="mm:ss" />
+            </div>
+          </div>
+        </Col>
+      </Row>
 
       <Button
         onClick={async () => {

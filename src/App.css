@@ -120,11 +120,6 @@ body {
   font-size: 18px;
 }
 
-.sideNav a:active,
-a :focus {
-  color: #74b83f;
-}
-
 .tree a:active {
   background-color: #f7f7f7;
 }
@@ -190,4 +185,10 @@ li {
   box-shadow: none !important;
   font-weight: 700;
   font-style: italic;
+}
+
+.image-tool {
+  --bg-color: white !important;
+  --front-color: #388ae5;
+  --border-color: #e8e8eb;
 }
