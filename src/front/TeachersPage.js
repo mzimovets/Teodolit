@@ -404,6 +404,10 @@ const TeacherPage = (props) => {
     },
   ];
 
+  useEffect(() => {
+    loadData();
+  }, [sortKey, sortOrder]);
+
   return (
     <div className="noselect" style={{ margin: "20px" }}>
       <div style={{ display: "flex", gap: "12px" }}>

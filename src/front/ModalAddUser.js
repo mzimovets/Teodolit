@@ -137,14 +137,14 @@ const ModalAddUser = (props) => {
               textAlign: "right",
               marginRight: "10px",
             }}
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
           >
             Фамилия :
           </span>
           <Input
             style={{ marginLeft: "8px", width: "250px" }}
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
             value={lastName}
           />
         </div>
@@ -163,13 +163,16 @@ const ModalAddUser = (props) => {
               textAlign: "right",
               marginRight: "10px",
             }}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
           >
             Имя :
           </span>
-          <Input style={{ marginLeft: "8px", width: "250px" }} value={name} />
+          <Input
+            style={{ marginLeft: "8px", width: "250px" }}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
         </div>
 
         <div
@@ -185,15 +188,15 @@ const ModalAddUser = (props) => {
               textAlign: "right",
               marginRight: "10px",
             }}
-            onChange={(e) => {
-              setSecondName(e.target.value);
-            }}
           >
             Отчество :
           </span>
           <Input
             style={{ marginLeft: "8px", width: "250px" }}
             value={secondName}
+            onChange={(e) => {
+              setSecondName(e.target.value);
+            }}
           />
         </div>
 
@@ -211,13 +214,16 @@ const ModalAddUser = (props) => {
               textAlign: "right",
               marginRight: "10px",
             }}
-            onChange={(e) => {
-              setGroup(e.target.value);
-            }}
           >
             Группа :
           </span>
-          <Input style={{ marginLeft: "8px", width: "250px" }} value={group} />
+          <Input
+            style={{ marginLeft: "8px", width: "250px" }}
+            value={group}
+            onChange={(e) => {
+              setGroup(e.target.value);
+            }}
+          />
         </div>
 
         <div
@@ -234,13 +240,16 @@ const ModalAddUser = (props) => {
               textAlign: "right",
               marginRight: "10px",
             }}
-            onChange={(e) => {
-              setLogin(e.target.value);
-            }}
           >
             Логин :
           </span>
-          <Input style={{ marginLeft: "8px", width: "250px" }} value={login} />
+          <Input
+            style={{ marginLeft: "8px", width: "250px" }}
+            value={login}
+            onChange={(e) => {
+              setLogin(e.target.value);
+            }}
+          />
         </div>
 
         <div
@@ -257,17 +266,17 @@ const ModalAddUser = (props) => {
               textAlign: "right",
               marginRight: "10px",
             }}
-            onChange={(e) => {
-              if (e.target.value.length <= 8) {
-                setPassword(e.target.value);
-              }
-            }}
           >
             Пароль :
           </span>
           <Input.Password
             style={{ marginLeft: "8px", width: "250px" }}
             value={password}
+            onChange={(e) => {
+              if (e.target.value.length <= 8) {
+                setPassword(e.target.value);
+              }
+            }}
           />
         </div>
         <p style={{ color: "red", width: "70%", margin: "auto" }}>
