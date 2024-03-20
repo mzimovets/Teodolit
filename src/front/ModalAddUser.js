@@ -2,6 +2,7 @@ import { Button, Modal, Input } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import md5 from "md5";
+import { fetchRequest } from "./utils";
 
 const ModalAddUser = (props) => {
   const sizeLarge = "large";
@@ -69,28 +70,25 @@ const ModalAddUser = (props) => {
       login !== undefined &&
       password !== undefined
     ) {
-      fetch("/users", {
-        method: "POST",
-        headers: {
+      fetchRequest(
+        "/users",
+        "POST",
+        {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data }),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-          setIsModalOpen(false);
-          props.loadData();
-          setLastName(undefined);
-          setName(undefined);
-          setSecondName(undefined);
-          setGroup(undefined);
-          setLogin(undefined);
-          setPassword(undefined);
-        });
+        JSON.stringify({ data })
+      ).then((data) => {
+        console.log(data);
+        setIsModalOpen(false);
+        props.loadData();
+        setLastName(undefined);
+        setName(undefined);
+        setSecondName(undefined);
+        setGroup(undefined);
+        setLogin(undefined);
+        setPassword(undefined);
+      });
     }
     setIsModalOpen(true);
     setFormHasError(true);

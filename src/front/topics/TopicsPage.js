@@ -299,7 +299,7 @@ const TopicsPage = (props) => {
               <Input
                 variant="borderless"
                 readOnly
-                value={props.selectedUser && `${props.selectedUser.login}`}
+                value={localStorage.getItem("login")}
               />
             </span>
             <span
@@ -312,7 +312,7 @@ const TopicsPage = (props) => {
               Пароль:
             </span>
             <Input.Password
-              value={props.selectedUser && `${props.selectedUser.password}`}
+              value={localStorage.getItem("password")}
               variant="borderless"
               readOnly
               style={{ width: "164px" }}

@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 
-const onFinish = (values: any) => {
+const onFinish = (values) => {
   console.log("Received values of form: ", values);
 };
 const { Title } = Typography;
 
 const MainMenu = () => {
+  const [inputValueLogin, setInputValueLogin] = useState();
+  const [inputValuePassword, setInputValuePassword] = useState();
+  const [enterErr, setEnterErr] = useState(false);
+
   const logIn = async () => {
     console.log("Вошли в функцию login");
     fetch("/users")
@@ -23,7 +27,36 @@ const MainMenu = () => {
   };
   const navigateEnter = useNavigate();
   const enterButton = () => {
-    navigateEnter("/teacherPage");
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+      },
+      body: JSON.stringify({
+        login: inputValueLogin,
+        password: inputValuePassword,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (data.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
+          localStorage.setItem("refreshToken", data.refreshToken);
+          localStorage.setItem("login", inputValueLogin);
+          localStorage.setItem("password", inputValuePassword);
+          if (data.role === 1) {
+            navigateEnter("/teacherPage");
+          } else {
+            navigateEnter("/topicsPage/topicOne");
+          }
+        } else {
+          setEnterErr(true);
+        }
+      });
   };
 
   return (
@@ -47,7 +80,7 @@ const MainMenu = () => {
               name="normal_login"
               className="login-form"
               initialValues={{ remember: true }}
-              onFinish={onFinish}
+              // onFinish={onFinish}
             >
               <Form.Item
                 name="username"
@@ -56,19 +89,35 @@ const MainMenu = () => {
                 <Input
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Логин"
+                  onChange={(e) => {
+                    setInputValueLogin(e.target.value);
+                  }}
                 />
               </Form.Item>
               <Form.Item
                 name="password"
                 rules={[{ required: true, message: "Введите пароль!" }]}
               >
-                <Input
+                <Input.Password
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Пароль"
+                  onChange={(e) => {
+                    setInputValuePassword(e.target.value);
+                  }}
                 />
               </Form.Item>
-
+              {enterErr && (
+                <p
+                  style={{
+                    color: "red",
+                    textAlign: "center",
+                    fontSize: "bold",
+                  }}
+                >
+                  Неверный логин или пароль!
+                </p>
+              )}
               <Form.Item>
                 <Button
                   type="primary"

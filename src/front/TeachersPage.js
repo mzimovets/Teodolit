@@ -23,6 +23,7 @@ import { ModalAddUser } from "./ModalAddUser";
 import { DeleteUserButton } from "./DeleteUserButton";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
+import { fetchRequest } from "./utils";
 
 const TeacherPage = (props) => {
   const navigateOk = useNavigate();
@@ -146,16 +147,27 @@ const TeacherPage = (props) => {
   }, []);
 
   const loadData = () => {
-    fetch("/users")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        const preparedData = JSON.parse(data.result);
-        const sortedData = sortData(preparedData, sortKey, sortOrder);
-        setTableData(sortedData);
-        console.log("preparedData = ", sortedData);
-      });
+    fetchRequest("/users").then((data) => {
+      const preparedData = JSON.parse(data.result);
+      const sortedData = sortData(preparedData, sortKey, sortOrder);
+      setTableData(sortedData);
+      console.log("preparedData = ", sortedData);
+    });
+    // fetch("/users", {
+    //   method: "get",
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    //   },
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     const preparedData = JSON.parse(data.result);
+    //     const sortedData = sortData(preparedData, sortKey, sortOrder);
+    //     setTableData(sortedData);
+    //     console.log("preparedData = ", sortedData);
+    //   });
   };
 
   const [exitBtn, setExitBtn] = useState(false);
