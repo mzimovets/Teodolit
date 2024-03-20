@@ -1,6 +1,6 @@
-import { Button, Modal, Form, Input } from "antd";
-import { UserAddOutlined, SignatureOutlined } from "@ant-design/icons";
-import { useState, useEffect } from "react";
+import { Button, Modal, Input } from "antd";
+import { UserAddOutlined } from "@ant-design/icons";
+import { useState } from "react";
 import md5 from "md5";
 
 const ModalAddUser = (props) => {
@@ -282,124 +282,6 @@ const ModalAddUser = (props) => {
         <p style={{ color: "red", width: "70%", margin: "auto" }}>
           {formHasError && "Пожалуйста, заполните все обязательные поля!"}
         </p>
-
-        {/* <Form.Item
-          label="Фамилия"
-          name="Фамилия"
-          value={lastName}
-          onChange={(e) => {
-            setLastName(e.target.value);
-          }}
-          rules={[
-            {
-              required: true,
-              message: "Введите фамилию!",
-            },
-          ]}
-        >
-          <Input value={lastName} />
-        </Form.Item> */}
-
-        {/* <Form.Item
-          label="Имя"
-          name="Имя"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          rules={[
-            {
-              required: true,
-              message: "Введите имя!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item> */}
-
-        {/* <Form.Item
-          label="Отчество"
-          name="Отчество"
-          value={secondName}
-          onChange={(e) => {
-            setSecondName(e.target.value);
-          }}
-          rules={[
-            {
-              required: false,
-              message: "Введите отчество!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item> */}
-
-        {/* <Form.Item
-          label="Группа"
-          name="Группа"
-          value={group}
-          onChange={(e) => {
-            setGroup(e.target.value);
-          }}
-          rules={[
-            {
-              required: true,
-              message: "Введите группу!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item> */}
-
-        {/* <Form.Item
-          label="Логин"
-          name="Логин"
-          value={login}
-          onChange={(e) => {
-            setLogin(e.target.value);
-          }}
-          rules={[
-            {
-              required: true,
-              message: "Введите логин!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item> */}
-
-        {/* <Form.Item
-          label="Пароль"
-          name="Пароль"
-          value={password}
-          onChange={(e) => {
-            if (e.target.value.length <= 8) {
-              setPassword(e.target.value);
-            }
-          }}
-          rules={[
-            {
-              required: true,
-              message: "Введите пароль!",
-            },
-          ]}
-        >
-          <span style={{ display: "flex", gap: "12px" }}>
-            <Input.Password style={{}} value={password} />
-            <Button
-              className="generatePasswordButton"
-              type="primary"
-              size={sizeLarge}
-              onClick={generatePassword}
-            >
-              <SignatureOutlined style={{ fontSize: "18px" }} />
-            </Button>
-          </span>
-        </Form.Item>
-        <p style={{ color: "red", width: "70%", margin: "auto" }}>
-          {formHasError && "Пожалуйста, заполните все обязательные поля!"}
-        </p> */}
-        {/* </Form> */}
       </Modal>
     </div>
   );

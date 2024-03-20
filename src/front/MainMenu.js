@@ -1,6 +1,7 @@
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const onFinish = (values: any) => {
   console.log("Received values of form: ", values);
@@ -18,17 +19,13 @@ const MainMenu = () => {
       .then((data) => {
         console.log(data);
       });
-    // let response = await fetch("/", {
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // console.log("res =", response);
-    // const data = await response.json();
-    // console.log("data =", data);
     console.log("Завершили функцию login");
   };
+  const navigateEnter = useNavigate();
+  const enterButton = () => {
+    navigateEnter("/teacherPage");
+  };
+
   return (
     <div style={{ overflow: "hidden", height: "813px", position: "relative" }}>
       <div className="mainContainer">
@@ -71,13 +68,6 @@ const MainMenu = () => {
                   placeholder="Пароль"
                 />
               </Form.Item>
-              {/* <Form.Item>
-              <Form.Item
-                name="remember"
-                valuePropName="checked"
-                noStyle
-              ></Form.Item>
-            </Form.Item> */}
 
               <Form.Item>
                 <Button
@@ -88,9 +78,9 @@ const MainMenu = () => {
                     backgroundColor: "black",
                     width: "102px",
                   }}
-                  // onClick={logIn}
+                  onClick={enterButton}
                 >
-                  <a href="http://localhost:3000/teacherPage">Войти</a>
+                  Войти
                 </Button>
               </Form.Item>
             </Form>

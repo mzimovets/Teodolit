@@ -1,31 +1,19 @@
-import * as ReactDOM from "react-dom/client";
-import { Routes, Route, Outlet, Link } from "react-router-dom";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-  UserOutlined,
-  BookOutlined,
-  LogoutOutlined,
-  ClockCircleOutlined,
-  AuditOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, BookOutlined, LogoutOutlined } from "@ant-design/icons";
 
 import { TopicOne } from "./TopicOne";
 
 import { createReactEditorJS } from "react-editor-js";
-import CheckList from "@editorjs/checklist";
 import {
   Layout,
   Button,
   Modal,
   Form,
-  Col,
-  Row,
   Statistic,
   Input,
   Table,
+  Tag,
 } from "antd";
 const { Countdown } = Statistic;
 const deadline = Date.now() + 300000; // Dayjs is also OK
@@ -122,6 +110,66 @@ const TopicsPage = (props) => {
       ? "topicsName selected"
       : "topicsName";
   };
+
+  // Таблица профиля
+  const dataSourceUser = [
+    {
+      topic: "1. Правила обращения с теодолитом",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+    {
+      topic: "2. Основные части теодолита",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+    {
+      topic: "3. Установка теодолита в рабочее положение",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+    {
+      topic:
+        "4. Устройство и принцип работы технических теодолитов 2Т30П и 4Т30П",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+    {
+      topic: "5. Общие сведения о поверках теодолитов 2Т30П и 4Т30П",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+    {
+      topic: "6. Отсчётные устройства теодолитов 2Т30П и 4Т30П",
+      statusTopic: "",
+      numberOfAttempts: "",
+    },
+  ];
+
+  const columnsUser = [
+    {
+      title: "Тема",
+      dataIndex: "topic",
+      key: "topic",
+    },
+    {
+      title: "Статус",
+      dataIndex: "statusTopic",
+      key: "statusTopic",
+      render: (status, item) => {
+        return (
+          <Tag color={"blue"} key={status}>
+            {status?.toUpperCase()}
+          </Tag>
+        );
+      },
+    },
+    {
+      title: "Кол-во попыток (?)",
+      dataIndex: "numberOfAttempts",
+      key: "numberOfAttempts",
+    },
+  ];
 
   return (
     <div className="topicsContainer">
@@ -271,8 +319,8 @@ const TopicsPage = (props) => {
             />
           </div>
           <Table
-            dataSource={props.dataSourceUser}
-            columns={props.columnsUser}
+            dataSource={dataSourceUser}
+            columns={columnsUser}
             pagination={false}
           />
         </Modal>

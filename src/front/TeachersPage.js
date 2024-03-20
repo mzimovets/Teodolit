@@ -8,7 +8,6 @@ import {
   Form,
   Input,
   Tag,
-  Select,
 } from "antd";
 import {
   EditOutlined,
@@ -19,7 +18,7 @@ import {
   EyeInvisibleOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useEffect, useState, form } from "react";
+import { useEffect, useState } from "react";
 import { ModalAddUser } from "./ModalAddUser";
 import { DeleteUserButton } from "./DeleteUserButton";
 import { useNavigate } from "react-router-dom";
@@ -283,10 +282,7 @@ const TeacherPage = (props) => {
               value={password}
               readOnly
               style={{ width: "100%", border: "none", boxShadow: "none" }}
-              iconRender={(visible) => (
-                // visible ? <EyeOutlined /> : <EyeInvisibleOutlined />
-                <></>
-              )}
+              iconRender={(visible) => <></>}
               visibilityToggle={{ visible: isPasswordVisible }}
             />
           </div>
@@ -427,17 +423,6 @@ const TeacherPage = (props) => {
         >
           Сортировка: {/* Стрелка */}
           <span style={{ paddingLeft: "6px" }}>
-            {/* <Select
-              defaultValue={items[0]}
-              onChange={(e) => {
-                const result = sortData(
-                  filteredData !== undefined ? filteredData : tableData
-                );
-                console.log("res", result);
-                setTableData(result);
-              }}
-              options={items}
-            /> */}
             <Dropdown
               overlay={menu}
               trigger={["click"]}
@@ -446,7 +431,6 @@ const TeacherPage = (props) => {
             >
               <a
                 onClick={(e) => {
-                  // e.preventDefault();
                   const result = sortData(
                     filteredData !== undefined ? filteredData : tableData
                   );
@@ -473,8 +457,6 @@ const TeacherPage = (props) => {
         <Input
           className="search-input"
           placeholder="Поиск по фамилии"
-          // onSearch={onSearch}
-          // enterButton
           style={{
             width: "290px",
             height: "33px",
@@ -510,15 +492,6 @@ const TeacherPage = (props) => {
         dataSource={filteredData !== undefined ? filteredData : tableData}
         columns={columns}
         pagination={false}
-        // onRow={(record) => {
-        //   return {
-        //     onClick: () => {
-        //       console.log('кликнули на строкку таблицы')
-        //       setSelectedUser(record);
-        //       showModalUser();
-        //     },
-        //   };
-        // }}
       />
       {/* Профиль модальное окно*/}
       {console.log("isUserOpen", isUserOpen)}
@@ -609,20 +582,6 @@ const TeacherPage = (props) => {
               marginTop: "24px",
             }}
           >
-            {/* <Form.Item
-              label="Фамилия"
-              name="Фамилия"
-              value={selectedUser.lastName}
-              rules={[
-                {
-                  required: true,
-                  message: "Введите фамилию!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item> */}
-
             <div
               style={{
                 display: "flex",
@@ -644,20 +603,6 @@ const TeacherPage = (props) => {
                 value={selectedUser.lastName}
               />
             </div>
-
-            {/* <Form.Item
-              label="Имя"
-              name="Имя"
-              value={selectedUser.name}
-              rules={[
-                {
-                  required: true,
-                  message: "Введите имя!",
-                },
-              ]}
-            >
-              <Input value={selectedUser.name} />
-            </Form.Item> */}
 
             <div
               style={{
@@ -682,18 +627,6 @@ const TeacherPage = (props) => {
               />
             </div>
 
-            {/* <Form.Item
-            label="Отчество"
-            name="Отчество"
-            id="secondName"
-            initialValue={selectedUser.secondName}
-            rules={[
-              {
-                required: false,
-                message: "Введите отчество!",
-              },
-            ]}
-          > */}
             <div
               style={{
                 display: "flex",
@@ -715,21 +648,6 @@ const TeacherPage = (props) => {
                 value={selectedUser.secondName}
               />
             </div>
-            {/* </Form.Item> */}
-
-            {/* <Form.Item
-              label="Группа"
-              name="Группа"
-              value={selectedUser.group}
-              rules={[
-                {
-                  required: true,
-                  message: "Введите группу!",
-                },
-              ]}
-            >
-              <Input value={selectedUser.group} />
-            </Form.Item> */}
 
             <div
               style={{
@@ -754,20 +672,6 @@ const TeacherPage = (props) => {
               />
             </div>
 
-            {/* <Form.Item
-              label="Логин"
-              name="Логин"
-              value={selectedUser.login}
-              rules={[
-                {
-                  required: true,
-                  message: "Введите логин!",
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item> */}
-
             <div
               style={{
                 display: "flex",
@@ -790,20 +694,6 @@ const TeacherPage = (props) => {
                 value={selectedUser.login}
               />
             </div>
-
-            {/* <Form.Item
-              label="Пароль"
-              name="Пароль"
-              value={selectedUser.password}
-              rules={[
-                {
-                  required: true,
-                  message: "Введите пароль!",
-                },
-              ]}
-            >
-              <Input.Password />
-            </Form.Item> */}
 
             <div
               style={{

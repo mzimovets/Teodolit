@@ -19,18 +19,11 @@ body {
   pointer-events: none;
 }
 
-/* .login-form{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
-
 .authWindow {
   position: absolute;
   margin-left: 100px;
   margin-top: 42px;
   width: 500px;
-  /* height: 248px; */
   box-shadow: -1px 9px 30px rgba(0, 0, 0, 0.26), 4px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
 }
@@ -163,13 +156,6 @@ li {
   color: black;
   font-weight: 600;
 }
-
-/* .topicsName:hover,
-.topicsName:focus,
-.topicsName:active,
-.topicsName.selected {
-  color: #ff6800 !important;
-} */
 
 .selected {
   color: #ff6800;
