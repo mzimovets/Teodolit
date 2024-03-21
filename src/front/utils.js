@@ -5,7 +5,7 @@ const fetchRequest = async (url, method = "get", headers, body) => {
       ...headers,
       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
     },
-    body,
+    body: JSON.stringify(body),
   };
   const res = await fetch(url, resultHeaders);
   console.log("fetchRequest", res, localStorage.getItem("accessToken"));

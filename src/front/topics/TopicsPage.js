@@ -15,6 +15,7 @@ import {
   Table,
   Tag,
 } from "antd";
+import { fetchRequest } from "../utils";
 const { Countdown } = Statistic;
 const deadline = Date.now() + 300000; // Dayjs is also OK
 
@@ -52,6 +53,8 @@ const siderStyle = {
 };
 
 const TopicsPage = (props) => {
+  const [currentUser, setCurrentUser] = useState();
+
   const navigateOk = useNavigate(); // Использование хука useNavigate
   const location = useLocation();
 
@@ -68,10 +71,25 @@ const TopicsPage = (props) => {
   };
 
   useEffect(() => {
+    fetchRequest(
+      "/information",
+      "post",
+      {
+        "Content-type": "application/json",
+        Accept: "*/*",
+      },
+      {
+        login: localStorage.getItem("login"),
+        password: localStorage.getItem("password"),
+      }
+    ).then((data) => {
+      console.log("data.userInfo", data.userInfo);
+      setCurrentUser(data.userInfo);
+    });
     console.log(location.pathname);
     if (location.pathname.includes("topicsPage"))
       document.body.classList.add("body");
-  });
+  }, []);
 
   const [exitBtn, setExitBtn] = useState(false);
   const showModalExit = () => {
@@ -265,8 +283,8 @@ const TopicsPage = (props) => {
           key={""}
           title={
             <span style={{ padding: "4px" }}>
-              {props.selectedUser &&
-                `${props.selectedUser.lastName} ${props.selectedUser.name} ${props.selectedUser.secondName}  ${props.selectedUser.group}`}
+              {currentUser?.lastName} {currentUser?.name}{" "}
+              {currentUser?.secondName} {currentUser?.group}
             </span>
           }
           open={isUserModalWindowOpen}

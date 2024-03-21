@@ -70,13 +70,46 @@ const TeacherPage = (props) => {
   };
 
   const handleOkEdit = () => {
+    console.log(
+      "selectedUser",
+      selectedUser,
+      "!name =",
+      selectedUser.lastName !== "",
+      selectedUser.name !== "" &&
+        selectedUser.lastName !== "" &&
+        selectedUser.group !== "" &&
+        selectedUser.login !== "" &&
+        selectedUser.password !== ""
+    );
+    if (
+      selectedUser.name !== "" &&
+      selectedUser.lastName !== "" &&
+      selectedUser.group !== "" &&
+      selectedUser.login !== "" &&
+      selectedUser.password !== ""
+    ) {
+      fetchRequest(
+        "/users",
+        "put",
+        {
+          "Content-type": "application/json",
+          Accept: "*/*",
+        },
+        { ...selectedUser }
+      ).then(() => {
+        loadData();
+        setFormEditHasError(false);
+        setIsEditOpen(false);
+      });
+    }
+    setFormEditHasError(true);
     form.resetFields();
-    setIsEditOpen(false);
     console.log("нажато");
   };
 
   const handleCancelEdit = () => {
     setIsEditOpen(false);
+    setFormEditHasError(false);
   };
 
   // Состояние открытия/ закрытия модального окна профиля учетной записи
@@ -581,6 +614,7 @@ const TeacherPage = (props) => {
       >
         {selectedUser && (
           <Form
+            form={form}
             name="basic"
             labelCol={{
               span: 8,
@@ -613,6 +647,13 @@ const TeacherPage = (props) => {
               <Input
                 style={{ marginLeft: "8px", width: "250px" }}
                 value={selectedUser.lastName}
+                onChange={(e) => {
+                  console.log("e.target.value", e.target.value);
+                  setSelectedUser({
+                    ...selectedUser,
+                    lastName: e.target.value,
+                  });
+                }}
               />
             </div>
 
@@ -636,6 +677,10 @@ const TeacherPage = (props) => {
               <Input
                 style={{ marginLeft: "8px", width: "250px" }}
                 value={selectedUser.name}
+                onChange={(e) => {
+                  console.log("e.target.value", e.target.value);
+                  setSelectedUser({ ...selectedUser, name: e.target.value });
+                }}
               />
             </div>
 
@@ -658,6 +703,13 @@ const TeacherPage = (props) => {
               <Input
                 style={{ marginLeft: "8px", width: "250px" }}
                 value={selectedUser.secondName}
+                onChange={(e) => {
+                  console.log("e.target.value", e.target.value);
+                  setSelectedUser({
+                    ...selectedUser,
+                    secondName: e.target.value,
+                  });
+                }}
               />
             </div>
 
@@ -681,6 +733,10 @@ const TeacherPage = (props) => {
               <Input
                 style={{ marginLeft: "8px", width: "250px" }}
                 value={selectedUser.group}
+                onChange={(e) => {
+                  console.log("e.target.value", e.target.value);
+                  setSelectedUser({ ...selectedUser, group: e.target.value });
+                }}
               />
             </div>
 
@@ -704,6 +760,10 @@ const TeacherPage = (props) => {
               <Input
                 style={{ marginLeft: "8px", width: "250px" }}
                 value={selectedUser.login}
+                onChange={(e) => {
+                  console.log("e.target.value", e.target.value);
+                  setSelectedUser(e.target.value);
+                }}
               />
             </div>
 
@@ -727,6 +787,10 @@ const TeacherPage = (props) => {
               <Input.Password
                 style={{ marginLeft: "8px", width: "250px" }}
                 value={selectedUser.password}
+                onChange={(e) => {
+                  console.log("e.target.value", e.target.value);
+                  setSelectedUser(e.target.value);
+                }}
               />
             </div>
             {/* // Написать логику для проверки обязательных полей в окне редактирования */}

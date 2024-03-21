@@ -48,6 +48,7 @@ const MainMenu = () => {
           localStorage.setItem("refreshToken", data.refreshToken);
           localStorage.setItem("login", inputValueLogin);
           localStorage.setItem("password", inputValuePassword);
+
           if (data.role === 1) {
             navigateEnter("/teacherPage");
           } else {

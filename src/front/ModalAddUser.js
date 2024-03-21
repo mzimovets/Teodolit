@@ -42,6 +42,7 @@ const ModalAddUser = (props) => {
     setLogin("");
     setPassword("");
     console.log(lastName, name, secondName, group, login, password);
+    setFormHasError(false);
   };
 
   const [lastName, setLastName] = useState();
@@ -77,7 +78,7 @@ const ModalAddUser = (props) => {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        JSON.stringify({ data })
+        { data }
       ).then((data) => {
         console.log(data);
         setIsModalOpen(false);
@@ -88,10 +89,11 @@ const ModalAddUser = (props) => {
         setGroup(undefined);
         setLogin(undefined);
         setPassword(undefined);
+        setFormHasError(false);
       });
     }
-    setIsModalOpen(true);
     setFormHasError(true);
+    setIsModalOpen(true);
   };
 
   return (
