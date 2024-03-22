@@ -202,6 +202,7 @@ const TopicOne = () => {
         footer={null} // Отключаем подвал модального окна
         cancelButtonProps={false}
         width={1000} // Задаём ширину модального окна
+        style={{ top: "40px" }}
       >
         <TestOne />
         <div style={{ textAlign: "right", marginTop: "20px" }}>

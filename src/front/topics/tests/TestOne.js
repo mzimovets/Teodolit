@@ -1,7 +1,15 @@
 import React from "react";
 import { message, Button, Space } from "antd";
+import ImageMapper from "react-img-mapper";
 
 const TestOne = () => {
+  const URL = "/logo192.png";
+  const MAP = {
+    name: "my-map",
+    // GET JSON FROM BELOW URL AS AN EXAMPLE AND PUT IT HERE
+    areas:
+      "https://raw.githubusercontent.com/img-mapper/react-docs/master/src/assets/example.json",
+  };
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
     messageApi.open({
@@ -22,12 +30,13 @@ const TestOne = () => {
       <div className="testTaskDiscription">
         Нажмите на изображение, где находится ...
       </div>
-      <img
+      <ImageMapper src={URL} map={MAP} />;
+      {/* <img
         className="testImage"
         src="/logo192.png"
         alt=""
         onClick={() => alert("Вы кликнули по картинке!")}
-      />
+      /> */}
       <div className="testTaskHeader">Задание №2</div>
       <div className="testTaskDiscription">
         Нажмите на изображение, где находится ...
@@ -39,41 +48,6 @@ const TestOne = () => {
         onClick={() => alert("Вы кликнули по картинке!")}
       />
       <div />
-      {/*  */}
-      <div className="testTaskHeader">Задание №2</div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится ...
-      </div>
-      <img
-        className="testImage"
-        src="/logo192.png"
-        alt=""
-        onClick={() => alert("Вы кликнули по картинке!")}
-      />
-      <div />
-      <div className="testTaskHeader">Задание №2</div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится ...
-      </div>
-      <img
-        className="testImage"
-        src="/logo192.png"
-        alt=""
-        onClick={() => alert("Вы кликнули по картинке!")}
-      />
-      <div />
-      <div className="testTaskHeader">Задание №2</div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится ...
-      </div>
-      <img
-        className="testImage"
-        src="/logo192.png"
-        alt=""
-        onClick={() => alert("Вы кликнули по картинке!")}
-      />
-      <div />
-
       <>
         {contextHolder}
         <Space>
