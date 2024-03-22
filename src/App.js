@@ -18,7 +18,6 @@ function App() {
         <Route path="/editUsers" element={<EditUsers />} />
         <Route path="/topicsPage/:pageId" element={<TopicsPage />} />
         <Route path="/topicOne" element={"topicOne"} />
-        <Route path="/testTopicOne" element={"testTopicOne"} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,24 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Typography,
-  Alert,
-  Space,
-  Image,
-  Button,
-  Input,
-  Col,
-  Row,
-  Statistic,
-} from "antd";
-import {
-  BookOutlined,
-  ClockCircleOutlined,
-  AuditOutlined,
-} from "@ant-design/icons";
+import { Typography, Button, Col, Row, Statistic, Modal } from "antd";
+import { ClockCircleOutlined, AuditOutlined } from "@ant-design/icons";
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./tools";
 import { getData, saveData } from "./editorsActions";
 import { useMatch } from "react-router-dom";
+import { TestOne } from "./tests/TestOne";
 
 const { Title } = Typography;
 const { Countdown } = Statistic;
@@ -58,6 +45,11 @@ const TopicOne = () => {
       setTimerEnd(true);
     }, 1000 * 60 * 5); //5 мин
   }, []);
+  const [isModalVisible, setIsModalVisible] = useState(false); // Хранение состояния видимости модального окна
+
+  const handleTestButtonClick = () => {
+    setIsModalVisible(true); // При нажатии на кнопку отображаем модальное окно
+  };
 
   console.log("editor tools", article, article?.blocks, editorCore.current);
 
@@ -143,7 +135,8 @@ const TopicOne = () => {
                 <Button
                   type="primary"
                   style={{ marginRight: "24px" }}
-                  disabled={!isTimerEnd}
+                  // disabled={!isTimerEnd}
+                  onClick={handleTestButtonClick}
                 >
                   <div style={{ display: "flex", gap: "6px" }}>
                     <AuditOutlined style={{ fontSize: "20px" }} />
@@ -190,6 +183,35 @@ const TopicOne = () => {
           </Button>
         </>
       )}
+      {/* Модальное окно для теста */}
+      <Modal
+        title={
+          <div
+            style={{
+              // width: "920px",
+              // textAlign: "center",
+              fontWeight: "bold",
+              fontSize: "20px",
+            }}
+          >
+            Тест по теме №1 "Правила обращения с теодолитом"
+          </div>
+        }
+        visible={isModalVisible} // Отображение модального окна зависит от состояния isModalVisible
+        onCancel={() => setIsModalVisible(false)} // Обработчик закрытия модального окна
+        footer={null} // Отключаем подвал модального окна
+        cancelButtonProps={false}
+        width={1000} // Задаём ширину модального окна
+      >
+        <TestOne />
+        <div style={{ textAlign: "right", marginTop: "20px" }}>
+          {" "}
+          {/* Выравниваем кнопку по правому краю */}
+          <Button type="primary" onClick={() => setIsModalVisible(false)}>
+            Завершить тест
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 };

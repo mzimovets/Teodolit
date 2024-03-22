@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { UserOutlined, BookOutlined, LogoutOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  BookOutlined,
+  LogoutOutlined,
+  CheckCircleOutlined,
+  SyncOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons";
 
 import { TopicOne } from "./TopicOne";
 
@@ -179,6 +186,16 @@ const TopicsPage = (props) => {
           <Tag color={"blue"} key={status}>
             {status?.toUpperCase()}
           </Tag>
+          // <Tag color={"success"} key={status} icon={<CheckCircleOutlined />}>
+          //   {" "}
+          //   ПРОЙДЕНО
+          // </Tag>
+          // <Tag icon={<SyncOutlined spin />} color="processing">
+          //   В ПРОЦЕССЕ
+          // </Tag>
+          // <Tag icon={<CloseCircleOutlined />} color="error">
+          //   НЕ ПРОЙДЕНО
+          // </Tag>
         );
       },
     },

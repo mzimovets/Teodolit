@@ -178,3 +178,21 @@ li {
   --front-color: #388ae5;
   --border-color: #e8e8eb;
 }
+
+/* Tests style */
+
+.testTaskHeader {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.testTaskDiscription {
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.testImage {
+  display: block;
+  margin: 0 auto;
+}
