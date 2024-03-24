@@ -1,15 +1,53 @@
-import React from "react";
-import { message, Button, Space } from "antd";
+import React, { useState } from "react";
+import { message, Button, Space, Divider, Flex, Tag } from "antd";
+
 import ImageMapper from "react-img-mapper";
+import { useSearchParams } from "react-router-dom";
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  CloseCircleOutlined,
+  ExclamationCircleOutlined,
+  MinusCircleOutlined,
+  SyncOutlined,
+} from "@ant-design/icons";
 
 const TestOne = () => {
-  const URL = "/logo192.png";
+  const [coord, setCoord] = useState(); //получение координат
+  const [answer, setAnswer] = useState(); //получение ответа
+
   const MAP = {
     name: "my-map",
     // GET JSON FROM BELOW URL AS AN EXAMPLE AND PUT IT HERE
-    areas:
-      "https://raw.githubusercontent.com/img-mapper/react-docs/master/src/assets/example.json",
+    areas: [
+      //   {
+      //     name: "1",
+      //     shape: "poly",
+      //     coords: [25, 33, 27, 300, 128, 240, 128, 94],
+      //     preFillColor: "green",
+      //     fillColor: "blue",
+      //   },
+      //   {
+      //     name: "2",
+      //     shape: "rect",
+      //     coords: [0, 10, 10, 0],
+      //     preFillColor: "red",
+      //     fillColor: "yellow",
+      //   },
+      {
+        name: "3",
+        shape: "rect",
+        coords: [335, 225, 385, 275], //x1, y1, x2, y2
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        hide: true, // Скрыть область
+
+        strokeColor: "rgba(0, 0, 0, 0)",
+      },
+    ],
   };
+
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
     messageApi.open({
@@ -26,11 +64,38 @@ const TestOne = () => {
 
   return (
     <div style={{ paddingLeft: "20px", paddingTop: "12px" }}>
-      <div className="testTaskHeader">Задание №1</div>
+      <div className="testTaskHeader">
+        Задание №1
+        {answer?.[0] == true ? (
+          <Tag
+            icon={<CheckCircleOutlined />}
+            style={{ marginLeft: "14px" }}
+            color="success"
+          >
+            Ответ принят
+          </Tag>
+        ) : null}
+      </div>
       <div className="testTaskDiscription">
         Нажмите на изображение, где находится ...
       </div>
-      <ImageMapper src={URL} map={MAP} />;
+      <div style={{ width: "80%", margin: "auto" }}>
+        <ImageMapper
+          src={"/image/Topic1.1.png"}
+          height={330}
+          width={700}
+          map={MAP}
+          onClick={(area, index, evt) => {
+            console.log(area, index, evt);
+            setAnswer([true]);
+          }}
+          onImageMouseMove={(evt) => {
+            // console.log(evt);
+            setCoord({ x: evt.clientX, y: evt.clientY });
+          }}
+        />
+      </div>
+      {JSON.stringify(coord)}
       {/* <img
         className="testImage"
         src="/logo192.png"

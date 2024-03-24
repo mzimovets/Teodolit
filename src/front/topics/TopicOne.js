@@ -6,6 +6,7 @@ import { EDITOR_JS_TOOLS } from "./tools";
 import { getData, saveData } from "./editorsActions";
 import { useMatch } from "react-router-dom";
 import { TestOne } from "./tests/TestOne";
+import { TestTwo } from "./tests/TestTwo";
 
 const { Title } = Typography;
 const { Countdown } = Statistic;
@@ -194,7 +195,7 @@ const TopicOne = () => {
               fontSize: "20px",
             }}
           >
-            Тест по теме №1 "Правила обращения с теодолитом"
+            Тест по теме №2 "Основные части теодолита"
           </div>
         }
         visible={isModalVisible} // Отображение модального окна зависит от состояния isModalVisible
@@ -205,6 +206,7 @@ const TopicOne = () => {
         style={{ top: "40px" }}
       >
         <TestOne />
+
         <div style={{ textAlign: "right", marginTop: "20px" }}>
           {" "}
           {/* Выравниваем кнопку по правому краю */}

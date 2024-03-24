@@ -11,6 +11,7 @@ import {
 
 import { TopicOne } from "./TopicOne";
 
+
 import { createReactEditorJS } from "react-editor-js";
 import {
   Layout,
@@ -183,16 +184,21 @@ const TopicsPage = (props) => {
       key: "statusTopic",
       render: (status, item) => {
         return (
-          <Tag color={"blue"} key={status}>
-            {status?.toUpperCase()}
-          </Tag>
-          // <Tag bordered={false} color={"success"} key={status} icon={<CheckCircleOutlined />}>
+          // <Tag color={"blue"} key={status}>
+          //   {status?.toUpperCase()}
+          // </Tag>
+          // <Tag
+          //   bordered={false}
+          //   color={"success"}
+          //   key={status}
+          //   icon={<CheckCircleOutlined />}
+          // >
           //   {" "}
           //   ПРОЙДЕНО
           // </Tag>
-          // <Tag bordered={false} icon={<SyncOutlined spin />} color="processing">
-          //   В ПРОЦЕССЕ
-          // </Tag>
+          <Tag bordered={false} icon={<SyncOutlined spin />} color="processing">
+            В ПРОЦЕССЕ
+          </Tag>
           // <Tag bordered={false} icon={<CloseCircleOutlined />} color="error">
           //   НЕ ПРОЙДЕНО
           // </Tag>
