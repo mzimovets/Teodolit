@@ -207,7 +207,7 @@ const TopicOne = () => {
       >
         <TestOne />
 
-        <div style={{ textAlign: "right", marginTop: "20px" }}>
+        <div style={{ textAlign: "right" }}>
           {" "}
           {/* Выравниваем кнопку по правому краю */}
           <Button type="primary" onClick={() => setIsModalVisible(false)}>

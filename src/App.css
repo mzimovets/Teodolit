@@ -196,3 +196,11 @@ li {
   display: block;
   margin: 0 auto;
 }
+
+.answers:hover {
+  color: rgb(86, 86, 86) !important;
+}
+
+/* .ant-checkbox-inner {
+  color: rgb(86, 86, 86) !important;
+} */

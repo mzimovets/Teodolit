@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, json } from "react-router-dom";
 import {
   UserOutlined,
   BookOutlined,
@@ -10,7 +10,6 @@ import {
 } from "@ant-design/icons";
 
 import { TopicOne } from "./TopicOne";
-
 
 import { createReactEditorJS } from "react-editor-js";
 import {
@@ -62,6 +61,7 @@ const siderStyle = {
 
 const TopicsPage = (props) => {
   const [currentUser, setCurrentUser] = useState();
+  const [dataUserTest, setDataUserTest] = useState();
 
   const navigateOk = useNavigate(); // Использование хука useNavigate
   const location = useLocation();
@@ -69,6 +69,29 @@ const TopicsPage = (props) => {
   const [isUserModalWindowOpen, setIsUserModalWindowOpen] = useState(false);
   const showModalUserWindow = () => {
     setIsUserModalWindowOpen(true);
+    console.log("showModalUserWindow");
+    fetchRequest(
+      `/userTest`,
+      "post",
+      {
+        "Content-type": "application/json",
+        Accept: "*/*",
+      },
+      {
+        login: localStorage.getItem("login"),
+        password: localStorage.getItem("password"),
+      }
+    ).then((data) => {
+      console.log("dataUserTest", data);
+      if (data.status == "OK") {
+        try {
+          const resultObject = JSON.parse(data.result);
+          setDataUserTest(resultObject);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    });
   };
 
   const handleOkUserWindow = () => {
@@ -141,34 +164,22 @@ const TopicsPage = (props) => {
   const dataSourceUser = [
     {
       topic: "1. Правила обращения с теодолитом",
-      statusTopic: "",
-      numberOfAttempts: "",
     },
     {
       topic: "2. Основные части теодолита",
-      statusTopic: "",
-      numberOfAttempts: "",
     },
     {
       topic: "3. Установка теодолита в рабочее положение",
-      statusTopic: "",
-      numberOfAttempts: "",
     },
     {
       topic:
         "4. Устройство и принцип работы технических теодолитов 2Т30П и 4Т30П",
-      statusTopic: "",
-      numberOfAttempts: "",
     },
     {
       topic: "5. Общие сведения о поверках теодолитов 2Т30П и 4Т30П",
-      statusTopic: "",
-      numberOfAttempts: "",
     },
     {
       topic: "6. Отсчётные устройства теодолитов 2Т30П и 4Т30П",
-      statusTopic: "",
-      numberOfAttempts: "",
     },
   ];
 
@@ -196,8 +207,27 @@ const TopicsPage = (props) => {
           //   {" "}
           //   ПРОЙДЕНО
           // </Tag>
-          <Tag bordered={false} icon={<SyncOutlined spin />} color="processing">
-            В ПРОЦЕССЕ
+          <Tag
+            icon={
+              status == "НЕ ПРОЙДЕНО" ? (
+                item.numberOfAttempts > 0 ? (
+                  <CloseCircleOutlined />
+                ) : (
+                  <CloseCircleOutlined />
+                )
+              ) : (
+                <CheckCircleOutlined />
+              )
+            }
+            color={
+              status == "НЕ ПРОЙДЕНО"
+                ? item.numberOfAttempts > 0
+                  ? "error"
+                  : "default"
+                : "success"
+            }
+          >
+            {status}
           </Tag>
           // <Tag bordered={false} icon={<CloseCircleOutlined />} color="error">
           //   НЕ ПРОЙДЕНО
@@ -206,7 +236,7 @@ const TopicsPage = (props) => {
       },
     },
     {
-      title: "Кол-во попыток (?)",
+      title: "Кол-во попыток",
       dataIndex: "numberOfAttempts",
       key: "numberOfAttempts",
     },
@@ -360,7 +390,13 @@ const TopicsPage = (props) => {
             />
           </div>
           <Table
-            dataSource={dataSourceUser}
+            dataSource={dataSourceUser.map((item, index) => {
+              return {
+                topic: item.topic,
+                statusTopic: dataUserTest?.testData?.[index]?.status,
+                numberOfAttempts: dataUserTest?.testData?.[index]?.count,
+              };
+            })}
             columns={columnsUser}
             pagination={false}
           />
