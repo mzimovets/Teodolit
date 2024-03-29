@@ -3,9 +3,6 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 
-const onFinish = (values) => {
-  console.log("Received values of form: ", values);
-};
 const { Title } = Typography;
 
 const MainMenu = () => {
@@ -13,18 +10,6 @@ const MainMenu = () => {
   const [inputValuePassword, setInputValuePassword] = useState();
   const [enterErr, setEnterErr] = useState(false);
 
-  const logIn = async () => {
-    console.log("Вошли в функцию login");
-    fetch("/users")
-      .then((res) => {
-        console.log("res =", res);
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
-    console.log("Завершили функцию login");
-  };
   const navigateEnter = useNavigate();
   const enterButton = () => {
     fetch("/login", {
@@ -81,7 +66,6 @@ const MainMenu = () => {
               name="normal_login"
               className="login-form"
               initialValues={{ remember: true }}
-              // onFinish={onFinish}
             >
               <Form.Item
                 name="username"

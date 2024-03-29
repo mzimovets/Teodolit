@@ -2,7 +2,7 @@ import { Button, Modal, Input } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import md5 from "md5";
-import { fetchRequest } from "./utils";
+import { fetchRequest } from "../../utils";
 
 const ModalAddUser = (props) => {
   const sizeLarge = "large";

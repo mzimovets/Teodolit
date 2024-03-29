@@ -19,11 +19,12 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import { ModalAddUser } from "./ModalAddUser";
-import { DeleteUserButton } from "./DeleteUserButton";
+import { ModalAddUser } from "./components/ModalAddUser";
+import { DeleteUserButton } from "./components/DeleteUserButton";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
-import { fetchRequest } from "./utils";
+import { fetchRequest } from "../utils";
+import { EditUsers } from "./components/EditUsers";
 
 const TeacherPage = (props) => {
   const navigateOk = useNavigate();
@@ -58,59 +59,6 @@ const TeacherPage = (props) => {
   };
 
   const [selectedUser, setSelectedUser] = useState(null);
-
-  // Состояние открытия/ закрытия модального окна редактирования учетной записи
-
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const showModalEdit = (user) => {
-    console.log("user", user);
-    console.log("selectedUser", selectedUser);
-    setIsEditOpen(true);
-    setSelectedUser(user);
-  };
-
-  const handleOkEdit = () => {
-    console.log(
-      "selectedUser",
-      selectedUser,
-      "!name =",
-      selectedUser.lastName !== "",
-      selectedUser.name !== "" &&
-        selectedUser.lastName !== "" &&
-        selectedUser.group !== "" &&
-        selectedUser.login !== "" &&
-        selectedUser.password !== ""
-    );
-    if (
-      selectedUser.name !== "" &&
-      selectedUser.lastName !== "" &&
-      selectedUser.group !== "" &&
-      selectedUser.login !== "" &&
-      selectedUser.password !== ""
-    ) {
-      fetchRequest(
-        "/users",
-        "put",
-        {
-          "Content-type": "application/json",
-          Accept: "*/*",
-        },
-        { ...selectedUser }
-      ).then(() => {
-        loadData();
-        setFormEditHasError(false);
-        setIsEditOpen(false);
-      });
-    }
-    setFormEditHasError(true);
-    form.resetFields();
-    console.log("нажато");
-  };
-
-  const handleCancelEdit = () => {
-    setIsEditOpen(false);
-    setFormEditHasError(false);
-  };
 
   // Состояние открытия/ закрытия модального окна профиля учетной записи
   const [isUserOpen, setIsUserOpen] = useState(false);
@@ -449,6 +397,16 @@ const TeacherPage = (props) => {
     loadData();
   }, [sortKey, sortOrder]);
 
+  // Состояние открытия/ закрытия модального окна редактирования учетной записи
+
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const showModalEdit = (user) => {
+    console.log("user", user);
+    console.log("selectedUser", selectedUser);
+    setIsEditOpen(true);
+    setSelectedUser(user);
+  };
+
   return (
     <div className="noselect" style={{ margin: "20px" }}>
       <div style={{ display: "flex", gap: "12px" }}>
@@ -604,203 +562,13 @@ const TeacherPage = (props) => {
         />
       </Modal>
       {console.log("isEditOpen", isEditOpen)}
-      <Modal
-        title="Редактировать учетную запись"
-        open={isEditOpen}
-        onOk={handleOkEdit}
-        onCancel={handleCancelEdit}
-        okText="Сохранить"
-        cancelText="Отмена"
-      >
-        {selectedUser && (
-          <Form
-            form={form}
-            name="basic"
-            labelCol={{
-              span: 8,
-            }}
-            wrapperCol={{
-              span: 16,
-            }}
-            style={{
-              maxWidth: 600,
-              paddingRight: "74px",
-              marginTop: "24px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                marginBottom: "22px",
-              }}
-            >
-              <span style={{ color: "red", marginLeft: "40px" }}>*</span>
-              <span
-                style={{
-                  width: "72px",
-                  textAlign: "right",
-                  marginRight: "10px",
-                }}
-              >
-                Фамилия :
-              </span>
-              <Input
-                style={{ marginLeft: "8px", width: "250px" }}
-                value={selectedUser.lastName}
-                onChange={(e) => {
-                  console.log("e.target.value", e.target.value);
-                  setSelectedUser({
-                    ...selectedUser,
-                    lastName: e.target.value,
-                  });
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-
-                marginBottom: "22px",
-              }}
-            >
-              <span style={{ color: "red", marginLeft: "72px" }}>*</span>
-              <span
-                style={{
-                  width: "40px",
-                  textAlign: "right",
-                  marginRight: "10px",
-                }}
-              >
-                Имя :
-              </span>
-              <Input
-                style={{ marginLeft: "8px", width: "250px" }}
-                value={selectedUser.name}
-                onChange={(e) => {
-                  console.log("e.target.value", e.target.value);
-                  setSelectedUser({ ...selectedUser, name: e.target.value });
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-
-                marginBottom: "22px",
-              }}
-            >
-              <span
-                style={{
-                  width: "120px",
-                  textAlign: "right",
-                  marginRight: "10px",
-                }}
-              >
-                Отчество :
-              </span>
-              <Input
-                style={{ marginLeft: "8px", width: "250px" }}
-                value={selectedUser.secondName}
-                onChange={(e) => {
-                  console.log("e.target.value", e.target.value);
-                  setSelectedUser({
-                    ...selectedUser,
-                    secondName: e.target.value,
-                  });
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-
-                marginBottom: "22px",
-              }}
-            >
-              <span style={{ color: "red", marginLeft: "54px" }}>*</span>
-              <span
-                style={{
-                  width: "60px",
-                  textAlign: "right",
-                  marginRight: "10px",
-                }}
-              >
-                Группа :
-              </span>
-              <Input
-                style={{ marginLeft: "8px", width: "250px" }}
-                value={selectedUser.group}
-                onChange={(e) => {
-                  console.log("e.target.value", e.target.value);
-                  setSelectedUser({ ...selectedUser, group: e.target.value });
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-
-                marginBottom: "22px",
-              }}
-            >
-              <span style={{ color: "red", marginLeft: "60px" }}>*</span>
-              <span
-                style={{
-                  width: "54px",
-                  textAlign: "right",
-                  marginRight: "10px",
-                }}
-              >
-                Логин :
-              </span>
-              <Input
-                style={{ marginLeft: "8px", width: "250px" }}
-                value={selectedUser.login}
-                onChange={(e) => {
-                  console.log("e.target.value", e.target.value);
-                  setSelectedUser(e.target.value);
-                }}
-              />
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-
-                marginBottom: "22px",
-              }}
-            >
-              <span style={{ color: "red", marginLeft: "50px" }}>*</span>
-              <span
-                style={{
-                  width: "64px",
-                  textAlign: "right",
-                  marginRight: "10px",
-                }}
-              >
-                Пароль :
-              </span>
-              <Input.Password
-                style={{ marginLeft: "8px", width: "250px" }}
-                value={selectedUser.password}
-                onChange={(e) => {
-                  console.log("e.target.value", e.target.value);
-                  setSelectedUser(e.target.value);
-                }}
-              />
-            </div>
-            {/* // Написать логику для проверки обязательных полей в окне редактирования */}
-            <p style={{ color: "red", width: "70%", margin: "auto" }}>
-              {formEditHasError &&
-                "Пожалуйста, заполните все обязательные поля!"}
-            </p>
-          </Form>
-        )}
-      </Modal>
+      <EditUsers
+        isEditOpen={isEditOpen}
+        selectedUser={selectedUser}
+        setSelectedUser={setSelectedUser}
+        setIsEditOpen={setIsEditOpen}
+        loadData={loadData}
+      />
 
       {/* Модальное окно выхода из учетной записи преподавателя */}
       <Modal
