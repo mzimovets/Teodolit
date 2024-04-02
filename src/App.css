@@ -113,10 +113,6 @@ body {
   font-size: 18px;
 }
 
-.tree a:active {
-  background-color: #f7f7f7;
-}
-
 .topicsContainer {
   display: flex;
   background-color: #ebedee;
@@ -201,6 +197,18 @@ li {
   color: rgb(86, 86, 86) !important;
 }
 
-/* .ant-checkbox-inner {
-  color: rgb(86, 86, 86) !important;
-} */
+/* TopicsPage */
+
+.namesTopics {
+  padding-left: 26px;
+  padding-right: 10px;
+  font-size: 14px;
+}
+
+.siderTopic a:not(.selected):hover {
+  color: #fca468;
+}
+
+.topicsContainer li {
+  margin-bottom: 38px;
+}

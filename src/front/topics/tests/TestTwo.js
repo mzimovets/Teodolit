@@ -1,8 +1,15 @@
 import React from "react";
-import { message, Button, Space } from "antd";
+import { message, Input, Tag, Button, Checkbox } from "antd";
+import { CheckCircleOutlined } from "@ant-design/icons";
+
 import ImageMapper from "react-img-mapper";
 
 const TestTwo = () => {
+  // чекбоксы
+  const onChange = (e) => {
+    console.log(`checked = ${e.target.checked}`);
+  };
+
   const URL = "/logo192.png";
   const MAP = {
     name: "my-map",
@@ -53,30 +60,124 @@ const TestTwo = () => {
 
   return (
     <div style={{ paddingLeft: "20px", paddingTop: "12px" }}>
-      <div className="testTaskHeader">Задание №1</div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится ...
+      <div className="testTaskHeader">
+        Задание №1
+        {/* {answer1?.[0] == true ? ( */}
+        <Tag
+          icon={<CheckCircleOutlined />}
+          style={{ marginLeft: "14px" }}
+          color="success"
+        >
+          Ответ принят
+        </Tag>
+        {/* ) : null} */}
       </div>
-      <ImageMapper
-        src={URL}
-        map={MAP}
-        onImageMouseMove={(evt) => console.log(evt)}
-      />
-      ;
-      {/* <img
-        className="testImage"
-        src="/logo192.png"
-        alt=""
-        onClick={() => alert("Вы кликнули по картинке!")}
-      /> */}
-      <div />
-      <>
-        {contextHolder}
-        <Space>
-          <Button onClick={success}>Success</Button>
-          <Button onClick={error}>Error</Button>
-        </Space>
-      </>
+      <div className="testTaskDiscription">
+        Горизонтальный круг теодолита состоит из ... (Ответ вводить в им.
+        падеже, ед. числе с маленькой буквы)
+      </div>
+      <div style={{ display: "flex", alignItems: "baseline", gap: "20px" }}>
+        1.
+        <Input placeholder="ответ" style={{ width: "100px" }} />
+        2.
+        <Input placeholder="ответ" style={{ width: "100px" }} />
+      </div>
+      <div style={{ textAlign: "left" }}>
+        {" "}
+        <Button
+          style={{ marginBottom: "32px", marginTop: "16px" }}
+          type="primary"
+        >
+          Ответить
+        </Button>
+      </div>
+      <div className="testTaskHeader">
+        Задание №2
+        {/* {answer1?.[0] == true ? ( */}
+        <Tag
+          icon={<CheckCircleOutlined />}
+          style={{ marginLeft: "14px" }}
+          color="success"
+        >
+          Ответ принят
+        </Tag>
+        {/* ) : null} */}
+      </div>
+      <div className="testTaskDiscription">
+        Как называется величина дуги лимбо между двумя ближайшими штрихами?
+        (Ответ вводить в им. падеже, ед. числе с маленькой буквы, через один
+        пробел)
+      </div>
+      <div>
+        <Input placeholder="ответ" style={{ width: "180px" }} />
+      </div>
+      <div style={{ textAlign: "left" }}>
+        {" "}
+        <Button
+          style={{ marginBottom: "32px", marginTop: "16px" }}
+          type="primary"
+        >
+          Ответить
+        </Button>
+      </div>
+      <div className="testTaskHeader">
+        Задание №3
+        {/* {answer1?.[0] == true ? ( */}
+        <Tag
+          icon={<CheckCircleOutlined />}
+          style={{ marginLeft: "14px" }}
+          color="success"
+        >
+          Ответ принят
+        </Tag>
+        {/* ) : null} */}
+      </div>
+      <div className="testTaskDiscription">
+        Через сколько градусов производится оцифровка лимба? (Введите число)
+      </div>
+      <div>
+        <Input disabled={true} placeholder="ответ" style={{ width: "180px" }} />
+      </div>
+      <div style={{ textAlign: "left" }}>
+        {" "}
+        <Button
+          style={{ marginBottom: "32px", marginTop: "16px" }}
+          type="primary"
+        >
+          Ответить
+        </Button>
+      </div>
+      <div className="testTaskHeader">
+        Задание №4
+        {/* {answer1?.[0] == true ? ( */}
+        <Tag
+          icon={<CheckCircleOutlined />}
+          style={{ marginLeft: "14px" }}
+          color="success"
+        >
+          Ответ принят
+        </Tag>
+        {/* ) : null} */}
+      </div>
+      <div className="testTaskDiscription">
+        Для чего служит вертикальный круг теодолита? (Выберите один правильный
+        ответ)
+      </div>
+      <div style={{ display: "grid", gap: "12px" }}>
+        <Checkbox onChange={onChange}>ответ 1</Checkbox>
+        <Checkbox onChange={onChange}>ответ 2</Checkbox>
+        <Checkbox onChange={onChange}>Измерение углов наклона</Checkbox>
+        <Checkbox onChange={onChange}>ответ 4</Checkbox>
+      </div>
+      <div style={{ textAlign: "left" }}>
+        {" "}
+        <Button
+          style={{ marginBottom: "32px", marginTop: "16px" }}
+          type="primary"
+        >
+          Ответить
+        </Button>
+      </div>
     </div>
   );
 };

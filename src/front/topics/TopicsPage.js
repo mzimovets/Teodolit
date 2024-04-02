@@ -245,17 +245,20 @@ const TopicsPage = (props) => {
   return (
     <div className="topicsContainer">
       <div className="siderTopic">
-        <ul style={{ paddingTop: "10%", paddingLeft: "20%", fontSize: "18px" }}>
-          <li style={{ paddingBottom: "16px" }}>
+        <ul style={{ paddingTop: "10%", paddingLeft: "15%", fontSize: "18px" }}>
+          <li >
             <a
               className={selectedTopic("/topicsPage/topicOne")}
               href="/topicsPage/topicOne"
             >
-              <BookOutlined className="bookIcon" />
+              <BookOutlined className="bookIcon " />
               Тема №1
             </a>
+            <div className="namesTopics noselect">
+              Правила обращения с теодолитом
+            </div>
           </li>
-          <li style={{ paddingBottom: "16px" }}>
+          <li >
             <a
               className={selectedTopic("/topicsPage/topicTwo")}
               href="/topicsPage/topicTwo"
@@ -263,8 +266,9 @@ const TopicsPage = (props) => {
               <BookOutlined className="bookIcon" />
               Тема №2
             </a>
+            <div className="namesTopics noselect">Основные части теодолита</div>
           </li>
-          <li style={{ paddingBottom: "16px" }}>
+          <li >
             <a
               className={selectedTopic("/topicsPage/topicThree")}
               href="/topicsPage/topicThree"
@@ -272,8 +276,11 @@ const TopicsPage = (props) => {
               <BookOutlined className="bookIcon" />
               Тема №3
             </a>
+            <div className="namesTopics noselect">
+              Установка теодолита в рабочее положение
+            </div>
           </li>
-          <li style={{ paddingBottom: "16px" }}>
+          <li >
             <a
               className={selectedTopic("/topicsPage/topicFour")}
               href="/topicsPage/topicFour"
@@ -281,8 +288,11 @@ const TopicsPage = (props) => {
               <BookOutlined className="bookIcon" />
               Тема №4
             </a>
+            <div className="namesTopics noselect">
+              Устройство и принцип работы технических теодолитов 2Т30П и 4Т30П
+            </div>
           </li>
-          <li style={{ paddingBottom: "16px" }}>
+          <li >
             <a
               className={selectedTopic("/topicsPage/topicFive")}
               href="/topicsPage/topicFive"
@@ -290,8 +300,11 @@ const TopicsPage = (props) => {
               <BookOutlined className="bookIcon" />
               Тема №5
             </a>
+            <div className="namesTopics noselect">
+              Общие сведения о поверках теодолитов 2Т30П и 4Т30П
+            </div>
           </li>
-          <li style={{ paddingBottom: "16px" }}>
+          <li>
             <a
               className={selectedTopic("/topicsPage/topicSix")}
               href="/topicsPage/topicSix"
@@ -299,6 +312,9 @@ const TopicsPage = (props) => {
               <BookOutlined className="bookIcon" />
               Тема №6
             </a>
+            <div className="namesTopics noselect">
+              Отсчётные устройства теодолитов 2Т30П и 4Т30П
+            </div>
           </li>
         </ul>
         <Modal

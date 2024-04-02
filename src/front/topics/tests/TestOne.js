@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { message, Button, Space, Divider, Flex, Tag, Checkbox } from "antd";
+import {
+  message,
+  Button,
+  Space,
+  Divider,
+  Flex,
+  Tag,
+  Checkbox,
+  ConfigProvider,
+} from "antd";
 
 import ImageMapper from "react-img-mapper";
 import { useSearchParams } from "react-router-dom";
 import {
   CheckCircleOutlined,
-  ClockCircleOutlined,
-  CloseCircleOutlined,
-  ExclamationCircleOutlined,
-  MinusCircleOutlined,
-  SyncOutlined,
+  FrownOutlined,
+  SmileOutlined,
 } from "@ant-design/icons";
 
 const onChange = (e) => {
@@ -126,14 +132,16 @@ const TestOne = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
     messageApi.open({
+      icon: <SmileOutlined style={{ fontSize: "16px" }} />,
       type: "success",
-      content: "Вы прошли тест!",
+      content: "Тест успешно пройден!",
     });
   };
   const error = () => {
     messageApi.open({
+      icon: <FrownOutlined style={{ fontSize: "16px" }} />,
       type: "error",
-      content: "Вы не прошли тест. Попробуйте еще раз",
+      content: "Тест не пройден. Правильных ответов 4 / 5",
     });
   };
 
@@ -152,11 +160,11 @@ const TestOne = () => {
         ) : null}
       </div>
       <div className="testTaskDiscription">
-        Нажмите на изображение, где находится ...
+        Нажмите на изображение, где находится становый винт
       </div>
       <div style={{ width: "80%", margin: "auto" }}>
         <ImageMapper
-          src={"/image/Topic1.1.png"}
+          src={"/image/Topic1-1.png"}
           height={330}
           width={700}
           map={MAP_1}
@@ -183,61 +191,95 @@ const TestOne = () => {
         ) : null}
       </div>
       <div className="testTaskDiscription">
-        Нажмите на изображение, где находится ...
+        Нажмите на изображение, где находится базовая пластина
       </div>
       <div style={{ width: "80%", margin: "auto" }}>
-        <img
-          src="/image/Topic1.2.png"
-          style={{ height: "500px", width: "500px" }}
+        <ImageMapper
+          src={"/image/Topic1-1.png"}
+          height={330}
+          width={700}
+          map={MAP_1}
           onClick={(area, index, evt) => {
             console.log(area, index, evt);
-            setAnswer2([true]);
+            setAnswer1([true]);
+          }}
+          onImageMouseMove={(evt) => {
+            // console.log(evt);
+            setCoord({ x: evt.clientX, y: evt.clientY });
           }}
         />
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          paddingLeft: "14px",
-          paddingTop: "14px",
-        }}
-      >
-        <Checkbox onChange={onChange}>
-          <p
-            className="answers"
-            style={{ margin: "6px", fontSize: "17px", fontWeight: "500" }}
+      <div className="testTaskHeader">
+        Задание №3
+        {answer2?.[0] == true ? (
+          <Tag
+            icon={<CheckCircleOutlined />}
+            style={{ marginLeft: "14px" }}
+            color="success"
           >
-            Вариант ответа 1
-          </p>
-        </Checkbox>
-        <Checkbox onChange={onChange}>
-          <p
-            className="answers"
-            style={{ margin: "6px", fontSize: "17px", fontWeight: "500" }}
-          >
-            Вариант ответа 2
-          </p>
-        </Checkbox>
-        <Checkbox onChange={onChange}>
-          <p
-            className="answers"
-            style={{ margin: "6px", fontSize: "17px", fontWeight: "500" }}
-          >
-            Вариант ответа 3
-          </p>
-        </Checkbox>
-        <Checkbox onChange={onChange} style={{ paddingBottom: "14px" }}>
-          <p
-            className="answers"
-            style={{ margin: "6px", fontSize: "17px", fontWeight: "500" }}
-          >
-            Вариант ответа 4
-          </p>
-        </Checkbox>
+            Ответ принят
+          </Tag>
+        ) : null}
       </div>
+      <div className="testTaskDiscription">
+        Нажмите на изображение, где находится площадка штатива
+      </div>
+      <div style={{ width: "80%", margin: "auto" }}>
+        <ImageMapper
+          src={"/image/Topic1-1.png"}
+          height={330}
+          width={700}
+          map={MAP_1}
+          onClick={(area, index, evt) => {
+            console.log(area, index, evt);
+            setAnswer1([true]);
+          }}
+          onImageMouseMove={(evt) => {
+            // console.log(evt);
+            setCoord({ x: evt.clientX, y: evt.clientY });
+          }}
+        />
+      </div>
+      <div className="testTaskHeader">
+        Задание №4
+        {answer2?.[0] == true ? (
+          <Tag
+            icon={<CheckCircleOutlined />}
+            style={{ marginLeft: "14px" }}
+            color="success"
+          >
+            Ответ принят
+          </Tag>
+        ) : null}
+      </div>
+      <div className="testTaskDiscription">
+        Нажмите на деталь штатива, используя которую производят изменение высоты
+        штатива
+      </div>
+      <div style={{ width: "45%", margin: "auto" }}>
+        <ImageMapper
+          src={"/image/Topic1-2.png"}
+          height={500}
+          width={345}
+          map={MAP_1}
+          onClick={(area, index, evt) => {
+            console.log(area, index, evt);
+            setAnswer1([true]);
+          }}
+          onImageMouseMove={(evt) => {
+            // console.log(evt);
+            setCoord({ x: evt.clientX, y: evt.clientY });
+          }}
+        />
+      </div>
+
       <>
         {contextHolder}
+        {/* <ConfigProvider
+          theme={{
+            token: { contentBg: "#f58787" },
+          }}
+        ></ConfigProvider> */}
         <Space>
           <Button onClick={success}>Success</Button>
           <Button onClick={error}>Error</Button>
