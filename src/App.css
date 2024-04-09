@@ -212,3 +212,17 @@ li {
 .topicsContainer li {
   margin-bottom: 38px;
 }
+
+.button {
+}
+
+.button:disabled {
+  background-color: #868686; /* Желаемый цвет фона для отключенной кнопки */
+  color: white;
+}
+
+/* TestOne */
+
+.keyWord {
+  font-size: 18px;
+}

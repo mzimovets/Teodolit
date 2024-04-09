@@ -52,6 +52,19 @@ const TopicOne = () => {
     setIsModalVisible(true); // При нажатии на кнопку отображаем модальное окно
   };
 
+  const renderTest = () => {
+    switch (topicId) {
+      case "topicOne":
+        return (
+          <TestOne setIsModalVisible={setIsModalVisible} topicId={topicId} />
+        );
+      case "topicTwo":
+        return (
+          <TestTwo setIsModalVisible={setIsModalVisible} topicId={topicId} />
+        );
+    }
+  };
+
   console.log("editor tools", article, article?.blocks, editorCore.current);
 
   return (
@@ -189,31 +202,21 @@ const TopicOne = () => {
         title={
           <div
             style={{
-              // width: "920px",
-              // textAlign: "center",
               fontWeight: "bold",
               fontSize: "20px",
             }}
           >
-            Тест по теме №1 "Основные части теодолита"
+            Тест по теме №1 "Правила обращения с теодолитом"
           </div>
         }
-        visible={isModalVisible} // Отображение модального окна зависит от состояния isModalVisible
-        onCancel={() => setIsModalVisible(false)} // Обработчик закрытия модального окна
-        footer={null} // Отключаем подвал модального окна
+        visible={isModalVisible}
+        onCancel={() => setIsModalVisible(false)}
+        footer={null}
         cancelButtonProps={false}
-        width={1000} // Задаём ширину модального окна
+        width={1000}
         style={{ top: "40px" }}
       >
-        <TestOne />
-
-        <div style={{ textAlign: "right" }}>
-          {" "}
-          {/* Выравниваем кнопку по правому краю */}
-          <Button type="primary" onClick={() => setIsModalVisible(false)}>
-            Завершить тест
-          </Button>
-        </div>
+        {renderTest()}
       </Modal>
     </div>
   );
