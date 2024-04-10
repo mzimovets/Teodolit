@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { message, Input, Tag, Button, Radio } from "antd";
+import { message, Input, Tag, Button, Radio, Modal, Form } from "antd";
 import {
   CheckCircleOutlined,
   SmileOutlined,
@@ -18,6 +18,7 @@ const TestTwo = (props) => {
   const [answered4, setAnswered4] = useState(false);
   const [answeredResult, setAnsweredResult] = useState([]);
 
+  
   // радио-кнопка
   const [value, setValue] = useState(1);
   const onChange = (event) => {
@@ -361,6 +362,7 @@ const TestTwo = (props) => {
           Завершить тест
         </Button>
       </div>
+      
     </div>
   );
 };

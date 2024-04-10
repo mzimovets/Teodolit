@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Typography, Button, Col, Row, Statistic, Modal } from "antd";
+import { Typography, Button, Col, Row, Statistic, Modal, Form } from "antd";
 import { ClockCircleOutlined, AuditOutlined } from "@ant-design/icons";
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./tools";
@@ -33,6 +33,19 @@ const TopicOne = () => {
   const editorCore = useRef(null);
 
   const [isTimerEnd, setTimerEnd] = useState(false);
+
+  const [exitBtn, setExitBtn] = useState(false);
+  const showModalExit = () => {
+    setExitBtn(true);
+  };
+  const handleExit = () => {
+    setExitBtn(false);
+    setIsModalVisible(false);
+  };
+
+  const handleCancelExit = () => {
+    setExitBtn(false);
+  };
 
   useEffect(async () => {
     const articleRes = await getData(topicId);
@@ -210,13 +223,51 @@ const TopicOne = () => {
           </div>
         }
         visible={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
+        onCancel={() => {
+          showModalExit();
+        }}
         footer={null}
         cancelButtonProps={false}
         width={1000}
         style={{ top: "40px" }}
       >
         {renderTest()}
+      </Modal>
+      <Modal
+        className="deleteModal"
+        title={
+          <div style={{ width: "242px" }}>
+            Завершить тест?{" "}
+            <p style={{ fontSize: "14px", margin: "0px" }}>
+              Попытка будет засчитана
+            </p>
+          </div>
+        }
+        open={exitBtn}
+        onOk={handleExit}
+        onCancel={handleCancelExit}
+        okText="Выйти"
+        cancelText="Отмена"
+        okButtonProps={{
+          type: "primary",
+          danger: true,
+        }}
+      >
+        <Form
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          style={{
+            width: "200px",
+            maxWidth: 600,
+            paddingRight: "74px",
+            marginTop: "24px",
+          }}
+        ></Form>
       </Modal>
     </div>
   );

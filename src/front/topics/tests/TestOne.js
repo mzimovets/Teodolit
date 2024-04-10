@@ -260,18 +260,13 @@ const TestOne = (props) => {
         style={{
           display: "flex",
           gap: "6px",
-
           alignItems: "center",
         }}
       >
         <FormOutlined />
         Задание №1
         {answer1?.[0] == true ? (
-          <Tag
-            // icon={<CheckCircleOutlined />}
-            style={{ marginLeft: "14px" }}
-            color="orange"
-          >
+          <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
         ) : null}
@@ -310,11 +305,7 @@ const TestOne = (props) => {
         <FormOutlined />
         Задание №2
         {answer2?.[0] == true ? (
-          <Tag
-            icon={<CheckCircleOutlined />}
-            style={{ marginLeft: "14px" }}
-            color="success"
-          >
+          <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
         ) : null}
@@ -348,16 +339,16 @@ const TestOne = (props) => {
       </div>
       <div
         className="testTaskHeader"
-        style={{ display: "flex", gap: "6px", alignItems: "center" }}
+        style={{
+          display: "flex",
+          gap: "6px",
+          alignItems: "center",
+        }}
       >
         <FormOutlined />
         Задание №3
         {answer3?.[0] == true ? (
-          <Tag
-            icon={<CheckCircleOutlined />}
-            style={{ marginLeft: "14px" }}
-            color="success"
-          >
+          <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
         ) : null}
@@ -396,11 +387,7 @@ const TestOne = (props) => {
         <FormOutlined />
         Задание №4
         {answer4?.[0] == true ? (
-          <Tag
-            icon={<CheckCircleOutlined />}
-            style={{ marginLeft: "14px" }}
-            color="success"
-          >
+          <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
         ) : null}
@@ -414,7 +401,7 @@ const TestOne = (props) => {
           width: "40%",
           margin: "auto",
           marginBottom: "20px",
-          border: "1px solid black",
+          border: "1px solid black"
         }}
       >
         <ImageMapper
