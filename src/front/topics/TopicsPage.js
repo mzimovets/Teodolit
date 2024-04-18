@@ -1,69 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation, json } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   UserOutlined,
   BookOutlined,
   LogoutOutlined,
   CheckCircleOutlined,
-  SyncOutlined,
   CloseCircleOutlined,
 } from "@ant-design/icons";
-
 import { TopicOne } from "./TopicOne";
-
-import { createReactEditorJS } from "react-editor-js";
-import {
-  Layout,
-  Button,
-  Modal,
-  Form,
-  Statistic,
-  Input,
-  Table,
-  Tag,
-} from "antd";
+import { Button, Modal, Form, Input, Table, Tag } from "antd";
 import { fetchRequest } from "../utils";
-const { Countdown } = Statistic;
-const deadline = Date.now() + 300000; // Dayjs is also OK
-
-const onFinish = () => {
-  console.log("finished!");
-};
-const onChange = (val) => {
-  if (typeof val === "number" && 4.95 * 1000 < val && val < 5 * 1000) {
-    console.log("changed!");
-  }
-};
-
-const { Header, Footer, Sider, Content } = Layout;
 
 const sizeLarge = "large";
-const sizeMedium = "middle";
-const sizeSmall = "small";
-
-const contentStyle = {
-  textAlign: "center",
-  minHeight: 120,
-  lineHeight: "120px",
-  color: "#fff",
-  backgroundColor: "#0958d9",
-};
-
-const siderStyle = {
-  textAlign: "center",
-  lineHeight: "120px",
-  color: "#fff",
-  backgroundColor: "#333",
-  display: "table",
-  paddingTop: "19px",
-  height: "1000px",
-};
 
 const TopicsPage = (props) => {
   const [currentUser, setCurrentUser] = useState();
   const [dataUserTest, setDataUserTest] = useState();
 
-  const navigateOk = useNavigate(); // Использование хука useNavigate
+  const navigateOk = useNavigate();
   const location = useLocation();
 
   const [isUserModalWindowOpen, setIsUserModalWindowOpen] = useState(false);
@@ -135,24 +89,6 @@ const TopicsPage = (props) => {
     setExitBtn(false);
   };
 
-  // Состояние открытия/ закрытия модального окна профиля учетной записи студента
-  const [isUserOpenProfile, setIsUserOpenProfile] = useState(false);
-  const showModalUserProfile = () => {
-    setIsUserOpenProfile(true);
-  };
-
-  const handleOkUserProfile = () => {
-    setIsUserOpenProfile(false);
-  };
-  const handleCancelUserProfile = () => {
-    setIsUserOpenProfile(false);
-  };
-  //
-
-  const ReactEditorJS = createReactEditorJS();
-  const navigate = useNavigate();
-  console.log("Topic props");
-
   const selectedTopic = (page) => {
     console.log("window.location:", window.location, page);
     return window.location.pathname === page
@@ -160,7 +96,6 @@ const TopicsPage = (props) => {
       : "topicsName";
   };
 
-  // Таблица профиля
   const dataSourceUser = [
     {
       topic: "1. Правила обращения с теодолитом",
@@ -195,18 +130,6 @@ const TopicsPage = (props) => {
       key: "statusTopic",
       render: (status, item) => {
         return (
-          // <Tag color={"blue"} key={status}>
-          //   {status?.toUpperCase()}
-          // </Tag>
-          // <Tag
-          //   bordered={false}
-          //   color={"success"}
-          //   key={status}
-          //   icon={<CheckCircleOutlined />}
-          // >
-          //   {" "}
-          //   ПРОЙДЕНО
-          // </Tag>
           <Tag
             icon={
               status == "НЕ ПРОЙДЕНО" ? (
@@ -229,9 +152,6 @@ const TopicsPage = (props) => {
           >
             {status}
           </Tag>
-          // <Tag bordered={false} icon={<CloseCircleOutlined />} color="error">
-          //   НЕ ПРОЙДЕНО
-          // </Tag>
         );
       },
     },
@@ -246,7 +166,7 @@ const TopicsPage = (props) => {
     <div className="topicsContainer">
       <div className="siderTopic">
         <ul style={{ paddingTop: "10%", paddingLeft: "15%", fontSize: "18px" }}>
-          <li >
+          <li>
             <a
               className={selectedTopic("/topicsPage/topicOne")}
               href="/topicsPage/topicOne"
@@ -258,7 +178,7 @@ const TopicsPage = (props) => {
               Правила обращения с теодолитом
             </div>
           </li>
-          <li >
+          <li>
             <a
               className={selectedTopic("/topicsPage/topicTwo")}
               href="/topicsPage/topicTwo"
@@ -268,7 +188,7 @@ const TopicsPage = (props) => {
             </a>
             <div className="namesTopics noselect">Основные части теодолита</div>
           </li>
-          <li >
+          <li>
             <a
               className={selectedTopic("/topicsPage/topicThree")}
               href="/topicsPage/topicThree"
@@ -280,7 +200,7 @@ const TopicsPage = (props) => {
               Установка теодолита в рабочее положение
             </div>
           </li>
-          <li >
+          <li>
             <a
               className={selectedTopic("/topicsPage/topicFour")}
               href="/topicsPage/topicFour"
@@ -292,7 +212,7 @@ const TopicsPage = (props) => {
               Устройство и принцип работы технических теодолитов 2Т30П и 4Т30П
             </div>
           </li>
-          <li >
+          <li>
             <a
               className={selectedTopic("/topicsPage/topicFive")}
               href="/topicsPage/topicFive"

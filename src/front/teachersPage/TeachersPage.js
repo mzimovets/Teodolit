@@ -83,15 +83,6 @@ const TeacherPage = (props) => {
     setSelectedItemToDelete(id);
   };
 
-  const handleDelete = () => {
-    setIsDeleteOpen(false);
-    console.log("нажато");
-  };
-
-  const handleCancelDelete = () => {
-    setIsDeleteOpen(false);
-  };
-
   const menu = (
     <Menu
       onClick={({ key }) => handleMenuClick(items.find((i) => i.value === key))}
@@ -104,12 +95,8 @@ const TeacherPage = (props) => {
     </Menu>
   );
 
-  // Переменные для размера кнопок
   const sizeLarge = "large";
-  const sizeMedium = "middle";
-  const sizeSmall = "small";
 
-  // Переменная для компонента поиска
   const { Search } = Input;
   const onSearch = (e) => {
     const value = e.target.value;
@@ -134,21 +121,6 @@ const TeacherPage = (props) => {
       setTableData(sortedData);
       console.log("preparedData = ", sortedData);
     });
-    // fetch("/users", {
-    //   method: "get",
-    //   headers: {
-    //     Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    //   },
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     const preparedData = JSON.parse(data.result);
-    //     const sortedData = sortData(preparedData, sortKey, sortOrder);
-    //     setTableData(sortedData);
-    //     console.log("preparedData = ", sortedData);
-    //   });
   };
 
   const [exitBtn, setExitBtn] = useState(false);
@@ -163,43 +135,6 @@ const TeacherPage = (props) => {
   const handleCancelExit = () => {
     setExitBtn(false);
   };
-
-  // Написать логику для проверки обязательных полей в окне редактирования
-  const [formEditHasError, setFormEditHasError] = useState();
-
-  // Общая таблица
-  const dataSource = [
-    {
-      key: "1",
-      lastName: "Зимовец",
-      name: "Максим",
-      secondName: "Алексеевич",
-      group: "ПИ-202",
-      login: "zimMaks",
-      password: "36345fgf45",
-      status: "Зачет",
-    },
-    {
-      key: "2",
-      lastName: "Пономарев",
-      name: "Александр",
-      secondName: "Владимирович",
-      group: "ПИ-202",
-      login: "ponomarAlex",
-      password: "2234fdgt24",
-      status: "Зачет",
-    },
-    {
-      key: "3",
-      lastName: "Филиппов",
-      name: "Максим",
-      secondName: "Владимирович",
-      group: "ПИ-202",
-      login: "filippovMaks",
-      password: "5534dgfd424",
-      status: "Зачет",
-    },
-  ];
 
   const columns = [
     {
@@ -422,9 +357,10 @@ const TeacherPage = (props) => {
             borderRadius: "6px",
             padding: "4px 0px 4px 11px",
             textAlign: "center",
+            fontWeight: "600",
           }}
         >
-          Сортировка: {/* Стрелка */}
+          Сортировка:
           <span style={{ paddingLeft: "6px" }}>
             <Dropdown
               overlay={menu}

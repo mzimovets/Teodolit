@@ -1,36 +1,33 @@
 import React, { useState } from "react";
-import {
-  message,
-  Button,
-  Space,
-  Divider,
-  Flex,
-  Tag,
-  Checkbox,
-  ConfigProvider,
-} from "antd";
-
+import { message, Button, Space, Tag } from "antd";
 import ImageMapper from "react-img-mapper";
-import { useSearchParams } from "react-router-dom";
-import {
-  CheckCircleOutlined,
-  FrownOutlined,
-  SmileOutlined,
-  FormOutlined,
-} from "@ant-design/icons";
-import { forEach } from "lodash";
-import { validateAnswer } from "./TestTwoValidation";
-
-const onChange = (e) => {
-  console.log(`checked = ${e.target.checked}`);
-};
+import { FrownOutlined, SmileOutlined, FormOutlined } from "@ant-design/icons";
+import { answer, validateAnswer } from "./TestOneValidation";
+import { fetchRequest } from "../../utils";
 
 const TestOne = (props) => {
-  const [coord, setCoord] = useState(); //получение координат
-  const [answer1, setAnswer1] = useState(); //получение ответа на вопрос 1
-  const [answer2, setAnswer2] = useState(); //получение ответа на вопрос 2
-  const [answer3, setAnswer3] = useState(); //получение ответа на вопрос 3
-  const [answer4, setAnswer4] = useState(); //получение ответа на вопрос 4
+  const [coord, setCoord] = useState();
+  const [answer1, setAnswer1] = useState();
+  const [answer2, setAnswer2] = useState();
+  const [answer3, setAnswer3] = useState();
+  const [answer4, setAnswer4] = useState();
+
+  const [task1, setTask1] = useState();
+  const [task2, setTask2] = useState();
+  const [task3, setTask3] = useState();
+  const [task4, setTask4] = useState();
+
+  const clearState = () => {
+    setAnswer1(false);
+    setAnswer2(false);
+    setAnswer3(false);
+    setAnswer4(false);
+
+    setTask1();
+    setTask2();
+    setTask3();
+    setTask4();
+  };
 
   const MAP_1 = {
     name: "my-map-1",
@@ -39,34 +36,56 @@ const TestOne = (props) => {
         // становый винт
         name: "1",
         shape: "rect",
-        coords: [145, 368, 205, 303],
+        coords: [160, 365, 195, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина
         name: "2",
-        shape: "rect",
-        coords: [95, 210, 257, 245],
+        shape: "poly",
+        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
-        // Площадка штатива
+        // площадка штатива
         name: "3",
-        shape: "rect",
-        coords: [60, 247, 280, 300],
+        shape: "poly",
+        coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
+      },
+      {
+        // остальные области
+        name: "4",
+        shape: "rect",
+        coords: [90, 20, 260, 247],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
+      },
+      {
+        // остальные области
+        name: "5",
+        shape: "rect",
+        coords: [300, 450, 48, 330],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -78,34 +97,56 @@ const TestOne = (props) => {
         // становый винт
         name: "1",
         shape: "rect",
-        coords: [145, 368, 205, 303],
+        coords: [160, 365, 195, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина
         name: "2",
-        shape: "rect",
-        coords: [95, 210, 257, 245],
+        shape: "poly",
+        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
-        // Площадка штатива
+        // площадка штатива
         name: "3",
-        shape: "rect",
-        coords: [60, 247, 280, 300],
+        shape: "poly",
+        coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
+      },
+      {
+        // остальные области
+        name: "4",
+        shape: "rect",
+        coords: [90, 20, 260, 247],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
+      },
+      {
+        // остальные области
+        name: "5",
+        shape: "rect",
+        coords: [300, 450, 48, 330],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -117,34 +158,56 @@ const TestOne = (props) => {
         // становый винт
         name: "1",
         shape: "rect",
-        coords: [145, 368, 205, 303],
+        coords: [160, 365, 195, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина
         name: "2",
-        shape: "rect",
-        coords: [95, 210, 257, 245],
+        shape: "poly",
+        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
-        // Площадка штатива
+        // площадка штатива
         name: "3",
-        shape: "rect",
-        coords: [60, 247, 280, 300],
+        shape: "poly",
+        coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
+      },
+      {
+        // остальные области
+        name: "4",
+        shape: "rect",
+        coords: [90, 20, 260, 247],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
+      },
+      {
+        // остальные области
+        name: "5",
+        shape: "rect",
+        coords: [300, 450, 48, 330],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -153,76 +216,24 @@ const TestOne = (props) => {
     name: "my-map-4",
     areas: [
       {
-        // "ноги" штатива слева - направо
         name: "1",
-
         shape: "poly",
-        coords: [80, 335, 25, 495, 65, 495, 120, 340], // x лево вверх, y лево вверх, x лево низ, y низ лево
+        coords: [100, 10, 250, 10, 250, 240, 100, 240],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         name: "2",
-        shape: "rect",
-        coords: [155, 315, 195, 430], //левая сторона, верхняя сторона, правая сторона,  нижняя сторона,
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        name: "3",
         shape: "poly",
-        coords: [260, 340, 300, 330, 345, 495, 315, 495], // x лево вверх, y лево вверх, x лево низ, y низ лево
+        coords: [50, 240, 50, 605, 345, 605, 345, 240],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        name: "4",
-        shape: "poly",
-        coords: [145, 145, 168, 145, 115, 338, 80, 332], // x лево вверх, y лево вверх, x лево низ, y низ лево
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        name: "5",
-        shape: "poly",
-        coords: [165, 145, 195, 145, 195, 315, 163, 315], // x лево вверх, y лево вверх, x лево низ, y низ лево
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        name: "6",
-        shape: "poly",
-        coords: [195, 145, 220, 145, 300, 330, 260, 340], // x лево вверх, y лево вверх, x лево низ, y низ лево
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        name: "7",
-        shape: "poly",
-        coords: [150, 10, 215, 10, 215, 145, 150, 145], // x лево вверх, y лево вверх, x лево низ, y низ лево
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        // hide: true, // Скрыть область
-        // strokeColor: "rgba(0, 0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -236,21 +247,57 @@ const TestOne = (props) => {
       duration: 5.5,
     });
   };
-  const error = () => {
+
+  const error = (correctAnswersCount) => {
     messageApi.open({
       icon: <FrownOutlined style={{ fontSize: "16px" }} />,
       type: "error",
-      content: "Тест не пройден. Правильных ответов 4 / 5",
+      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 4`,
       duration: 5.5,
     });
   };
 
   const onTestComplete = () => {
+    const testResult = [];
+    const answeredResult = [task1, task2, task3, task4];
+    console.log("answeredResult", answeredResult);
+    answeredResult.forEach((element, index) => {
+      const userAnswer = validateAnswer(index, element);
+      console.log("userAnswer", userAnswer);
+      testResult.push(userAnswer);
+    });
+
+    const isTestPass =
+      testResult.length == answer.length && testResult.indexOf(false) == -1;
+    console.log("isTestPass", isTestPass);
+    console.log(
+      "testResult.length",
+      testResult.length == answer.length && testResult.indexOf(false) == -1
+    );
+
+    if (isTestPass) {
+      success();
+    } else {
+      error(testResult.filter((result) => result).length);
+    }
+    fetchRequest(
+      "/userTest",
+      "put",
+      {
+        "Content-type": "application/json",
+        Accept: "*/*",
+      },
+      {
+        login: localStorage.getItem("login"),
+        password: localStorage.getItem("password"),
+        topicId: 0,
+        status: isTestPass ? "ПРОЙДЕНО" : "НЕ ПРОЙДЕНО",
+      }
+    ).then((data) => {
+      console.log("data: ", data);
+    });
     props.setIsModalVisible(false);
-    // answeredResult.forEach((element, index) => {
-    //   validateAnswer(index, element);
-    // });
-    // брать данные (ответы пользователя) и отправлять в валидатор. по результату показываем алерт. Отправляем фетч запрос на обновление резльтатов тестирования
+    clearState();
   };
 
   return (
@@ -265,7 +312,7 @@ const TestOne = (props) => {
       >
         <FormOutlined />
         Задание №1
-        {answer1?.[0] == true ? (
+        {answer1?.[0] === true ? (
           <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
@@ -280,20 +327,22 @@ const TestOne = (props) => {
           width: "36.2%",
           margin: "auto",
           marginBottom: "20px",
-          border: "1px solid black",
+          border: "2px solid #d9d9d9",
+          borderRadius: "14px",
+          marginTop: "18px",
         }}
       >
         <ImageMapper
-          src={"/image/test1.jpeg"}
+          src={"/image/test1-1.png"}
           height={450}
           width={337}
           map={MAP_1}
           onClick={(area, index, evt) => {
             console.log(area, index, evt);
             setAnswer1([true]);
+            setTask1(area.name);
           }}
           onImageMouseMove={(evt) => {
-            // console.log(evt);
             setCoord({ x: evt.clientX, y: evt.clientY });
           }}
         />
@@ -319,20 +368,21 @@ const TestOne = (props) => {
           width: "36.2%",
           margin: "auto",
           marginBottom: "20px",
-          border: "1px solid black",
+          border: "2px solid #d9d9d9",
+          borderRadius: "14px",
         }}
       >
         <ImageMapper
-          src={"/image/test1.jpeg"}
+          src={"/image/test1-1.png"}
           height={450}
           width={337}
           map={MAP_2}
           onClick={(area, index, evt) => {
             console.log(area, index, evt);
             setAnswer2([true]);
+            setTask2(area.name);
           }}
           onImageMouseMove={(evt) => {
-            // console.log(evt);
             setCoord({ x: evt.clientX, y: evt.clientY });
           }}
         />
@@ -362,20 +412,21 @@ const TestOne = (props) => {
           width: "36.2%",
           margin: "auto",
           marginBottom: "20px",
-          border: "1px solid black",
+          border: "2px solid #d9d9d9",
+          borderRadius: "14px",
         }}
       >
         <ImageMapper
-          src={"/image/test1.jpeg"}
+          src={"/image/test1-1.png"}
           height={450}
           width={337}
           map={MAP_3}
           onClick={(area, index, evt) => {
             console.log(area, index, evt);
             setAnswer3([true]);
+            setTask3(area.name);
           }}
           onImageMouseMove={(evt) => {
-            // console.log(evt);
             setCoord({ x: evt.clientX, y: evt.clientY });
           }}
         />
@@ -401,20 +452,21 @@ const TestOne = (props) => {
           width: "40%",
           margin: "auto",
           marginBottom: "20px",
-          border: "1px solid black"
+          border: "2px solid #d9d9d9",
+          borderRadius: "14px",
         }}
       >
         <ImageMapper
-          src={"/image/Topic1-2.png"}
-          height={500}
+          src={"/image/test1-2.png"}
+          height={610}
           width={345}
           map={MAP_4}
           onClick={(area, index, evt) => {
             console.log(area, index, evt);
             setAnswer4([true]);
+            setTask4(area.name);
           }}
           onImageMouseMove={(evt) => {
-            // console.log(evt);
             setCoord({ x: evt.clientX, y: evt.clientY });
           }}
         />
@@ -422,15 +474,6 @@ const TestOne = (props) => {
 
       <>
         {contextHolder}
-        {/* <ConfigProvider
-          theme={{
-            token: { contentBg: "#f58787" },
-          }}
-        ></ConfigProvider> */}
-        <Space>
-          <Button onClick={success}>Success</Button>
-          <Button onClick={error}>Error</Button>
-        </Space>
         <div style={{ textAlign: "right" }}>
           {" "}
           <Button type="primary" onClick={onTestComplete}>

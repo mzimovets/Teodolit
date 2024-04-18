@@ -5,28 +5,6 @@ import md5 from "md5";
 import { fetchRequest } from "../../utils";
 
 const ModalAddUser = (props) => {
-  const sizeLarge = "large";
-  const sizeMedium = "middle";
-  const sizeSmall = "small";
-
-  const [passwordLength, setPasswordLength] = useState(6);
-  const [passwordBut, setPasswordBut] = useState("");
-
-  const generatePassword = () => {
-    const site = "0123456789_";
-
-    const text = site + "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    const generatedPassword = md5(text);
-
-    if (generatedPassword.length < passwordLength) {
-      for (let i = generatedPassword.length; i < passwordLength; i++) {
-        generatedPassword += "0";
-      }
-    }
-
-    setPassword(generatedPassword.substring(0, passwordLength));
-  };
-
   // Состояние открытия/ закрытия модального окна добавления новой учетной записи
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {

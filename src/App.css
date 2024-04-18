@@ -213,12 +213,15 @@ li {
   margin-bottom: 38px;
 }
 
-.button {
-}
-
 .button:disabled {
   background-color: #868686; /* Желаемый цвет фона для отключенной кнопки */
   color: white;
+}
+
+/* TopicOne */
+
+.codex-editor__redactor {
+  padding-bottom: 34px !important;
 }
 
 /* TestOne */

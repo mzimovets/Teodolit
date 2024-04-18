@@ -1,12 +1,6 @@
 import { React, useState } from "react";
-import { message, Input, Tag, Button, Radio, Modal, Form } from "antd";
-import {
-  CheckCircleOutlined,
-  SmileOutlined,
-  FrownOutlined,
-} from "@ant-design/icons";
-
-import ImageMapper from "react-img-mapper";
+import { message, Input, Tag, Button, Radio } from "antd";
+import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { validateAnswer, answer } from "./TestTwoValidation";
 import { fetchRequest } from "../../utils";
 
@@ -18,9 +12,6 @@ const TestTwo = (props) => {
   const [answered4, setAnswered4] = useState(false);
   const [answeredResult, setAnsweredResult] = useState([]);
 
-  
-  // радио-кнопка
-  const [value, setValue] = useState(1);
   const onChange = (event) => {
     const newArr = [...answeredResult];
     if (newArr[3] !== undefined) {
@@ -35,23 +26,18 @@ const TestTwo = (props) => {
 
   // Cостояния для ответа пользователя и проверки правильности ответа
   const onFirstTaskClick = () => {
-    const result = validateAnswer(0, { answer1: "лимб", answer2: "аидада" });
-    console.log(result);
     setAnswered1(true);
   };
 
   const onSecondTaskClick = () => {
-    const result = validateAnswer(0, { answer1: "цена деления лимба" });
     setAnswered2(true);
   };
 
   const onThirdTaskClick = () => {
-    const result = validateAnswer(0, { answer1: "1" });
     setAnswered3(true);
   };
 
   const onFourthTaskClick = () => {
-    const result = validateAnswer(0, { answer1: "3" });
     setAnswered4(true);
   };
 
@@ -63,40 +49,6 @@ const TestTwo = (props) => {
     setAnswered4(false);
   };
 
-  const URL = "/logo192.png";
-  const MAP = {
-    name: "my-map",
-    // GET JSON FROM BELOW URL AS AN EXAMPLE AND PUT IT HERE
-    areas: [
-      {
-        name: "1",
-        shape: "poly",
-        coords: [25, 33, 27, 300, 128, 240, 128, 94],
-        preFillColor: "green",
-        fillColor: "blue",
-      },
-      {
-        name: "2",
-        shape: "poly",
-        coords: [219, 118, 220, 210, 283, 210, 284, 119],
-        preFillColor: "pink",
-      },
-      {
-        name: "3",
-        shape: "poly",
-        coords: [381, 241, 383, 94, 462, 53, 457, 282],
-        fillColor: "yellow",
-      },
-      {
-        name: "4",
-        shape: "poly",
-        coords: [245, 285, 290, 285, 274, 239, 249, 238],
-        preFillColor: "red",
-      },
-      { name: "5", shape: "circle", coords: [170, 100, 25] },
-    ],
-  };
-
   const [messageApi, contextHolder] = message.useMessage();
 
   const success = () => {
@@ -104,20 +56,20 @@ const TestTwo = (props) => {
       icon: <SmileOutlined style={{ fontSize: "16px" }} />,
       type: "success",
       content: "Тест успешно пройден!",
+      duration: 5.5,
     });
   };
 
-  const error = () => {
+  const error = (correctAnswersCount) => {
     messageApi.open({
       icon: <FrownOutlined style={{ fontSize: "16px" }} />,
       type: "error",
-      content: "Тест не пройден. Правильных ответов 4 / 5",
+      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 4`,
+      duration: 5.5,
     });
-    console.log("AHTUNG!");
   };
 
   const onTestComplete = () => {
-    console.log("answeredResult: ", answeredResult);
     const testResult = [];
     answeredResult.forEach((element, index) => {
       const userAnswer = validateAnswer(index, element);
@@ -127,10 +79,8 @@ const TestTwo = (props) => {
       testResult.length == answer.length && testResult.indexOf(false) == -1;
     if (isTestPass) {
       success();
-      console.log("success");
     } else {
-      error();
-      console.log("false");
+      error(testResult.filter((result) => result).length);
     }
     fetchRequest(
       "/userTest",
@@ -150,7 +100,6 @@ const TestTwo = (props) => {
     });
     props.setIsModalVisible(false);
     clearState();
-    // брать данные (ответы пользователя) и отправлять в валидатор. по результату показываем алерт. Отправляем фетч запрос на обновление резльтатов тестирования
   };
 
   return (
@@ -159,11 +108,7 @@ const TestTwo = (props) => {
       <div className="testTaskHeader">
         Задание №1
         {answered1 == true ? (
-          <Tag
-            icon={<CheckCircleOutlined />}
-            style={{ marginLeft: "14px" }}
-            color="success"
-          >
+          <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
         ) : null}
@@ -208,7 +153,6 @@ const TestTwo = (props) => {
       </div>
       <div style={{ textAlign: "left" }}>
         {" "}
-        {/* Кнопка первого вопроса */}
         <Button
           className="button"
           style={{ marginBottom: "32px", marginTop: "16px" }}
@@ -222,17 +166,13 @@ const TestTwo = (props) => {
       <div className="testTaskHeader">
         Задание №2
         {answered2 == true ? (
-          <Tag
-            icon={<CheckCircleOutlined />}
-            style={{ marginLeft: "14px" }}
-            color="success"
-          >
+          <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
         ) : null}
       </div>
       <div className="testTaskDiscription">
-        Как называется величина дуги лимбо между двумя ближайшими штрихами?
+        Как называется величина дуги лимба между двумя ближайшими штрихами?
         (Ответ вводить в им. падеже, ед. числе с маленькой буквы, через один
         пробел)
       </div>
@@ -268,11 +208,7 @@ const TestTwo = (props) => {
       <div className="testTaskHeader">
         Задание №3
         {answered3 == true ? (
-          <Tag
-            icon={<CheckCircleOutlined />}
-            style={{ marginLeft: "14px" }}
-            color="success"
-          >
+          <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
         ) : null}
@@ -312,11 +248,7 @@ const TestTwo = (props) => {
       <div className="testTaskHeader">
         Задание №4
         {answered4 == true ? (
-          <Tag
-            icon={<CheckCircleOutlined />}
-            style={{ marginLeft: "14px" }}
-            color="success"
-          >
+          <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
         ) : null}
@@ -331,16 +263,16 @@ const TestTwo = (props) => {
           style={{ display: "grid", gap: "12px" }}
         >
           <Radio disabled={answered4} value={1}>
-            ответ 1
+            измерение горизонтальных углов
           </Radio>
           <Radio disabled={answered4} value={2}>
-            ответ 2
+            измерение расстояний
           </Radio>
           <Radio disabled={answered4} value={3}>
             измерение углов наклона
           </Radio>
           <Radio disabled={answered4} value={4}>
-            ответ 4
+            все ответы верны
           </Radio>
         </Radio.Group>
       </div>
@@ -362,7 +294,6 @@ const TestTwo = (props) => {
           Завершить тест
         </Button>
       </div>
-      
     </div>
   );
 };

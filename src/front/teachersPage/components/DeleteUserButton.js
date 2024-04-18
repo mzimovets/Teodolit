@@ -1,6 +1,5 @@
 import { Modal, Form } from "antd";
 const DeleteUserButton = (props) => {
-  // Состояние открытия/ закрытия модального окна удаления учетной записи
   const handleDelete = () => {
     fetch(`/users?id=${props.id}`, { method: "DELETE" });
     props.setIsDeleteOpen(false);
