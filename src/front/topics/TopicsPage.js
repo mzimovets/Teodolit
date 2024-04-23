@@ -346,7 +346,7 @@ const TopicsPage = (props) => {
             gap: "6px",
             position: "absolute",
             top: "50px",
-            left: "1314px",
+            right: "50px"
           }}
         >
           {/* Кнопка профиля */}

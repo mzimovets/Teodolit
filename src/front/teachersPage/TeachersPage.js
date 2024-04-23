@@ -8,6 +8,8 @@ import {
   Form,
   Input,
   Tag,
+  Pagination,
+  Flex,
 } from "antd";
 import {
   EditOutlined,
@@ -17,6 +19,9 @@ import {
   EyeOutlined,
   EyeInvisibleOutlined,
   UserOutlined,
+  CloseCircleOutlined,
+  CheckCircleOutlined,
+  KeyOutlined,
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { ModalAddUser } from "./components/ModalAddUser";
@@ -25,14 +30,40 @@ import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 import { fetchRequest } from "../utils";
 import { EditUsers } from "./components/EditUsers";
+import { StudentProfile } from "./components/StudentProfile";
+import { KeyOne } from "../topics/keys/KeyOne";
+import { KeyTwo } from "../topics/keys/KeyTwo";
+import { KeyThree } from "../topics/keys/KeyThree";
+import { KeyFive } from "../topics/keys/KeyFive";
+import Password from "antd/es/input/Password";
 
 const TeacherPage = (props) => {
   const navigateOk = useNavigate();
+  const [keyId, setKeyId] = useState(1);
+
+  const renderKey = () => {
+    switch (keyId) {
+      case 1:
+        return <KeyOne keyId={keyId} />;
+      case 2:
+        return <KeyTwo keyId={keyId} />;
+      case 3:
+        return <KeyThree keyId={keyId} />;
+      // case 4:
+      //   return <TestThree keyId={keyId} />;
+      case 5:
+        return <KeyFive keyId={keyId} />;
+      // case 6:
+      //   return <TestThree keyId={keyId} />;
+    }
+  };
 
   const items = [
     { label: "Фамилия", value: "lastName" },
     { label: "Группа", value: "group" },
   ];
+
+  const [password, setPassword] = useState();
 
   const [sortKey, setSortKey] = useState(items[0]);
   const [sortOrder, setSortOrder] = useState("ascend");
@@ -66,13 +97,6 @@ const TeacherPage = (props) => {
     setIsUserOpen(true);
   };
 
-  const handleOkUser = () => {
-    setIsUserOpen(false);
-  };
-  const handleCancelUser = () => {
-    setIsUserOpen(false);
-  };
-
   // Состояние открытия/ закрытия модального окна удаления учетной записи
 
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -82,6 +106,17 @@ const TeacherPage = (props) => {
     setIsDeleteOpen(true);
     setSelectedItemToDelete(id);
   };
+
+  const [isModalKeyOpen, setIsModalKeyOpen] = useState(false);
+  const showModalKeyOpen = () => {
+    setIsModalKeyOpen(true);
+  };
+
+  const handleCloseModalKey = () => {
+    setIsModalKeyOpen(false);
+  };
+
+  const [studentsTestInfo, setStudentsTestInfo] = useState();
 
   const menu = (
     <Menu
@@ -117,9 +152,23 @@ const TeacherPage = (props) => {
   const loadData = () => {
     fetchRequest("/users").then((data) => {
       const preparedData = JSON.parse(data.result);
-      const sortedData = sortData(preparedData, sortKey, sortOrder);
-      setTableData(sortedData);
-      console.log("preparedData = ", sortedData);
+
+      fetchRequest("/userTest").then((data) => {
+        if (data.status === "OK") {
+          const studentsTestsResult = JSON.parse(data.result);
+          preparedData.forEach((student, index) => {
+            const failedTests = studentsTestsResult[index].testData.find(
+              (testResult) => testResult.status === "НЕ ПРОЙДЕНО"
+            );
+            student.status = failedTests ? "НЕ ПРОЙДЕНО" : "ПРОЙДЕНО";
+          });
+
+          console.log("preparedData", preparedData);
+          const sortedData = sortData(preparedData, sortKey, sortOrder);
+          setTableData(sortedData);
+          console.log("preparedData = ", sortedData);
+        }
+      });
     });
   };
 
@@ -134,6 +183,38 @@ const TeacherPage = (props) => {
 
   const handleCancelExit = () => {
     setExitBtn(false);
+  };
+
+  // ключи
+
+  const [keyBtn, setKeyBtn] = useState(false);
+  const showModalKey = () => {
+    setKeyBtn(true);
+  };
+  const handleKey = () => {
+    console.log("password", password);
+    fetchRequest(
+      "/login",
+      "POST",
+      {
+        "Content-type": "application/json",
+        Accept: "*/*",
+      },
+      { login: "admin", password: password }
+    ).then((data) => {
+      console.log("data", data);
+      if (data.role == 1) {
+        setIsModalKeyOpen(true);
+        setKeyBtn(false);
+        setPassword("");
+      } else {
+        // сообщение об ошибке
+      }
+    });
+  };
+
+  const handleCancelKey = () => {
+    setKeyBtn(false);
   };
 
   const columns = [
@@ -172,8 +253,17 @@ const TeacherPage = (props) => {
       // Теги, статус
       render: (status, item) => {
         return (
-          <Tag color={"blue"} key={status}>
-            {status?.toUpperCase()}
+          <Tag
+            icon={
+              status == "НЕ ПРОЙДЕНО" ? (
+                <CloseCircleOutlined />
+              ) : (
+                <CheckCircleOutlined />
+              )
+            }
+            color={status == "НЕ ПРОЙДЕНО" ? "error" : "success"}
+          >
+            {status}
           </Tag>
         );
       },
@@ -268,66 +358,6 @@ const TeacherPage = (props) => {
     },
   ];
 
-  // Таблица профиля
-  const dataSourceUser = [
-    {
-      topic: "1. Правила обращения с теодолитом",
-      statusTopic: "",
-      numberOfAttempts: "",
-    },
-    {
-      topic: "2. Основные части теодолита",
-      statusTopic: "",
-      numberOfAttempts: "",
-    },
-    {
-      topic: "3. Установка теодолита в рабочее положение",
-      statusTopic: "",
-      numberOfAttempts: "",
-    },
-    {
-      topic:
-        "4. Устройство и принцип работы технических теодолитов 2Т30П и 4Т30П",
-      statusTopic: "",
-      numberOfAttempts: "",
-    },
-    {
-      topic: "5. Общие сведения о поверках теодолитов 2Т30П и 4Т30П",
-      statusTopic: "",
-      numberOfAttempts: "",
-    },
-    {
-      topic: "6. Отсчётные устройства теодолитов 2Т30П и 4Т30П",
-      statusTopic: "",
-      numberOfAttempts: "",
-    },
-  ];
-
-  const columnsUser = [
-    {
-      title: "Тема",
-      dataIndex: "topic",
-      key: "topic",
-    },
-    {
-      title: "Статус",
-      dataIndex: "statusTopic",
-      key: "statusTopic",
-      render: (status, item) => {
-        return (
-          <Tag color={"blue"} key={status}>
-            {status?.toUpperCase()}
-          </Tag>
-        );
-      },
-    },
-    {
-      title: "Кол-во попыток (?)",
-      dataIndex: "numberOfAttempts",
-      key: "numberOfAttempts",
-    },
-  ];
-
   useEffect(() => {
     loadData();
   }, [sortKey, sortOrder]);
@@ -344,66 +374,95 @@ const TeacherPage = (props) => {
 
   return (
     <div className="noselect" style={{ margin: "20px" }}>
-      <div style={{ display: "flex", gap: "12px" }}>
-        <ModalAddUser loadData={loadData} />
+      <div
+        style={{ display: "flex", gap: "12px", width: "94%", margin: "auto" }}
+      >
+        <Flex style={{ gap: "12px", flexGrow: "5" }}>
+          <ModalAddUser loadData={loadData} />
+
+          <div
+            style={{
+              marginTop: "0px",
+              height: "24px",
+              borderStyle: "solid",
+              borderWidth: "1px",
+              borderColor: "#d9d9d9",
+              borderRadius: "6px",
+              padding: "4px 0px 4px 11px",
+              textAlign: "center",
+              alignItems: "baseline",
+              fontWeight: "600",
+              display: "flex",
+            }}
+          >
+            Сортировка:
+            <span style={{ paddingLeft: "6px" }}>
+              <Dropdown
+                overlay={menu}
+                trigger={["click"]}
+                placement="bottom"
+                arrow="true"
+              >
+                <a
+                  onClick={(e) => {
+                    const result = sortData(
+                      filteredData !== undefined ? filteredData : tableData
+                    );
+                    console.log("res", result);
+                    setTableData(result);
+                  }}
+                >
+                  <Space className="list-sort">
+                    <Button
+                      className="button-sort"
+                      type="primary"
+                      style={{ width: "120px" }}
+                    >
+                      <span style={{ fontWeight: "bold" }}>
+                        {sortKey.label} <CaretDownOutlined />
+                      </span>
+                    </Button>
+                  </Space>
+                </a>
+              </Dropdown>
+            </span>
+          </div>
+
+          <Input
+            className="search-input"
+            placeholder="Поиск по фамилии"
+            style={{
+              width: "290px",
+              height: "33px",
+              paddingLeft: "8px",
+            }}
+            onChange={onSearch}
+          />
+        </Flex>
 
         <div
           style={{
-            marginTop: "0px",
-            height: "24px",
-            borderStyle: "solid",
-            borderWidth: "1px",
-            borderColor: "#d9d9d9",
-            borderRadius: "6px",
-            padding: "4px 0px 4px 11px",
-            textAlign: "center",
-            fontWeight: "600",
+            marginTop: "-4px",
+
+            display: "flex",
+            gap: "12px",
           }}
         >
-          Сортировка:
-          <span style={{ paddingLeft: "6px" }}>
-            <Dropdown
-              overlay={menu}
-              trigger={["click"]}
-              placement="bottom"
-              arrow="true"
-            >
-              <a
-                onClick={(e) => {
-                  const result = sortData(
-                    filteredData !== undefined ? filteredData : tableData
-                  );
-                  console.log("res", result);
-                  setTableData(result);
-                }}
-              >
-                <Space className="list-sort">
-                  <Button
-                    className="button-sort"
-                    type="primary"
-                    style={{ width: "120px" }}
-                  >
-                    <span style={{ fontWeight: "bold" }}>
-                      {sortKey.label} <CaretDownOutlined />
-                    </span>
-                  </Button>
-                </Space>
-              </a>
-            </Dropdown>
-          </span>
-        </div>
-
-        <Input
-          className="search-input"
-          placeholder="Поиск по фамилии"
-          style={{
-            width: "290px",
-            height: "33px",
-            paddingLeft: "8px",
-          }}
-          onChange={onSearch}
-        />
-        <div style={{ marginTop: "-4px", marginLeft: "590px" }}>
+          <Button // ключи
+            type="primary"
+            shape="circle"
+            size={sizeLarge}
+            style={{}}
+            onClick={() => {
+              showModalKey();
+            }}
+          >
+            <KeyOutlined
+              style={{
+                fontSize: "24px",
+              }}
+            />
+          </Button>
           <Button
             type="primary"
             shape="circle"
@@ -434,69 +493,12 @@ const TeacherPage = (props) => {
       />
       {/* Профиль модальное окно*/}
       {console.log("isUserOpen", isUserOpen)}
-      <Modal
-        key={""}
-        title={
-          <span style={{ padding: "4px" }}>
-            {selectedUser &&
-              `${selectedUser.lastName} ${selectedUser.name} ${selectedUser.secondName}  ${selectedUser.group}`}
-          </span>
-        }
-        open={isUserOpen}
-        onOk={handleOkUser}
-        onCancel={handleCancelUser}
-        okText="Сохранить"
-        cancelText="Отмена"
-        width={1120}
-        footer={null}
-      >
-        <div
-          className="noselect"
-          style={{
-            display: "flex",
-            gap: "10px",
-            marginBottom: "14px",
-            marginTop: "24px",
-            padding: "4px",
-          }}
-        >
-          <span
-            style={{
-              fontWeight: "bold",
-              display: "flex",
-              gap: "10px",
-              alignItems: "center",
-            }}
-          >
-            Логин
-            <Input
-              variant="borderless"
-              readOnly
-              value={selectedUser && `${selectedUser.login}`}
-            />
-          </span>
-          <span
-            style={{
-              fontWeight: "bold",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            Пароль:
-          </span>
-          <Input.Password
-            value={selectedUser && `${selectedUser.password}`}
-            variant="borderless"
-            readOnly
-            style={{ width: "164px" }}
-          />
-        </div>
-        <Table
-          dataSource={dataSourceUser}
-          columns={columnsUser}
-          pagination={false}
-        />
-      </Modal>
+      <StudentProfile
+        selectedUser={selectedUser}
+        isUserOpen={isUserOpen}
+        setData
+        setIsUserOpen={setIsUserOpen}
+      />
       {console.log("isEditOpen", isEditOpen)}
       <EditUsers
         isEditOpen={isEditOpen}
@@ -535,6 +537,57 @@ const TeacherPage = (props) => {
             marginTop: "24px",
           }}
         ></Form>
+      </Modal>
+
+      {/* ПАРОЛЬ */}
+      <Modal
+        title={<div>Введите пароль</div>}
+        open={keyBtn}
+        width={400}
+        onOk={handleKey}
+        onCancel={handleCancelKey}
+        okText="Войти"
+        cancelText="Отмена"
+        okButtonProps={{
+          type: "primary",
+        }}
+      >
+        <Input.Password
+          style={{
+            marginTop: "10px",
+            marginBottom: "10px",
+            marginLeft: "36px",
+            width: "80%",
+          }}
+          value={password}
+          placeholder="Введите пароль"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Modal>
+
+      {/* Ключи */}
+      <Modal
+        title={
+          <div style={{ paddingLeft: "10px", fontSize: "20px" }}>
+            Ключи к тестам
+          </div>
+        }
+        open={isModalKeyOpen}
+        onCancel={handleCloseModalKey}
+        width={1000}
+        footer={null}
+      >
+        <Pagination
+          onChange={(page) => {
+            setKeyId(page);
+            console.log("page", page);
+          }}
+          defaultCurrent={1}
+          defaultPageSize={1}
+          total={6}
+          style={{ marginBottom: "14px" }}
+        />
+        {renderKey()}
       </Modal>
 
       {/* Удаление */}

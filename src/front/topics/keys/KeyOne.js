@@ -7,11 +7,10 @@ import {
   FormOutlined,
   AimOutlined,
 } from "@ant-design/icons";
-import { answer, validateAnswer } from "./TestOneValidation";
-import { fetchRequest } from "../../utils";
+
 import Title from "antd/es/typography/Title";
 
-const TestOne = (props) => {
+const KeyOne = (props) => {
   const [coord, setCoord] = useState();
   const [answer1, setAnswer1] = useState();
   const [answer2, setAnswer2] = useState();
@@ -46,8 +45,8 @@ const TestOne = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 255, 255, 1)",
       },
       {
         // Базовая пластина
@@ -118,8 +117,8 @@ const TestOne = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
       },
       {
         // площадка штатива
@@ -190,8 +189,8 @@ const TestOne = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 255)",
       },
       {
         // остальные области
@@ -238,87 +237,20 @@ const TestOne = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 255)",
       },
     ],
   };
 
-  const [messageApi, contextHolder] = message.useMessage();
-  const success = () => {
-    messageApi.open({
-      icon: <SmileOutlined style={{ fontSize: "16px" }} />,
-      type: "success",
-      content: "Тест успешно пройден!",
-      duration: 5.5,
-    });
-  };
-
-  const error = (correctAnswersCount) => {
-    messageApi.open({
-      icon: <FrownOutlined style={{ fontSize: "16px" }} />,
-      type: "error",
-      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 4`,
-      duration: 5.5,
-    });
-  };
-
-  const onTestComplete = () => {
-    const testResult = [];
-    const answeredResult = [task1, task2, task3, task4];
-    console.log("answeredResult", answeredResult);
-    answeredResult.forEach((element, index) => {
-      const userAnswer = validateAnswer(index, element);
-      console.log("userAnswer", userAnswer);
-      testResult.push(userAnswer);
-    });
-
-    const isTestPass =
-      testResult.length == answer.length && testResult.indexOf(false) == -1;
-    console.log("isTestPass", isTestPass);
-    console.log(
-      "testResult.length",
-      testResult.length == answer.length && testResult.indexOf(false) == -1
-    );
-
-    if (isTestPass) {
-      success();
-    } else {
-      error(testResult.filter((result) => result).length);
-    }
-    fetchRequest(
-      "/userTest",
-      "put",
-      {
-        "Content-type": "application/json",
-        Accept: "*/*",
-      },
-      {
-        login: localStorage.getItem("login"),
-        password: localStorage.getItem("password"),
-        topicId: 0,
-        status: isTestPass ? "ПРОЙДЕНО" : "НЕ ПРОЙДЕНО",
-      }
-    ).then((data) => {
-      console.log("data: ", data);
-    });
-    props.setIsModalVisible(false);
-    clearState();
-  };
-
   return (
-    <div style={{ paddingLeft: "20px", paddingTop: "12px" }}>
+    <div style={{ paddingLeft: "10px", paddingTop: "12px" }}>
       <Title level={3} style={{ marginTop: "-16px" }}>
         Тест по теме №1 "Правила обращения с теодолитом"
       </Title>
       <div className="testTaskHeader">
         <AimOutlined />
         Задание №1
-        {answer1?.[0] === true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
       </div>
       <div className="testTaskDiscription">
         Нажмите на изображение, где находится{" "}
@@ -352,11 +284,6 @@ const TestOne = (props) => {
       <div className="testTaskHeader">
         <AimOutlined />
         Задание №2
-        {answer2?.[0] == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
       </div>
       <div className="testTaskDiscription">
         Нажмите на изображение, где находится{" "}
@@ -389,11 +316,6 @@ const TestOne = (props) => {
       <div className="testTaskHeader">
         <AimOutlined />
         Задание №3
-        {answer3?.[0] == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
       </div>
       <div className="testTaskDiscription">
         Нажмите на изображение, где находится{" "}
@@ -426,11 +348,6 @@ const TestOne = (props) => {
       <div className="testTaskHeader">
         <AimOutlined />
         Задание №4
-        {answer4?.[0] == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
       </div>
       <div className="testTaskDiscription">
         Нажмите на <b className="keyWord">деталь штатива</b>, используя которую
@@ -461,17 +378,9 @@ const TestOne = (props) => {
         />
       </div>
 
-      <>
-        {contextHolder}
-        <div style={{ textAlign: "right" }}>
-          {" "}
-          <Button type="primary" onClick={onTestComplete}>
-            Завершить тест
-          </Button>
-        </div>
-      </>
+      <></>
     </div>
   );
 };
 
-export { TestOne };
+export { KeyOne };

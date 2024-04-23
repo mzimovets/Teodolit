@@ -16,6 +16,10 @@ export const answer = [
     // Вопрос 4
     answer1: 3,
   },
+  {
+    // Вопрос 5
+    answer1: "1",
+  },
 ];
 
 const validateFirstAnswers = (userAnswer) => {

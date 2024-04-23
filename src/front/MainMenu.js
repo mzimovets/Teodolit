@@ -46,79 +46,80 @@ const MainMenu = () => {
   };
 
   return (
-    <div style={{ overflow: "hidden", height: "813px", position: "relative" }}>
-      <div className="mainContainer">
-        <div className="noselect" style={{ paddingTop: "152px" }}>
-          <Title
-            level={1}
-            style={{ margin: "0px", paddingLeft: "100px", fontSize: "84px" }}
+    <div className="mainContainer">
+      <div className="noselect" style={{ paddingTop: "152px" }}>
+        <Title
+          level={1}
+          style={{ margin: "0px", paddingLeft: "100px", fontSize: "84px" }}
+        >
+          Тренажер
+        </Title>
+        <Title
+          level={3}
+          style={{ margin: "0px", paddingLeft: "100px", fontSize: "34px" }}
+        >
+          по дисциплине "Геодезия"
+        </Title>
+      </div>
+      <img class="teodolit-img" src="teod.png" />
+      <div className="authWindow">
+        <div className="auth">
+          <Form
+            name="normal_login"
+            className="login-form"
+            initialValues={{ remember: true }}
           >
-            Тренажер
-          </Title>
-          <Title level={3} style={{ margin: "0px", paddingLeft: "100px" }}>
-            по дисциплине "Геодезия"
-          </Title>
-        </div>
-        <img class="teodolit-img" src="teod.png" />
-        <div className="authWindow">
-          <div className="auth">
-            <Form
-              name="normal_login"
-              className="login-form"
-              initialValues={{ remember: true }}
+            <Form.Item
+              name="username"
+              rules={[{ required: true, message: "Введите логин!" }]}
             >
-              <Form.Item
-                name="username"
-                rules={[{ required: true, message: "Введите логин!" }]}
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="Логин"
+                onChange={(e) => {
+                  setInputValueLogin(e.target.value);
+                }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[{ required: true, message: "Введите пароль!" }]}
+            >
+              <Input.Password
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Пароль"
+                onChange={(e) => {
+                  setInputValuePassword(e.target.value);
+                }}
+              />
+            </Form.Item>
+            {enterErr && (
+              <p
+                style={{
+                  color: "red",
+                  textAlign: "center",
+                  fontSize: "bold",
+                }}
               >
-                <Input
-                  prefix={<UserOutlined className="site-form-item-icon" />}
-                  placeholder="Логин"
-                  onChange={(e) => {
-                    setInputValueLogin(e.target.value);
-                  }}
-                />
-              </Form.Item>
-              <Form.Item
-                name="password"
-                rules={[{ required: true, message: "Введите пароль!" }]}
+                Неверный логин или пароль!
+              </p>
+            )}
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button center-btn"
+                style={{
+                  backgroundColor: "black",
+                  width: "102px",
+                }}
+                onClick={enterButton}
               >
-                <Input.Password
-                  prefix={<LockOutlined className="site-form-item-icon" />}
-                  type="password"
-                  placeholder="Пароль"
-                  onChange={(e) => {
-                    setInputValuePassword(e.target.value);
-                  }}
-                />
-              </Form.Item>
-              {enterErr && (
-                <p
-                  style={{
-                    color: "red",
-                    textAlign: "center",
-                    fontSize: "bold",
-                  }}
-                >
-                  Неверный логин или пароль!
-                </p>
-              )}
-              <Form.Item>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  className="login-form-button center-btn"
-                  style={{
-                    backgroundColor: "black",
-                    width: "102px",
-                  }}
-                  onClick={enterButton}
-                >
-                  Войти
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
+                Войти
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
       </div>
     </div>

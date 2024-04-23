@@ -84,7 +84,7 @@ const ModalAddUser = (props) => {
           fontFamily: "Roboto",
           fontWeight: "bold",
           marginBottom: "10px",
-          marginLeft: "44px",
+
           borderRadius: "7px",
           height: "33px",
         }}

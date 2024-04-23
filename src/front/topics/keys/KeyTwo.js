@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { message, Input, Tag, Button, Radio } from "antd";
+import { Input, Radio } from "antd";
 import {
   SmileOutlined,
   FrownOutlined,
@@ -7,12 +7,10 @@ import {
   EditOutlined,
   AimOutlined,
 } from "@ant-design/icons";
-import { validateAnswer, answer } from "./TestTwoValidation";
-import { fetchRequest } from "../../utils";
 import Title from "antd/es/typography/Title";
 import ImageMapper from "react-img-mapper";
 
-const TestTwo = (props) => {
+const KeyTwo = (props) => {
   // Состояние для блокировки полей после ответа пользователя
   const [answered1, setAnswered1] = useState(false);
   const [answered2, setAnswered2] = useState(false);
@@ -88,59 +86,6 @@ const TestTwo = (props) => {
     // ?
   };
 
-  const [messageApi, contextHolder] = message.useMessage();
-
-  const success = () => {
-    messageApi.open({
-      icon: <SmileOutlined style={{ fontSize: "16px" }} />,
-      type: "success",
-      content: "Тест успешно пройден!",
-      duration: 5.5,
-    });
-  };
-
-  const error = (correctAnswersCount) => {
-    messageApi.open({
-      icon: <FrownOutlined style={{ fontSize: "16px" }} />,
-      type: "error",
-      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 5`,
-      duration: 5.5,
-    });
-  };
-
-  const onTestComplete = () => {
-    const testResult = [];
-    answeredResult.forEach((element, index) => {
-      const userAnswer = validateAnswer(index, element);
-      testResult.push(userAnswer);
-    });
-    const isTestPass =
-      testResult.length == answer.length && testResult.indexOf(false) == -1;
-    if (isTestPass) {
-      success();
-    } else {
-      error(testResult.filter((result) => result).length);
-    }
-    fetchRequest(
-      "/userTest",
-      "put",
-      {
-        "Content-type": "application/json",
-        Accept: "*/*",
-      },
-      {
-        login: localStorage.getItem("login"),
-        password: localStorage.getItem("password"),
-        topicId: 1,
-        status: isTestPass ? "ПРОЙДЕНО" : "НЕ ПРОЙДЕНО",
-      }
-    ).then((data) => {
-      console.log("data: ", data);
-    });
-    props.setIsModalVisible(false);
-    clearState();
-  };
-
   const MAP_1 = {
     name: "my-map-1",
     areas: [
@@ -152,8 +97,8 @@ const TestTwo = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // правильный ответ
@@ -164,37 +109,38 @@ const TestTwo = (props) => {
         fillColor: "rgba(0, 0, 0, 0)",
 
         // hide: true, // Скрыть область
-        strokeColor: "rgba(154, 205, 50, 1.0)",
+        strokeColor: "rgba(255, 0, 0, 1.0)",
       },
     ],
   };
 
   return (
-    <div style={{ paddingLeft: "20px", paddingTop: "12px" }}>
-      {contextHolder}
+    <div style={{ paddingLeft: "10px", paddingTop: "12px" }}>
       <Title level={3} style={{ marginTop: "-16px" }}>
         Тест по теме №2 "Основные части теодолита"
       </Title>
       <div className="testTaskHeader">
         <EditOutlined />
         Задание №1
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
       </div>
       <div className="testTaskDiscription">
         Горизонтальный круг теодолита состоит из ... (Ответ вводить в им.
         падеже, ед. числе с маленькой буквы)
       </div>
-      <div style={{ display: "flex", alignItems: "baseline", gap: "20px" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          gap: "20px",
+          marginBottom: "28px",
+        }}
+      >
         1.
         <Input
           placeholder="ответ"
-          disabled={answered1}
+          disabled={true}
           style={{ width: "100px" }}
-          value={answeredResult?.[0]?.answer1 || ""}
+          value="лимб"
           onChange={(event) => {
             const newArr = [...answeredResult];
             if (newArr[0] !== undefined) {
@@ -208,9 +154,9 @@ const TestTwo = (props) => {
         2.
         <Input
           placeholder="ответ"
-          disabled={answered1}
+          disabled={true}
           style={{ width: "100px" }}
-          value={answeredResult?.[0]?.answer2 || ""}
+          value="алидада"
           onChange={(event) => {
             const newArr = [...answeredResult];
             if (newArr[0] !== undefined) {
@@ -222,38 +168,22 @@ const TestTwo = (props) => {
           }}
         />
       </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered1}
-          onClick={onFirstTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
+
       <div className="testTaskHeader">
         <EditOutlined />
         Задание №2
-        {answered2 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
       </div>
       <div className="testTaskDiscription">
         Как называется величина дуги лимба между двумя ближайшими штрихами?
         (Ответ вводить в им. падеже, ед. числе с маленькой буквы, через один
         пробел)
       </div>
-      <div>
+      <div style={{ marginBottom: "28px" }}>
         <Input
           placeholder="ответ"
-          disabled={answered2}
+          disabled={true}
           style={{ width: "180px" }}
-          value={answeredResult?.[1]?.answer1 || ""}
+          value="цена деления лимба"
           onChange={(event) => {
             const newArr = [...answeredResult];
             if (newArr[1] !== undefined) {
@@ -265,36 +195,20 @@ const TestTwo = (props) => {
           }}
         />
       </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered2}
-          onClick={onSecondTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
+
       <div className="testTaskHeader">
         <EditOutlined />
         Задание №3
-        {answered3 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
       </div>
       <div className="testTaskDiscription">
         Через сколько градусов производится оцифровка лимба? (Введите число)
       </div>
-      <div>
+      <div style={{ marginBottom: "28px" }}>
         <Input
-          disabled={answered3}
+          disabled={true}
           placeholder="ответ"
           style={{ width: "180px" }}
-          value={answeredResult?.[2]?.answer1 || ""}
+          value="1"
           onChange={(event) => {
             const newArr = [...answeredResult];
             if (newArr[2] !== undefined) {
@@ -306,70 +220,38 @@ const TestTwo = (props) => {
           }}
         />
       </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered3}
-          onClick={onThirdTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
+
       <div className="testTaskHeader">
         <CheckCircleOutlined />
         Задание №4
-        {answered4 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
       </div>
       <div className="testTaskDiscription">
         Для чего служит вертикальный круг теодолита? (Выберите один правильный
         ответ)
       </div>
-      <div>
+      <div style={{ marginBottom: "28px" }}>
         <Radio.Group
           onChange={onChange}
           style={{ display: "grid", gap: "12px" }}
         >
-          <Radio disabled={answered4} value={1}>
+          <Radio disabled={true} value={1}>
             измерение горизонтальных углов
           </Radio>
-          <Radio disabled={answered4} value={2}>
+          <Radio disabled={true} value={2}>
             измерение расстояний
           </Radio>
-          <Radio disabled={answered4} value={3}>
+          <Radio disabled={false} defaultValue={3}>
             измерение углов наклона
           </Radio>
-          <Radio disabled={answered4} value={4}>
+          <Radio disabled={true} value={4}>
             все ответы верны
           </Radio>
         </Radio.Group>
       </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered4}
-          onClick={onFourthTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
+
       <div className="testTaskHeader">
         <AimOutlined />
         Задание №5
-        {answered5 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
       </div>
       <div className="testTaskDiscription">
         Какую часть сетки нитей наводят на визирную цель для снятия отчетов при
@@ -392,25 +274,13 @@ const TestTwo = (props) => {
           height={471}
           width={500}
           map={MAP_1}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
           onImageMouseMove={(evt) => {
             setCoord({ x: evt.clientX, y: evt.clientY });
           }}
         />
       </div>
-      <div style={{ textAlign: "right" }}>
-        {" "}
-        <Button type="primary" onClick={onTestComplete}>
-          Завершить тест
-        </Button>
-      </div>
     </div>
   );
 };
 
-export { TestTwo };
+export { KeyTwo };
