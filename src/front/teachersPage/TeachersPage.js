@@ -63,6 +63,8 @@ const TeacherPage = (props) => {
     { label: "Группа", value: "group" },
   ];
 
+  const [passwordError, setPasswordError] = useState(false);
+
   const [password, setPassword] = useState();
 
   const [sortKey, setSortKey] = useState(items[0]);
@@ -211,6 +213,17 @@ const TeacherPage = (props) => {
         // сообщение об ошибке
       }
     });
+    // абоба
+    if (password !== "emf-@dmin") {
+      // Устанавливаем сообщение об ошибке
+      setPasswordError(true);
+    } else {
+      // Если пароль правильный, открываем модальное окно
+      setIsModalKeyOpen(true);
+      setKeyBtn(false);
+      setPasswordError(false); // Сбрасываем ошибку, если пароль правильный
+      setPassword(""); // Очищаем поле пароля
+    }
   };
 
   const handleCancelKey = () => {
@@ -563,6 +576,18 @@ const TeacherPage = (props) => {
           placeholder="Введите пароль"
           onChange={(e) => setPassword(e.target.value)}
         />
+        {passwordError && (
+          <p
+            style={{
+              color: "red",
+              textAlign: "center",
+              fontSize: "bold",
+              margin: "0px"
+            }}
+          >
+            Неверный пароль!
+          </p>
+        )}
       </Modal>
 
       {/* Ключи */}
