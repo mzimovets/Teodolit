@@ -346,7 +346,7 @@ const TestFour = (props) => {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
         name: "18",
         shape: "poly",
-        coords: [93, 69, 93, 52, 90, 55, 160, 90],
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
         // hide: true, // Скрыть область
@@ -366,52 +366,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -427,52 +573,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -488,52 +780,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -549,52 +987,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -610,52 +1194,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -671,52 +1401,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -732,52 +1608,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -793,52 +1815,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -854,52 +2022,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -915,52 +2229,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -976,52 +2436,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -1037,52 +2643,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
@@ -1098,52 +2850,198 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // Базовая пластина
+        // Базовая пластина (основание) (#2)
         name: "2",
         shape: "poly",
-        coords: [115, 285, 115, 247, 225, 249, 225, 280, 200, 295],
+        coords: [118, 285, 118, 272, 197, 280, 223, 266, 223, 278, 200, 295],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 0, 1)",
       },
       {
-        // площадка штатива
+        // подъемные винты (#3)
         name: "3",
+        shape: "poly",
+        coords: [
+          115, 270, 115, 246,
+
+          200, 252,
+
+          225, 241, 225, 264, 196, 278,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 255, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0, 1)",
+      },
+      {
+        // площадка штатива (#1)
+        name: "4",
         shape: "poly",
         coords: [106, 328, 110, 284, 200, 296, 225, 278, 243, 282, 247, 328],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1.0)",
       },
       {
-        // остальные области
-        name: "4",
-        shape: "rect",
-        coords: [90, 20, 260, 247],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
-      },
-      {
-        // остальные области
+        // штатив
         name: "5",
         shape: "rect",
         coords: [300, 450, 48, 330],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255, 1)",
+      },
+      {
+        // подставка (трегер) (#23)
+        name: "6",
+        shape: "poly",
+        coords: [
+          118, 244, 118, 214, 197, 217, 222, 215, 213, 222, 213, 235, 222, 241,
+          200, 251,
+        ],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 0, 255, 1)",
+      },
+      {
+        // зажимные винты (#5)
+        name: "7",
+        shape: "poly",
+        coords: [195, 184, 238, 182, 241, 212, 198, 215],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "8",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // наводящие винты (#4)
+        name: "9",
+        shape: "circle",
+        coords: [161, 193, 16],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 0, 0)",
+      },
+      {
+        // наводящие винты (#13)
+        name: "10",
+        shape: "poly",
+        coords: [239, 181, 241, 201, 247, 200, 247, 181],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(184, 134, 11)",
+      },
+      {
+        // цилиндрический уровень (#12)
+        name: "11",
+        shape: "poly",
+        coords: [180, 184, 180, 160, 257, 157, 255, 180, 190, 183],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(173, 255, 47)",
+      },
+      {
+        // наводящий винт зрительной трубы (#6)
+        name: "12",
+        shape: "circle",
+        coords: [167, 138, 16.5],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(127, 255, 212)",
+      },
+      {
+        // кремальера (#9)
+        name: "13",
+        shape: "circle",
+        coords: [225, 77, 17],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 255, 0)",
+      },
+      {
+        // зажимные винты (#14)
+        name: "14",
+        shape: "rect",
+        coords: [215, 240, 238, 219],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(47, 79, 79)",
+      },
+      {
+        // закрепительный винт зрительной трубы (#10)
+        name: "15",
+        shape: "rect",
+        coords: [199, 20, 214, 43],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0)",
+      },
+      {
+        // визир (#20)
+        name: "16",
+        shape: "poly",
+        coords: [127, 45, 127, 16, 175, 38, 175, 63],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 255)",
+      },
+      {
+        // зрительная труба (#21)
+        name: "17",
+        shape: "poly",
+        coords: [102, 78, 102, 36, 175, 64, 175, 100],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(255, 69, 0)",
+      },
+      {
+        // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
+        name: "18",
+        shape: "poly",
+        coords: [93, 71, 93, 52, 101, 52, 101, 71],
+        preFillColor: "rgba(0, 0, 0, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
+        // hide: true, // Скрыть область
+        strokeColor: "rgba(128, 128, 0)",
       },
     ],
   };
