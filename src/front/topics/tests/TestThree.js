@@ -22,18 +22,6 @@ const TestThree = (props) => {
   const [answered6, setAnswered6] = useState(false);
   const [answeredResult, setAnsweredResult] = useState([]);
 
-  const onChange = (event) => {
-    const newArr = [...answeredResult];
-    if (newArr[3] !== undefined) {
-      newArr[3].answer1 = event.target.value;
-    } else {
-      newArr[3] = { answer1: event.target.value };
-    }
-    setAnsweredResult([...newArr]);
-    newArr[3].answer1 = event.target.value;
-    setAnsweredResult([...newArr]);
-  };
-
   // Cостояния для ответа пользователя и проверки правильности ответа
   const onFirstTaskClick = () => {
     setAnswered1(true);
@@ -80,12 +68,6 @@ const TestThree = (props) => {
 
   // ?
   const [coord, setCoord] = useState();
-  const [answer1, setAnswer1] = useState();
-  const [answer2, setAnswer2] = useState();
-  const [answer3, setAnswer3] = useState();
-  const [answer4, setAnswer4] = useState();
-  const [answer5, setAnswer5] = useState();
-  const [answer6, setAnswer6] = useState();
 
   const [task1, setTask1] = useState();
   const [task2, setTask2] = useState();
@@ -117,10 +99,12 @@ const TestThree = (props) => {
 
   const onTestComplete = () => {
     const testResult = [];
+    const answeredResult = [task1, task2, task3, task4, task5, task6];
     answeredResult.forEach((element, index) => {
       const userAnswer = validateAnswer(index, element);
       testResult.push(userAnswer);
     });
+    console.log("answeredResult", answeredResult);
     const isTestPass =
       testResult.length == answer.length && testResult.indexOf(false) == -1;
     if (isTestPass) {
@@ -138,7 +122,7 @@ const TestThree = (props) => {
       {
         login: localStorage.getItem("login"),
         password: localStorage.getItem("password"),
-        topicId: 1,
+        topicId: 2,
         status: isTestPass ? "ПРОЙДЕНО" : "НЕ ПРОЙДЕНО",
       }
     ).then((data) => {
@@ -290,283 +274,308 @@ const TestThree = (props) => {
       <Title level={3} style={{ marginTop: "-16px" }}>
         Тест по теме №3 "Установка теодолита в рабочее положение"
       </Title>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №1
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, на ту деталь, которую нужно ослабить для
-        перемещения теодолита по головке штатива до нужного положения
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_1}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-        />
-      </div>
-      <div className="testTaskHeader">
-        <CheckCircleOutlined />
-        Задание №2
-        {answered4 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Какое дополнительное оборудование используют при центрировании с помощью
-        оптического центрира (Выберите один правильный ответ)
-      </div>
+      {/* Task 1 */}
       <div>
-        <Radio.Group
-          onChange={onChange}
-          style={{ display: "grid", gap: "12px" }}
-        >
-          <Radio disabled={answered4} value={1}>
-            зрительная труба
-          </Radio>
-          <Radio disabled={answered4} value={2}>
-            окуляр-насадка
-          </Radio>
-          <Radio disabled={answered4} value={3}>
-            перископ
-          </Radio>
-          <Radio disabled={answered4} value={4}>
-            сетка нитей
-          </Radio>
-        </Radio.Group>
-      </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered4}
-          onClick={onFourthTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
-      <div className="testTaskHeader">
-        <CheckCircleOutlined />
-        Задание №3
-        {answered4 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        При центрировании с помощью оптического центрира теодолит перемещают
-        пока ... (Выберите один правильный ответ)
-      </div>
-      <div>
-        <Radio.Group
-          onChange={onChange}
-          style={{ display: "grid", gap: "12px"}}
-        >
-          <Radio disabled={answered4} value={1}>
-            в поле зрения сетка нити не совпадет с вертикальной осью
-          </Radio>
-          <Radio disabled={answered4} value={2}>
-            в поле зрения вертикальная ось не совпадет с горизонтальной осью
-          </Radio>
-          <Radio disabled={answered4} value={3}>
-            в поле зрения сетка нитей не выйдет за пределы круга
-          </Radio>
-          <Radio disabled={answered4} value={4}>
-            в поле зрения центр точки не совпадает с центром сетки нитей
-          </Radio>
-        </Radio.Group>
-      </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered4}
-          onClick={onFourthTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №4
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Ориентируясь на показания какой детали теодолита осуществляют его
-        горизонтирование
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_2}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-          style={{ marginBottom: "32px" }}
-        />
-      </div>
-      <div className="testTaskHeader">
-        <CheckCircleOutlined />
-        Задание №5
-        {answered4 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Какие два винта в текущем положении теодолита нужно вращать для вывода
-        пузырька уровня в нуль-пункт? (Выберите один правильный ответ)
-      </div>
-      <div style={{ margin: "auto", width: "52%" }}>
-        <Image
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №1
+          {answered1 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, на ту деталь, которую нужно ослабить для
+          перемещения теодолита по головке штатива до нужного положения
+        </div>
+        <div
           style={{
+            width: "36.2%",
+            margin: "auto",
             marginBottom: "20px",
             border: "2px solid #d9d9d9",
             borderRadius: "14px",
+            marginTop: "18px",
           }}
-          width={500}
-          preview={false}
-          src="/image/Topic1.4a.png"
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_1}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask1(area.name);
+              onFirstTaskClick();
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+          />
+        </div>
       </div>
+      {/* Task 2 */}
       <div>
-        <Radio.Group
-          onChange={onChange}
-          style={{ display: "grid", gap: "12px"}}
-        >
-          <Radio disabled={answered4} value={1}>
-            винт №1 и винт №2
-          </Radio>
-          <Radio disabled={answered4} value={2}>
-            винт №2 и винт №3
-          </Radio>
-          <Radio disabled={answered4} value={3}>
-            винт №3 и винт №1
-          </Radio>
-        </Radio.Group>
+        <div className="testTaskHeader">
+          <CheckCircleOutlined />
+          Задание №2
+          {answered2 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Какое дополнительное оборудование используют при центрировании с
+          помощью оптического центрира (Выберите один правильный ответ)
+        </div>
+        <div>
+          <Radio.Group
+            onChange={(e) => {
+              setTask2(e.target.value);
+            }}
+            style={{ display: "grid", gap: "12px" }}
+          >
+            <Radio disabled={answered2} value={1}>
+              зрительная труба
+            </Radio>
+            <Radio disabled={answered2} value={2}>
+              окуляр-насадка
+            </Radio>
+            <Radio disabled={answered2} value={3}>
+              перископ
+            </Radio>
+            <Radio disabled={answered2} value={4}>
+              сетка нитей
+            </Radio>
+          </Radio.Group>
+        </div>
+        <div style={{ textAlign: "left" }}>
+          {" "}
+          <Button
+            className="button"
+            style={{ marginBottom: "32px", marginTop: "16px" }}
+            type="primary"
+            disabled={answered2}
+            onClick={onSecondTaskClick}
+          >
+            Ответить
+          </Button>
+        </div>
       </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered4}
-          onClick={onFourthTaskClick}
-        >
-          Ответить
-        </Button>
+      {/* Task 3 */}
+      <div>
+        <div className="testTaskHeader">
+          <CheckCircleOutlined />
+          Задание №3
+          {answered3 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          При центрировании с помощью оптического центрира теодолит перемещают
+          пока ... (Выберите один правильный ответ)
+        </div>
+        <div>
+          <Radio.Group
+            onChange={(e) => {
+              setTask3(e.target.value);
+            }}
+            style={{ display: "grid", gap: "12px" }}
+          >
+            <Radio disabled={answered3} value={1}>
+              в поле зрения сетка нити не совпадет с вертикальной осью
+            </Radio>
+            <Radio disabled={answered3} value={2}>
+              в поле зрения вертикальная ось не совпадет с горизонтальной осью
+            </Radio>
+            <Radio disabled={answered3} value={3}>
+              в поле зрения сетка нитей не выйдет за пределы круга
+            </Radio>
+            <Radio disabled={answered3} value={4}>
+              в поле зрения центр точки не совпадает с центром сетки нитей
+            </Radio>
+          </Radio.Group>
+        </div>
+        <div style={{ textAlign: "left" }}>
+          {" "}
+          <Button
+            className="button"
+            style={{ marginBottom: "32px", marginTop: "16px" }}
+            type="primary"
+            disabled={answered3}
+            onClick={onThirdTaskClick}
+          >
+            Ответить
+          </Button>
+        </div>
       </div>
-      <div className="testTaskHeader">
-        <CheckCircleOutlined />
-        Задание №6
-        {answered4 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Какой винт в текущем положении теодолита нужно вращать для вывода пузырька уровня в нуль-пунт? (Выберите один правильный ответ)
-      </div>
-      <div style={{ margin: "auto", width: "52%" }}>
-        <Image
+      {/* Task 4 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №4
+          {answered4 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Ориентируясь на показания какой детали теодолита осуществляют его
+          горизонтирование
+        </div>
+        <div
           style={{
+            width: "36.2%",
+            margin: "auto",
             marginBottom: "20px",
             border: "2px solid #d9d9d9",
             borderRadius: "14px",
+            marginTop: "18px",
           }}
-          width={500}
-          preview={false}
-          src="/image/Topic1.4b.png"
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_2}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask4(area.name);
+              onFourthTaskClick();
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            style={{ marginBottom: "32px" }}
+          />
+        </div>
       </div>
+      {/* Task 5 */}
       <div>
-        <Radio.Group
-          onChange={onChange}
-          style={{ display: "grid", gap: "12px" }}
-        >
-          <Radio disabled={answered4} value={1}>
-            винт №1
-          </Radio>
-          <Radio disabled={answered4} value={2}>
-            винт №2
-          </Radio>
-          <Radio disabled={answered4} value={3}>
-            винт №3
-          </Radio>
-        </Radio.Group>
+        <div className="testTaskHeader">
+          <CheckCircleOutlined />
+          Задание №5
+          {answered5 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Какие два винта в текущем положении теодолита нужно вращать для вывода
+          пузырька уровня в нуль-пункт? (Выберите один правильный ответ)
+        </div>
+        <div style={{ margin: "auto", width: "52%" }}>
+          <Image
+            style={{
+              marginBottom: "20px",
+              border: "2px solid #d9d9d9",
+              borderRadius: "14px",
+            }}
+            width={500}
+            preview={false}
+            src="/image/Topic1.4a.png"
+          />
+        </div>
+        <div>
+          <Radio.Group
+            onChange={(e) => {
+              setTask5(e.target.value);
+            }}
+            style={{ display: "grid", gap: "12px" }}
+          >
+            <Radio disabled={answered5} value={1}>
+              винт №1 и винт №2
+            </Radio>
+            <Radio disabled={answered5} value={2}>
+              винт №2 и винт №3
+            </Radio>
+            <Radio disabled={answered5} value={3}>
+              винт №3 и винт №1
+            </Radio>
+          </Radio.Group>
+        </div>
+        <div style={{ textAlign: "left" }}>
+          {" "}
+          <Button
+            className="button"
+            style={{ marginBottom: "32px", marginTop: "16px" }}
+            type="primary"
+            disabled={answered5}
+            onClick={onFiveTaskClick}
+          >
+            Ответить
+          </Button>
+        </div>
       </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered4}
-          onClick={onFourthTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
-      <div style={{ textAlign: "right" }}>
-        {" "}
-        <Button type="primary" type="primary" onClick={onTestComplete}>
-          Завершить тест
-        </Button>
+      {/* Task 6 */}
+      <div>
+        <div className="testTaskHeader">
+          <CheckCircleOutlined />
+          Задание №6
+          {answered6 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Какой винт в текущем положении теодолита нужно вращать для вывода
+          пузырька уровня в нуль-пунт? (Выберите один правильный ответ)
+        </div>
+        <div style={{ margin: "auto", width: "52%" }}>
+          <Image
+            style={{
+              marginBottom: "20px",
+              border: "2px solid #d9d9d9",
+              borderRadius: "14px",
+            }}
+            width={500}
+            preview={false}
+            src="/image/Topic1.4b.png"
+          />
+        </div>
+        <div>
+          <Radio.Group
+            onChange={(e) => {
+              setTask6(e.target.value);
+            }}
+            style={{ display: "grid", gap: "12px" }}
+          >
+            <Radio disabled={answered6} value={1}>
+              винт №1
+            </Radio>
+            <Radio disabled={answered6} value={2}>
+              винт №2
+            </Radio>
+            <Radio disabled={answered6} value={3}>
+              винт №3
+            </Radio>
+          </Radio.Group>
+        </div>
+        <div style={{ textAlign: "left" }}>
+          {" "}
+          <Button
+            className="button"
+            style={{ marginBottom: "32px", marginTop: "16px" }}
+            type="primary"
+            disabled={answered6}
+            onClick={onSixTaskClick}
+          >
+            Ответить
+          </Button>
+        </div>
+        <div style={{ textAlign: "right" }}>
+          {" "}
+          <Button type="primary" type="primary" onClick={onTestComplete}>
+            Завершить тест
+          </Button>
+        </div>
       </div>
     </div>
   );

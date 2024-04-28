@@ -13,7 +13,7 @@ export const answer = [
   },
   {
     // Вопрос 4
-    answer1: 6,
+    answer1: "6",
   },
   {
     // Вопрос 5
