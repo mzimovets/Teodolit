@@ -145,27 +145,27 @@ const TestTwo = (props) => {
     name: "my-map-1",
     areas: [
       {
-        // остальная область
-        name: "1",
-        shape: "circle",
-        coords: [246, 236, 205],
-        preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 0, 0)",
-
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1.0)",
-      },
-      {
         // правильный ответ
-        name: "2",
+        name: "1",
         shape: "circle",
         coords: [246, 236, 25],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
         // hide: true, // Скрыть область
-        strokeColor: "rgba(154, 205, 50, 1.0)",
+        strokeColor: "rgba(154, 0, 50, 1.0)",
       },
+      // {
+      //   // остальная область
+      //   name: "2",
+      //   shape: "circle",
+      //   coords: [246, 236, 205],
+      //   preFillColor: "rgba(0, 0, 0, 0)",
+      //   fillColor: "rgba(0, 0, 0, 0)",
+
+      //   // hide: true, // Скрыть область
+      //   strokeColor: "rgba(255, 0, 0, 1.0)",
+      // },
     ],
   };
 
@@ -400,6 +400,10 @@ const TestTwo = (props) => {
           }}
           onImageMouseMove={(evt) => {
             setCoord({ x: evt.clientX, y: evt.clientY });
+          }}
+          onImageClick={() => {
+            setTask1("");
+            onFiveTaskClick();
           }}
         />
       </div>

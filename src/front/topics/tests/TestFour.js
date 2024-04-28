@@ -20,19 +20,14 @@ const TestFour = (props) => {
   const [answered4, setAnswered4] = useState(false);
   const [answered5, setAnswered5] = useState(false);
   const [answered6, setAnswered6] = useState(false);
-  const [answeredResult, setAnsweredResult] = useState([]);
-
-  const onChange = (event) => {
-    const newArr = [...answeredResult];
-    if (newArr[3] !== undefined) {
-      newArr[3].answer1 = event.target.value;
-    } else {
-      newArr[3] = { answer1: event.target.value };
-    }
-    setAnsweredResult([...newArr]);
-    newArr[3].answer1 = event.target.value;
-    setAnsweredResult([...newArr]);
-  };
+  const [answered7, setAnswered7] = useState(false);
+  const [answered8, setAnswered8] = useState(false);
+  const [answered9, setAnswered9] = useState(false);
+  const [answered10, setAnswered10] = useState(false);
+  const [answered11, setAnswered11] = useState(false);
+  const [answered12, setAnswered12] = useState(false);
+  const [answered13, setAnswered13] = useState(false);
+  const [answered14, setAnswered14] = useState(false);
 
   // Cостояния для ответа пользователя и проверки правильности ответа
   const onFirstTaskClick = () => {
@@ -40,6 +35,7 @@ const TestFour = (props) => {
   };
 
   const onSecondTaskClick = () => {
+    console.log("taks 2 clicked ");
     setAnswered2(true);
   };
 
@@ -60,7 +56,6 @@ const TestFour = (props) => {
   };
 
   const clearState = () => {
-    setAnsweredResult([]);
     setAnswered1(false);
     setAnswered2(false);
     setAnswered3(false);
@@ -80,12 +75,6 @@ const TestFour = (props) => {
 
   // ?
   const [coord, setCoord] = useState();
-  const [answer1, setAnswer1] = useState();
-  const [answer2, setAnswer2] = useState();
-  const [answer3, setAnswer3] = useState();
-  const [answer4, setAnswer4] = useState();
-  const [answer5, setAnswer5] = useState();
-  const [answer6, setAnswer6] = useState();
 
   const [task1, setTask1] = useState();
   const [task2, setTask2] = useState();
@@ -93,6 +82,14 @@ const TestFour = (props) => {
   const [task4, setTask4] = useState();
   const [task5, setTask5] = useState();
   const [task6, setTask6] = useState();
+  const [task7, setTask7] = useState();
+  const [task8, setTask8] = useState();
+  const [task9, setTask9] = useState();
+  const [task10, setTask10] = useState();
+  const [task11, setTask11] = useState();
+  const [task12, setTask12] = useState();
+  const [task13, setTask13] = useState();
+  const [task14, setTask14] = useState();
   // ?
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -117,6 +114,22 @@ const TestFour = (props) => {
 
   const onTestComplete = () => {
     const testResult = [];
+    const answeredResult = [
+      task1,
+      task2,
+      task3,
+      task4,
+      task5,
+      task6,
+      task7,
+      task8,
+      task9,
+      task10,
+      task11,
+      task12,
+      task13,
+      task14,
+    ];
     answeredResult.forEach((element, index) => {
       const userAnswer = validateAnswer(index, element);
       testResult.push(userAnswer);
@@ -138,7 +151,7 @@ const TestFour = (props) => {
       {
         login: localStorage.getItem("login"),
         password: localStorage.getItem("password"),
-        topicId: 1,
+        topicId: 3,
         status: isTestPass ? "ПРОЙДЕНО" : "НЕ ПРОЙДЕНО",
       }
     ).then((data) => {
@@ -356,7 +369,7 @@ const TestFour = (props) => {
   };
 
   const MAP_2 = {
-    name: "my-map-1",
+    name: "my-map-2",
     areas: [
       {
         // становый винт
@@ -563,7 +576,7 @@ const TestFour = (props) => {
   };
 
   const MAP_3 = {
-    name: "my-map-1",
+    name: "my-map-3",
     areas: [
       {
         // становый винт
@@ -770,7 +783,7 @@ const TestFour = (props) => {
   };
 
   const MAP_4 = {
-    name: "my-map-1",
+    name: "my-map-4",
     areas: [
       {
         // становый винт
@@ -977,7 +990,7 @@ const TestFour = (props) => {
   };
 
   const MAP_5 = {
-    name: "my-map-1",
+    name: "my-map-5",
     areas: [
       {
         // становый винт
@@ -1184,7 +1197,7 @@ const TestFour = (props) => {
   };
 
   const MAP_6 = {
-    name: "my-map-1",
+    name: "my-map-6",
     areas: [
       {
         // становый винт
@@ -1391,7 +1404,7 @@ const TestFour = (props) => {
   };
 
   const MAP_7 = {
-    name: "my-map-1",
+    name: "my-map-7",
     areas: [
       {
         // становый винт
@@ -1598,7 +1611,7 @@ const TestFour = (props) => {
   };
 
   const MAP_8 = {
-    name: "my-map-1",
+    name: "my-map-8",
     areas: [
       {
         // становый винт
@@ -1805,7 +1818,7 @@ const TestFour = (props) => {
   };
 
   const MAP_9 = {
-    name: "my-map-1",
+    name: "my-map-9",
     areas: [
       {
         // становый винт
@@ -2012,7 +2025,7 @@ const TestFour = (props) => {
   };
 
   const MAP_10 = {
-    name: "my-map-1",
+    name: "my-map-10",
     areas: [
       {
         // становый винт
@@ -2219,7 +2232,7 @@ const TestFour = (props) => {
   };
 
   const MAP_11 = {
-    name: "my-map-1",
+    name: "my-map-11",
     areas: [
       {
         // становый винт
@@ -2426,7 +2439,7 @@ const TestFour = (props) => {
   };
 
   const MAP_12 = {
-    name: "my-map-1",
+    name: "my-map-12",
     areas: [
       {
         // становый винт
@@ -2633,7 +2646,7 @@ const TestFour = (props) => {
   };
 
   const MAP_13 = {
-    name: "my-map-1",
+    name: "my-map-13",
     areas: [
       {
         // становый винт
@@ -2840,7 +2853,7 @@ const TestFour = (props) => {
   };
 
   const MAP_14 = {
-    name: "my-map-1",
+    name: "my-map-14",
     areas: [
       {
         // становый винт
@@ -3053,558 +3066,643 @@ const TestFour = (props) => {
         Тест по теме №4 "Устройство и принцип работы технических теодолитов
         2Т30П и 4Т30П"
       </Title>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №1
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_1}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
+      {/* Taks 1 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №1
+          {answered1 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_1}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask1(area.name);
+              setAnswered1(true);
+              // onFirstTaskClick();
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              onFirstTaskClick();
+            }}
+          />
+        </div>
+      </div>
+      {/* Task 2 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №2
+          {console.log("AAAAAA", answered2)}
+          {answered2 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_2}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+
+              setTask2(area.name);
+              setAnswered2(true);
+              // onSecondTaskClick();
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              onSecondTaskClick();
+            }}
+          />
+        </div>
       </div>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №2
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_2}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
+      {/* Taks 3 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №3
+          {answered3 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_3}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask3(area.name);
+              onThirdTaskClick();
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              onThirdTaskClick();
+            }}
+          />
+        </div>
+      </div>
+      {/* Taks 4 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №4
+          {answered4 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_4}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask4(area.name);
+              onFourthTaskClick();
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              onFourthTaskClick();
+            }}
+          />
+        </div>
       </div>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №3
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_3}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
+      {/* Taks 5 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №5
+          {answered5 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_5}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+
+              setTask5(area.name);
+              onFiveTaskClick();
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              onFiveTaskClick();
+            }}
+          />
+        </div>
+      </div>
+      {/* Task 6 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №6
+          {answered6 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_6}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask6(area.name);
+              onSixTaskClick();
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              onSixTaskClick();
+            }}
+          />
+        </div>
       </div>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №4
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_4}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
+      {/* Task 7 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №7
+          {answered7 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_7}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask7(area.name);
+              setAnswered7(true);
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              setAnswered7(true);
+            }}
+          />
+        </div>
+      </div>
+      {/* Taks 8 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №8
+          {answered8 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_8}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setAnswered8(true);
+              setTask8(area.name);
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              setAnswered8(true);
+            }}
+          />
+        </div>
       </div>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №5
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_5}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
+      {/* Taks 9 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №9
+          {answered9 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-        />
-      </div>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №6
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_6}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-        />
-      </div>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №7
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_7}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_9}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask9(area.name);
+              setAnswered9(true);
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              setAnswered9(true);
+            }}
+          />
+        </div>
       </div>
 
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №8
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_8}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
+      {/* Task 10 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №10
+          {answered10 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_10}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask10(area.name);
+              setAnswered10(true);
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              setAnswered10(true);
+            }}
+          />
+        </div>
       </div>
 
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №9
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_9}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
+      {/* Task 11 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №11
+          {answered11 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_11}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask11(area.name);
+              setAnswered11(true);
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              setAnswered11(true);
+            }}
+          />
+        </div>
+      </div>
+      {/* Task 12 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №12
+          {answered12 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_12}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask12(area.name);
+              setAnswered12(true);
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              setAnswered12(true);
+            }}
+          />
+        </div>
       </div>
 
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №10
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_10}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
+      {/* Task 13 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №13
+          {answered13 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_13}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask13(area.name);
+              setAnswered13(true);
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              setAnswered13(true);
+            }}
+          />
+        </div>
+      </div>
+      {/* Task 14 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №14
+          {answered14 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Нажмите на изображение, где находится{" "}
+          <b className="keyWord">становый винт</b>
+        </div>
+        <div
+          style={{
+            width: "36.2%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
           }}
-        />
-      </div>
-
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №11
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_11}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-        />
-      </div>
-
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №12
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_12}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-        />
-      </div>
-
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №13
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_13}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-        />
-      </div>
-
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №14
-        {answered1 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Нажмите на изображение, где находится{" "}
-        <b className="keyWord">становый винт</b>
-      </div>
-      <div
-        style={{
-          width: "36.2%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/test1-1.png"}
-          height={450}
-          width={337}
-          map={MAP_14}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-        />
+        >
+          <ImageMapper
+            src={"/image/test1-1.png"}
+            height={450}
+            width={337}
+            map={MAP_14}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setTask14(area.name);
+              setAnswered14(true);
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask1("");
+              setAnswered14(true);
+            }}
+          />
+        </div>
       </div>
 
       <div style={{ textAlign: "right" }}>
