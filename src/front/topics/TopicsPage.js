@@ -10,10 +10,25 @@ import {
 import { TopicOne } from "./TopicOne";
 import { Button, Modal, Form, Input, Table, Tag } from "antd";
 import { fetchRequest } from "../utils";
+import { store } from "./store/store";
+import { Provider } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTopicState } from "./store/disabledStateSlice";
 
 const sizeLarge = "large";
 
+export const TopicsPageWrapper = (props) => {
+  return (
+    <Provider store={store}>
+      <TopicsPage {...props} />
+    </Provider>
+  );
+};
+
 const TopicsPage = (props) => {
+  const dispatch = useDispatch();
+  const disabledStatesTopics = useSelector((state) => state.disabledState);
+  console.log("disabledStatesTopics", disabledStatesTopics);
   const [currentUser, setCurrentUser] = useState();
   const [dataUserTest, setDataUserTest] = useState();
 
@@ -56,6 +71,7 @@ const TopicsPage = (props) => {
   };
 
   useEffect(() => {
+    dispatch(fetchTopicState());
     fetchRequest(
       "/information",
       "post",
@@ -162,6 +178,13 @@ const TopicsPage = (props) => {
     },
   ];
 
+  const disabledLinksStyles = {
+    pointerEvents: "none",
+    color: "#ccc",
+    display: "flex",
+    gap: "6px",
+    textDecoration: "none",
+  };
   return (
     <div className="topicsContainer">
       <div className="siderTopic">
@@ -180,17 +203,38 @@ const TopicsPage = (props) => {
           </li>
           <li>
             <a
-              className={selectedTopic("/topicsPage/topicTwo")}
+              className={
+                selectedTopic("/topicsPage/topicTwo")
+                // +
+                // disabledStatesTopics.topicTwo
+                //   ? "disabled"
+                //   : ""
+              }
+              style={disabledStatesTopics.topicTwo ? disabledLinksStyles : {}}
               href="/topicsPage/topicTwo"
+              disabled={disabledStatesTopics.topicTwo}
             >
               <BookOutlined className="bookIcon" />
               Тема №2
             </a>
             <div className="namesTopics noselect">Основные части теодолита</div>
           </li>
+          {console.log(
+            "LI",
+            disabledStatesTopics.topicThree ? "disabled" : "",
+            disabledStatesTopics.topicThree
+          )}
           <li>
             <a
-              className={selectedTopic("/topicsPage/topicThree")}
+              className={
+                selectedTopic("/topicsPage/topicThree")
+                // +
+                // disabledStatesTopics.topicThree
+                //   ? "disabled"
+                //   : ""
+              }
+              style={disabledStatesTopics.topicThree ? disabledLinksStyles : {}}
+              disabled={disabledStatesTopics.topicThree}
               href="/topicsPage/topicThree"
             >
               <BookOutlined className="bookIcon" />
@@ -204,6 +248,8 @@ const TopicsPage = (props) => {
             <a
               className={selectedTopic("/topicsPage/topicFour")}
               href="/topicsPage/topicFour"
+              style={disabledStatesTopics.topicFour ? disabledLinksStyles : {}}
+              disabled={disabledStatesTopics.topicFour}
             >
               <BookOutlined className="bookIcon" />
               Тема №4
@@ -216,6 +262,8 @@ const TopicsPage = (props) => {
             <a
               className={selectedTopic("/topicsPage/topicFive")}
               href="/topicsPage/topicFive"
+              style={disabledStatesTopics.topicFive ? disabledLinksStyles : {}}
+              disabled={disabledStatesTopics.topicFive}
             >
               <BookOutlined className="bookIcon" />
               Тема №5
@@ -228,6 +276,8 @@ const TopicsPage = (props) => {
             <a
               className={selectedTopic("/topicsPage/topicSix")}
               href="/topicsPage/topicSix"
+              style={disabledStatesTopics.topicSix ? disabledLinksStyles : {}}
+              disabled={disabledStatesTopics.topicSix}
             >
               <BookOutlined className="bookIcon" />
               Тема №6
@@ -346,7 +396,7 @@ const TopicsPage = (props) => {
             gap: "6px",
             position: "absolute",
             top: "50px",
-            right: "50px"
+            right: "50px",
           }}
         >
           {/* Кнопка профиля */}

@@ -19,6 +19,8 @@ import { TestThree } from "./tests/TestThree";
 import { TestFour } from "./tests/TestFour";
 import { TestFive } from "./tests/TestFive";
 import { TestSix } from "./tests/TestSix";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTopicState } from "./store/disabledStateSlice";
 
 const { Countdown } = Statistic;
 const deadline = Date.now() + 300000;
@@ -27,6 +29,10 @@ const ReactEditorJS = createReactEditorJS();
 const sizeMedium = "medium";
 
 const TopicOne = () => {
+  const dispatch = useDispatch();
+  const testsStatuses = useSelector(
+    (state) => state.disabledState.testsStatuses
+  );
   const match = useMatch("/topicsPage/:pageId");
   const [topicId, setTopicId] = useState(match.params.pageId || "topicOne");
   console.log("match", match);
@@ -73,13 +79,19 @@ const TopicOne = () => {
       setIsEdit(true);
     }
     setIsArticleFetched(true);
-    setTimeout(() => {
+    const testIndex = getTestIndex();
+    if (testsStatuses[testIndex]?.status === "ПРОЙДЕНО") {
       setTimerEnd(true);
-    }, 1000 * 60 * 5); //5 мин
+    } else {
+      setTimeout(() => {
+        setTimerEnd(true);
+      }, 1000 * 60 * 5); //5 мин
+    }
   };
 
   useEffect(() => {
     loadTopic();
+    dispatch(fetchTopicState());
   }, []);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -93,6 +105,7 @@ const TopicOne = () => {
   const renderTest = () => {
     switch (topicId) {
       case "topicOne":
+        console.log("TO Status", testsStatuses[0]?.status);
         return (
           <TestOne setIsModalVisible={setIsModalVisible} topicId={topicId} />
         );
@@ -116,6 +129,66 @@ const TopicOne = () => {
         return (
           <TestSix setIsModalVisible={setIsModalVisible} topicId={topicId} />
         );
+    }
+  };
+
+  const getTestIndex = () => {
+    switch (topicId) {
+      case "topicOne":
+        return 0;
+      case "topicTwo":
+        return 1;
+      case "topicThree":
+        return 2;
+      case "topicFour":
+        return 3;
+      case "topicFive":
+        return 4;
+      case "topicSix":
+        return 5;
+    }
+  };
+
+  const getDeadline = () => {
+    switch (topicId) {
+      case "topicOne":
+        console.log("TO Status", testsStatuses[0]?.status);
+
+        if (testsStatuses[0]?.status === "ПРОЙДЕНО") {
+          return 0;
+        } else {
+          return deadline;
+        }
+      case "topicTwo":
+        if (testsStatuses[1]?.status === "ПРОЙДЕНО") {
+          return 0;
+        } else {
+          return deadline;
+        }
+      case "topicThree":
+        if (testsStatuses[2]?.status === "ПРОЙДЕНО") {
+          return 0;
+        } else {
+          return deadline;
+        }
+      case "topicFour":
+        if (testsStatuses[3]?.status === "ПРОЙДЕНО") {
+          return 0;
+        } else {
+          return deadline;
+        }
+      case "topicFive":
+        if (testsStatuses[4]?.status === "ПРОЙДЕНО") {
+          return 0;
+        } else {
+          return deadline;
+        }
+      case "topicSix":
+        if (testsStatuses[5]?.status === "ПРОЙДЕНО") {
+          return 0;
+        } else {
+          return deadline;
+        }
     }
   };
 
@@ -182,7 +255,7 @@ const TopicOne = () => {
                 position: "relative",
                 width: "205px",
               }}
-              // disabled={!isTimerEnd}
+              disabled={!isTimerEnd}
               onClick={handleTestButtonClick}
             >
               <div
@@ -198,16 +271,7 @@ const TopicOne = () => {
                       right: "10px",
                       transform: "translateY(-50%)",
                     }}
-                  >
-                    {/* <Spin
-                      className="spinColor"
-                      spinning={loading}
-                      size="small"
-                      indicator={
-                        <LoadingOutlined style={{ fontSize: 24 }} spin />
-                      }
-                    /> */}
-                  </div>
+                  ></div>
                 </span>
               </div>
             </Button>
@@ -229,14 +293,15 @@ const TopicOne = () => {
                 />
               </div>
               <div>
-                <Countdown value={deadline} format="mm:ss" />
+                <Countdown value={getDeadline()} format="mm:ss" />
               </div>
             </div>
           </div>
           {/* </Col>
           </Row> */}
 
-          <Button
+           {/* saveButton */}
+          {/* <Button
             onClick={async () => {
               if (isEdit) {
                 const data = await editorCore.current.save();
@@ -247,9 +312,9 @@ const TopicOne = () => {
               }
             }}
           >
-            {/* Save */}
+          
             {isEdit ? "Save" : "Edit"}
-          </Button>
+          </Button> */}
         </>
       )}
       {/* Модальное окно для теста */}
