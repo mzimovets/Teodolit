@@ -92,7 +92,7 @@ const TestThree = (props) => {
     messageApi.open({
       icon: <FrownOutlined style={{ fontSize: "16px" }} />,
       type: "error",
-      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 4`,
+      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 6`,
       duration: 5.5,
     });
   };

@@ -4,47 +4,34 @@ import {
   SmileOutlined,
   FrownOutlined,
   CheckCircleOutlined,
-  EditOutlined,
-  AimOutlined,
 } from "@ant-design/icons";
-import { validateAnswer, answer } from "./TestTwoValidation";
+import { validateAnswer, answer } from "./TestFiveValidation";
 import { fetchRequest } from "../../utils";
 import Title from "antd/es/typography/Title";
-import ImageMapper from "react-img-mapper";
 
 const TestFive = (props) => {
   // Состояние для блокировки полей после ответа пользователя
   const [answered1, setAnswered1] = useState(false);
   const [answered2, setAnswered2] = useState(false);
   const [answered3, setAnswered3] = useState(false);
-  const [answered4, setAnswered4] = useState(false);
-  const [answered5, setAnswered5] = useState(false);
-  const [answeredResult, setAnsweredResult] = useState([]);
 
-  // ?
-  const [coord, setCoord] = useState();
-  const [answer1, setAnswer1] = useState();
-  const [answer2, setAnswer2] = useState();
-  const [answer3, setAnswer3] = useState();
-  const [answer4, setAnswer4] = useState();
+  // const [answeredResult, setAnsweredResult] = useState([]);
 
   const [task1, setTask1] = useState();
   const [task2, setTask2] = useState();
   const [task3, setTask3] = useState();
-  const [task4, setTask4] = useState();
-  // ?
 
-  const onChange = (event) => {
-    const newArr = [...answeredResult];
-    if (newArr[3] !== undefined) {
-      newArr[3].answer1 = event.target.value;
-    } else {
-      newArr[3] = { answer1: event.target.value };
-    }
-    setAnsweredResult([...newArr]);
-    newArr[3].answer1 = event.target.value;
-    setAnsweredResult([...newArr]);
-  };
+  // const onChange = (event) => {
+  //   const newArr = [...answeredResult];
+  //   if (newArr[3] !== undefined) {
+  //     newArr[3].answer1 = event.target.value;
+  //   } else {
+  //     newArr[3] = { answer1: event.target.value };
+  //   }
+  //   setAnsweredResult([...newArr]);
+  //   newArr[3].answer1 = event.target.value;
+  //   setAnsweredResult([...newArr]);
+  // };
 
   // Cостояния для ответа пользователя и проверки правильности ответа
   const onFirstTaskClick = () => {
@@ -59,33 +46,15 @@ const TestFive = (props) => {
     setAnswered3(true);
   };
 
-  const onFourthTaskClick = () => {
-    setAnswered4(true);
-  };
-
-  const onFiveTaskClick = () => {
-    setAnswered5(true);
-  };
-
   const clearState = () => {
-    setAnsweredResult([]);
+    // setAnsweredResult([]);
     setAnswered1(false);
     setAnswered2(false);
     setAnswered3(false);
-    setAnswered4(false);
-    setAnswered5(false);
-
-    // ?
-    setAnswer1(false);
-    setAnswer2(false);
-    setAnswer3(false);
-    setAnswer4(false);
 
     setTask1();
     setTask2();
     setTask3();
-    setTask4();
-    // ?
   };
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -103,13 +72,15 @@ const TestFive = (props) => {
     messageApi.open({
       icon: <FrownOutlined style={{ fontSize: "16px" }} />,
       type: "error",
-      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 5`,
+      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 3`,
       duration: 5.5,
     });
   };
 
   const onTestComplete = () => {
     const testResult = [];
+    const answeredResult = [task1, task2, task3];
+    console.log("test 3", answeredResult);
     answeredResult.forEach((element, index) => {
       const userAnswer = validateAnswer(index, element);
       testResult.push(userAnswer);
@@ -131,7 +102,7 @@ const TestFive = (props) => {
       {
         login: localStorage.getItem("login"),
         password: localStorage.getItem("password"),
-        topicId: 1,
+        topicId: 4,
         status: isTestPass ? "ПРОЙДЕНО" : "НЕ ПРОЙДЕНО",
       }
     ).then((data) => {
@@ -178,7 +149,7 @@ const TestFive = (props) => {
       <div className="testTaskHeader">
         <CheckCircleOutlined />
         Задание №1
-        {answered4 == true ? (
+        {answered1 == true ? (
           <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
@@ -187,24 +158,26 @@ const TestFive = (props) => {
       <div className="testTaskDiscription">Поверка - это ...</div>
       <div>
         <Radio.Group
-          onChange={onChange}
+          onChange={(e) => {
+            setTask1(e.target.value);
+          }}
           style={{ display: "grid", gap: "12px" }}
         >
-          <Radio disabled={answered4} value={1}>
+          <Radio disabled={answered1} value={1}>
             действия, имеющие целью выявить соблюдение геометрических условий,
             предъявляемых к конструкции прибора
           </Radio>
 
-          <Radio disabled={answered4} value={2}>
+          <Radio disabled={answered1} value={2}>
             юстировка
           </Radio>
-          <Radio disabled={answered4} value={3}>
+          <Radio disabled={answered1} value={3}>
             центрирование
           </Radio>
-          <Radio disabled={answered4} value={4}>
+          <Radio disabled={answered1} value={4}>
             действия, направленные на устранение выявленных нарушений в приборе
           </Radio>
-          <Radio disabled={answered4} value={5}>
+          <Radio disabled={answered1} value={5}>
             горизонтирование
           </Radio>
         </Radio.Group>
@@ -215,8 +188,8 @@ const TestFive = (props) => {
           className="button"
           style={{ marginBottom: "32px", marginTop: "16px" }}
           type="primary"
-          disabled={answered4}
-          onClick={onFourthTaskClick}
+          disabled={answered1}
+          onClick={onFirstTaskClick}
         >
           Ответить
         </Button>
@@ -225,7 +198,7 @@ const TestFive = (props) => {
       <div className="testTaskHeader">
         <CheckCircleOutlined />
         Задание №2
-        {answered4 == true ? (
+        {answered2 == true ? (
           <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
@@ -234,23 +207,25 @@ const TestFive = (props) => {
       <div className="testTaskDiscription">Юстировка - это ...</div>
       <div>
         <Radio.Group
-          onChange={onChange}
+          onChange={(e) => {
+            setTask2(e.target.value);
+          }}
           style={{ display: "grid", gap: "12px" }}
         >
-          <Radio disabled={answered4} value={1}>
+          <Radio disabled={answered2} value={1}>
             действия, имеющие целью выявить соблюдение геометрических условий,
             предъявляемых к конструкции прибора
           </Radio>
-          <Radio disabled={answered4} value={2}>
+          <Radio disabled={answered2} value={2}>
             поверка
           </Radio>
-          <Radio disabled={answered4} value={3}>
+          <Radio disabled={answered2} value={3}>
             центрирование
           </Radio>
-          <Radio disabled={answered4} value={4}>
+          <Radio disabled={answered2} value={4}>
             действия, направленные на устранение выявленных нарушений в приборе
           </Radio>
-          <Radio disabled={answered4} value={5}>
+          <Radio disabled={answered2} value={5}>
             горизонтирование
           </Radio>
         </Radio.Group>
@@ -261,8 +236,8 @@ const TestFive = (props) => {
           className="button"
           style={{ marginBottom: "32px", marginTop: "16px" }}
           type="primary"
-          disabled={answered4}
-          onClick={onFourthTaskClick}
+          disabled={answered2}
+          onClick={onSecondTaskClick}
         >
           Ответить
         </Button>
@@ -270,7 +245,7 @@ const TestFive = (props) => {
       <div className="testTaskHeader">
         <CheckCircleOutlined />
         Задание №3
-        {answered4 == true ? (
+        {answered3 == true ? (
           <Tag style={{ marginLeft: "14px" }} color="orange">
             Ответ принят
           </Tag>
@@ -281,16 +256,18 @@ const TestFive = (props) => {
       </div>
       <div>
         <Radio.Group
-          onChange={onChange}
+          onChange={(e) => {
+            setTask3(e.target.value);
+          }}
           style={{ display: "grid", gap: "12px" }}
         >
-          <Radio disabled={answered4} value={1}>
+          <Radio disabled={answered3} value={1}>
             после измерения, для проверки функционирования
           </Radio>
-          <Radio disabled={answered4} value={2}>
+          <Radio disabled={answered3} value={2}>
             до измерения, после внешнего осмотра
           </Radio>
-          <Radio disabled={answered4} value={3}>
+          <Radio disabled={answered3} value={3}>
             во время работы, не реже одного раза на измерение
           </Radio>
         </Radio.Group>
@@ -301,8 +278,8 @@ const TestFive = (props) => {
           className="button"
           style={{ marginBottom: "32px", marginTop: "16px" }}
           type="primary"
-          disabled={answered4}
-          onClick={onFourthTaskClick}
+          disabled={answered3}
+          onClick={onThirdTaskClick}
         >
           Ответить
         </Button>

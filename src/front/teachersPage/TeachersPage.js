@@ -34,6 +34,7 @@ import { StudentProfile } from "./components/StudentProfile";
 import { KeyOne } from "../topics/keys/KeyOne";
 import { KeyTwo } from "../topics/keys/KeyTwo";
 import { KeyThree } from "../topics/keys/KeyThree";
+import { KeyFour } from "../topics/keys/KeyFour";
 import { KeyFive } from "../topics/keys/KeyFive";
 import Password from "antd/es/input/Password";
 
@@ -49,12 +50,12 @@ const TeacherPage = (props) => {
         return <KeyTwo keyId={keyId} />;
       case 3:
         return <KeyThree keyId={keyId} />;
-      // case 4:
-      //   return <TestThree keyId={keyId} />;
+      case 4:
+        return <KeyFour keyId={keyId} />;
       case 5:
         return <KeyFive keyId={keyId} />;
       // case 6:
-      //   return <TestThree keyId={keyId} />;
+      //   return <TestSix keyId={keyId} />;
     }
   };
 
@@ -582,7 +583,7 @@ const TeacherPage = (props) => {
               color: "red",
               textAlign: "center",
               fontSize: "bold",
-              margin: "0px"
+              margin: "0px",
             }}
           >
             Неверный пароль!

@@ -19,31 +19,21 @@ const TestTwo = (props) => {
   const [answered3, setAnswered3] = useState(false);
   const [answered4, setAnswered4] = useState(false);
   const [answered5, setAnswered5] = useState(false);
-  const [answeredResult, setAnsweredResult] = useState([]);
+  // const [answeredResult, setAnsweredResult] = useState([]);
 
   // ?
   const [coord, setCoord] = useState();
-  const [answer1, setAnswer1] = useState();
-  const [answer2, setAnswer2] = useState();
-  const [answer3, setAnswer3] = useState();
-  const [answer4, setAnswer4] = useState();
 
+  const [task10, setTask10] = useState();
   const [task1, setTask1] = useState();
   const [task2, setTask2] = useState();
   const [task3, setTask3] = useState();
   const [task4, setTask4] = useState();
+  const [task5, setTask5] = useState();
   // ?
 
   const onChange = (event) => {
-    const newArr = [...answeredResult];
-    if (newArr[3] !== undefined) {
-      newArr[3].answer1 = event.target.value;
-    } else {
-      newArr[3] = { answer1: event.target.value };
-    }
-    setAnsweredResult([...newArr]);
-    newArr[3].answer1 = event.target.value;
-    setAnsweredResult([...newArr]);
+    setTask3(event);
   };
 
   // Cостояния для ответа пользователя и проверки правильности ответа
@@ -68,18 +58,12 @@ const TestTwo = (props) => {
   };
 
   const clearState = () => {
-    setAnsweredResult([]);
+    // setAnsweredResult([]);
     setAnswered1(false);
     setAnswered2(false);
     setAnswered3(false);
     setAnswered4(false);
     setAnswered5(false);
-
-    // ?
-    setAnswer1(false);
-    setAnswer2(false);
-    setAnswer3(false);
-    setAnswer4(false);
 
     setTask1();
     setTask2();
@@ -110,6 +94,16 @@ const TestTwo = (props) => {
 
   const onTestComplete = () => {
     const testResult = [];
+    const answeredResult = [
+      {
+        answer1: task10,
+        answer2: task1,
+      },
+      { answer1: task2 },
+      { answer1: task3 },
+      { answer1: task4 },
+      { answer1: task5 },
+    ];
     answeredResult.forEach((element, index) => {
       const userAnswer = validateAnswer(index, element);
       testResult.push(userAnswer);
@@ -153,19 +147,8 @@ const TestTwo = (props) => {
         fillColor: "rgba(0, 0, 0, 0)",
 
         // hide: true, // Скрыть область
-        strokeColor: "rgba(154, 0, 50, 1.0)",
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
-      // {
-      //   // остальная область
-      //   name: "2",
-      //   shape: "circle",
-      //   coords: [246, 236, 205],
-      //   preFillColor: "rgba(0, 0, 0, 0)",
-      //   fillColor: "rgba(0, 0, 0, 0)",
-
-      //   // hide: true, // Скрыть область
-      //   strokeColor: "rgba(255, 0, 0, 1.0)",
-      // },
     ],
   };
 
@@ -194,15 +177,9 @@ const TestTwo = (props) => {
           placeholder="ответ"
           disabled={answered1}
           style={{ width: "100px" }}
-          value={answeredResult?.[0]?.answer1 || ""}
+          value={task10}
           onChange={(event) => {
-            const newArr = [...answeredResult];
-            if (newArr[0] !== undefined) {
-              newArr[0].answer1 = event.target.value;
-            } else {
-              newArr[0] = { answer1: event.target.value };
-            }
-            setAnsweredResult([...newArr]);
+            setTask10(event.target.value);
           }}
         />
         2.
@@ -210,15 +187,9 @@ const TestTwo = (props) => {
           placeholder="ответ"
           disabled={answered1}
           style={{ width: "100px" }}
-          value={answeredResult?.[0]?.answer2 || ""}
+          value={task1}
           onChange={(event) => {
-            const newArr = [...answeredResult];
-            if (newArr[0] !== undefined) {
-              newArr[0].answer2 = event.target.value;
-            } else {
-              newArr[0] = { answer2: event.target.value };
-            }
-            setAnsweredResult([...newArr]);
+            setTask1(event.target.value);
           }}
         />
       </div>
@@ -234,178 +205,180 @@ const TestTwo = (props) => {
           Ответить
         </Button>
       </div>
-      <div className="testTaskHeader">
-        <EditOutlined />
-        Задание №2
-        {answered2 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Как называется величина дуги лимба между двумя ближайшими штрихами?
-        (Ответ вводить в им. падеже, ед. числе с маленькой буквы, через один
-        пробел)
-      </div>
+      {/* Taks 2 */}
       <div>
-        <Input
-          placeholder="ответ"
-          disabled={answered2}
-          style={{ width: "180px" }}
-          value={answeredResult?.[1]?.answer1 || ""}
-          onChange={(event) => {
-            const newArr = [...answeredResult];
-            if (newArr[1] !== undefined) {
-              newArr[1].answer1 = event.target.value;
-            } else {
-              newArr[1] = { answer1: event.target.value };
-            }
-            setAnsweredResult([...newArr]);
-          }}
-        />
+        <div className="testTaskHeader">
+          <EditOutlined />
+          Задание №2
+          {answered2 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Как называется величина дуги лимба между двумя ближайшими штрихами?
+          (Ответ вводить в им. падеже, ед. числе с маленькой буквы, через один
+          пробел)
+        </div>
+        <div>
+          <Input
+            placeholder="ответ"
+            disabled={answered2}
+            style={{ width: "180px" }}
+            value={task2}
+            onChange={(event) => {
+              setTask2(event.target.value);
+            }}
+          />
+        </div>
+        <div style={{ textAlign: "left" }}>
+          {" "}
+          <Button
+            className="button"
+            style={{ marginBottom: "32px", marginTop: "16px" }}
+            type="primary"
+            disabled={answered2}
+            onClick={onSecondTaskClick}
+          >
+            Ответить
+          </Button>
+        </div>
       </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered2}
-          onClick={onSecondTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
-      <div className="testTaskHeader">
-        <EditOutlined />
-        Задание №3
-        {answered3 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Через сколько градусов производится оцифровка лимба? (Введите число)
-      </div>
+      {/* Task 3 */}
       <div>
-        <Input
-          disabled={answered3}
-          placeholder="ответ"
-          style={{ width: "180px" }}
-          value={answeredResult?.[2]?.answer1 || ""}
-          onChange={(event) => {
-            const newArr = [...answeredResult];
-            if (newArr[2] !== undefined) {
-              newArr[2].answer1 = event.target.value;
-            } else {
-              newArr[2] = { answer1: event.target.value };
-            }
-            setAnsweredResult([...newArr]);
-          }}
-        />
+        <div className="testTaskHeader">
+          <EditOutlined />
+          Задание №3
+          {answered3 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Через сколько градусов производится оцифровка лимба? (Введите число)
+        </div>
+        <div>
+          <Input
+            disabled={answered3}
+            placeholder="ответ"
+            style={{ width: "180px" }}
+            value={task3}
+            onChange={(event) => {
+              setTask3(event.target.value);
+            }}
+          />
+        </div>
+        <div style={{ textAlign: "left" }}>
+          {" "}
+          <Button
+            className="button"
+            style={{ marginBottom: "32px", marginTop: "16px" }}
+            type="primary"
+            disabled={answered3}
+            onClick={onThirdTaskClick}
+          >
+            Ответить
+          </Button>
+        </div>
       </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered3}
-          onClick={onThirdTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
-      <div className="testTaskHeader">
-        <CheckCircleOutlined />
-        Задание №4
-        {answered4 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Для чего служит вертикальный круг теодолита? (Выберите один правильный
-        ответ)
-      </div>
+      {/* Task 4 */}
       <div>
-        <Radio.Group
-          onChange={onChange}
-          style={{ display: "grid", gap: "12px" }}
+        <div className="testTaskHeader">
+          <CheckCircleOutlined />
+          Задание №4
+          {answered4 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Для чего служит вертикальный круг теодолита? (Выберите один правильный
+          ответ)
+        </div>
+        <div>
+          <Radio.Group
+            onChange={(e) => {
+              setTask4(e.target.value);
+            }}
+            style={{ display: "grid", gap: "12px" }}
+          >
+            <Radio disabled={answered4} value={1}>
+              измерение горизонтальных углов
+            </Radio>
+            <Radio disabled={answered4} value={2}>
+              измерение расстояний
+            </Radio>
+            <Radio disabled={answered4} value={3}>
+              измерение углов наклона
+            </Radio>
+            <Radio disabled={answered4} value={4}>
+              все ответы верны
+            </Radio>
+          </Radio.Group>
+        </div>
+        <div style={{ textAlign: "left" }}>
+          {" "}
+          <Button
+            className="button"
+            style={{ marginBottom: "32px", marginTop: "16px" }}
+            type="primary"
+            disabled={answered4}
+            onClick={onFourthTaskClick}
+          >
+            Ответить
+          </Button>
+        </div>
+      </div>
+      {/* Task 5 */}
+      <div>
+        <div className="testTaskHeader">
+          <AimOutlined />
+          Задание №5
+          {answered5 == true ? (
+            <Tag style={{ marginLeft: "14px" }} color="orange">
+              Ответ принят
+            </Tag>
+          ) : null}
+        </div>
+        <div className="testTaskDiscription">
+          Какую часть сетки нитей наводят на визирную цель для снятия отчетов
+          при измерении углов?
+        </div>
+        <div
+          style={{
+            width: "54%",
+            margin: "auto",
+            marginBottom: "20px",
+            border: "2px solid #d9d9d9",
+            borderRadius: "14px",
+            marginTop: "18px",
+            paddingLeft: "8px",
+            paddingRight: "8px",
+          }}
         >
-          <Radio disabled={answered4} value={1}>
-            измерение горизонтальных углов
-          </Radio>
-          <Radio disabled={answered4} value={2}>
-            измерение расстояний
-          </Radio>
-          <Radio disabled={answered4} value={3}>
-            измерение углов наклона
-          </Radio>
-          <Radio disabled={answered4} value={4}>
-            все ответы верны
-          </Radio>
-        </Radio.Group>
-      </div>
-      <div style={{ textAlign: "left" }}>
-        {" "}
-        <Button
-          className="button"
-          style={{ marginBottom: "32px", marginTop: "16px" }}
-          type="primary"
-          disabled={answered4}
-          onClick={onFourthTaskClick}
-        >
-          Ответить
-        </Button>
-      </div>
-      <div className="testTaskHeader">
-        <AimOutlined />
-        Задание №5
-        {answered5 == true ? (
-          <Tag style={{ marginLeft: "14px" }} color="orange">
-            Ответ принят
-          </Tag>
-        ) : null}
-      </div>
-      <div className="testTaskDiscription">
-        Какую часть сетки нитей наводят на визирную цель для снятия отчетов при
-        измерении углов?
-      </div>
-      <div
-        style={{
-          width: "54%",
-          margin: "auto",
-          marginBottom: "20px",
-          border: "2px solid #d9d9d9",
-          borderRadius: "14px",
-          marginTop: "18px",
-          paddingLeft: "8px",
-          paddingRight: "8px",
-        }}
-      >
-        <ImageMapper
-          src={"/image/Topic1.3.png"}
-          height={471}
-          width={500}
-          map={MAP_1}
-          onClick={(area, index, evt) => {
-            console.log(area, index, evt);
-            setAnswer1([true]);
-            setTask1(area.name);
-            onFiveTaskClick();
-          }}
-          onImageMouseMove={(evt) => {
-            setCoord({ x: evt.clientX, y: evt.clientY });
-          }}
-          onImageClick={() => {
-            setTask1("");
-            onFiveTaskClick();
-          }}
-        />
+          <ImageMapper
+            src={"/image/Topic1.3.png"}
+            height={471}
+            width={500}
+            map={MAP_1}
+            onClick={(area, index, evt) => {
+              console.log(area, index, evt);
+              setAnswered5(true);
+              setTask5(area.name);
+              onFiveTaskClick();
+            }}
+            onImageMouseMove={(evt) => {
+              setCoord({ x: evt.clientX, y: evt.clientY });
+            }}
+            onImageClick={() => {
+              setTask5("");
+              onFiveTaskClick();
+            }}
+          />
+        </div>
       </div>
       <div style={{ textAlign: "right" }}>
         {" "}

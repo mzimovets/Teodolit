@@ -1,13 +1,7 @@
-import { React, useState } from "react";
-import { message, Input, Tag, Button, Radio, Image } from "antd";
-import {
-  SmileOutlined,
-  FrownOutlined,
-  CheckCircleOutlined,
-  EditOutlined,
-  AimOutlined,
-} from "@ant-design/icons";
-import { validateAnswer, answer } from "./TestThreeValidation";
+import { React, useState, useEffect } from "react";
+import { message, Spin, Tag, Button } from "antd";
+import { SmileOutlined, FrownOutlined, AimOutlined } from "@ant-design/icons";
+import { validateAnswer, answer } from "./TestFourValidation";
 import { fetchRequest } from "../../utils";
 import Title from "antd/es/typography/Title";
 import ImageMapper from "react-img-mapper";
@@ -107,7 +101,7 @@ const TestFour = (props) => {
     messageApi.open({
       icon: <FrownOutlined style={{ fontSize: "16px" }} />,
       type: "error",
-      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 4`,
+      content: `Тест не пройден. Правильных ответов ${correctAnswersCount} / 14`,
       duration: 5.5,
     });
   };
@@ -130,6 +124,7 @@ const TestFour = (props) => {
       task13,
       task14,
     ];
+    console.log("Test 4", answeredResult);
     answeredResult.forEach((element, index) => {
       const userAnswer = validateAnswer(index, element);
       testResult.push(userAnswer);
@@ -172,8 +167,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -183,8 +178,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -200,8 +195,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -211,8 +206,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -222,8 +217,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -236,8 +231,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -247,8 +242,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -258,8 +253,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -268,8 +263,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -278,8 +273,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -289,8 +284,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -299,8 +294,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -309,8 +304,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -320,8 +315,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -331,8 +326,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -342,8 +337,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -352,8 +347,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -362,8 +357,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -379,8 +374,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -390,8 +385,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -407,8 +402,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -418,8 +413,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -429,8 +424,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -443,8 +438,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -454,8 +449,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -465,8 +460,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -475,8 +470,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -485,8 +480,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -496,8 +491,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -506,8 +501,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -516,8 +511,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -527,8 +522,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -538,8 +533,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -549,8 +544,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -559,8 +554,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -569,8 +564,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -586,8 +581,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -597,8 +592,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -614,8 +609,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -625,8 +620,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -636,8 +631,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -650,8 +645,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -661,8 +656,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -672,8 +667,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -682,8 +677,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -692,8 +687,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -703,8 +698,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -713,8 +708,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -723,8 +718,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -734,8 +729,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -745,8 +740,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -756,8 +751,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -766,8 +761,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -776,8 +771,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -793,8 +788,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -804,8 +799,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -821,8 +816,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -832,8 +827,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -843,8 +838,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -857,8 +852,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -868,8 +863,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -879,8 +874,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -889,8 +884,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -899,8 +894,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -910,8 +905,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -920,8 +915,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -930,8 +925,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -941,8 +936,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -952,8 +947,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -963,8 +958,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -973,8 +968,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -983,8 +978,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -1000,8 +995,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -1011,8 +1006,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -1026,10 +1021,10 @@ const TestFour = (props) => {
           225, 241, 225, 264, 196, 278,
         ],
         preFillColor: "rgba(0, 0, 0, 0)",
-        fillColor: "rgba(0, 0, 255, 0)",
+        fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -1039,8 +1034,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -1050,8 +1045,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -1064,8 +1059,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -1075,8 +1070,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1086,8 +1081,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -1096,8 +1091,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -1106,8 +1101,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -1117,8 +1112,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -1127,8 +1122,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -1137,8 +1132,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1148,8 +1143,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -1159,8 +1154,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -1170,8 +1165,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -1180,8 +1175,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -1190,8 +1185,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -1207,8 +1202,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -1218,8 +1213,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -1235,8 +1230,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -1246,8 +1241,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -1257,8 +1252,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -1271,8 +1266,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -1282,8 +1277,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1293,8 +1288,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -1303,8 +1298,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -1313,8 +1308,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -1324,8 +1319,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -1334,8 +1329,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -1344,8 +1339,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1355,8 +1350,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -1366,8 +1361,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -1377,8 +1372,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -1387,8 +1382,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -1397,8 +1392,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -1414,8 +1409,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -1425,8 +1420,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -1442,8 +1437,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -1453,8 +1448,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -1464,8 +1459,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -1478,8 +1473,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -1489,8 +1484,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1500,8 +1495,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -1510,8 +1505,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -1520,8 +1515,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -1531,8 +1526,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -1541,8 +1536,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -1551,8 +1546,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1562,8 +1557,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -1573,8 +1568,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -1584,8 +1579,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -1594,8 +1589,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -1604,8 +1599,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -1621,8 +1616,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -1632,8 +1627,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -1649,8 +1644,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -1660,8 +1655,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -1671,8 +1666,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -1685,8 +1680,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -1696,8 +1691,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1707,8 +1702,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -1717,8 +1712,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -1727,8 +1722,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -1738,8 +1733,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -1748,8 +1743,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -1758,8 +1753,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1769,8 +1764,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -1780,8 +1775,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -1791,8 +1786,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -1801,8 +1796,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -1811,8 +1806,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -1828,8 +1823,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -1839,8 +1834,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -1856,8 +1851,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -1867,8 +1862,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -1878,8 +1873,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -1892,8 +1887,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -1903,8 +1898,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1914,8 +1909,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -1924,8 +1919,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -1934,8 +1929,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -1945,8 +1940,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -1955,8 +1950,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -1965,8 +1960,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -1976,8 +1971,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -1987,8 +1982,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -1998,8 +1993,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -2008,8 +2003,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -2018,8 +2013,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -2035,8 +2030,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -2046,8 +2041,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -2063,8 +2058,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -2074,8 +2069,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -2085,8 +2080,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -2099,8 +2094,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -2110,8 +2105,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -2121,8 +2116,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -2131,8 +2126,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -2141,8 +2136,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -2152,8 +2147,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -2162,8 +2157,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -2172,8 +2167,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -2183,8 +2178,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -2194,8 +2189,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -2205,8 +2200,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -2215,8 +2210,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -2225,8 +2220,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -2242,8 +2237,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -2253,8 +2248,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -2270,8 +2265,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -2281,8 +2276,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -2292,8 +2287,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -2306,8 +2301,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -2317,8 +2312,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -2328,8 +2323,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -2338,8 +2333,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -2348,8 +2343,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -2359,8 +2354,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -2369,8 +2364,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -2379,8 +2374,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -2390,8 +2385,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -2401,8 +2396,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -2412,8 +2407,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -2422,8 +2417,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -2432,8 +2427,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -2449,8 +2444,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -2460,8 +2455,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -2477,8 +2472,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -2488,8 +2483,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -2499,8 +2494,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -2513,8 +2508,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -2524,8 +2519,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -2535,8 +2530,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -2545,8 +2540,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -2555,8 +2550,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -2566,8 +2561,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -2576,8 +2571,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -2586,8 +2581,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -2597,8 +2592,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -2608,8 +2603,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -2619,8 +2614,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -2629,8 +2624,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -2639,8 +2634,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -2656,8 +2651,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -2667,8 +2662,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -2684,8 +2679,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -2695,8 +2690,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -2706,8 +2701,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -2720,8 +2715,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -2731,8 +2726,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -2742,8 +2737,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -2752,8 +2747,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -2762,8 +2757,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -2773,8 +2768,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -2783,8 +2778,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -2793,8 +2788,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -2804,8 +2799,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -2815,8 +2810,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -2826,8 +2821,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -2836,8 +2831,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -2846,8 +2841,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -2863,8 +2858,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // Базовая пластина (основание) (#2)
@@ -2874,8 +2869,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подъемные винты (#3)
@@ -2891,8 +2886,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 255, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // площадка штатива (#1)
@@ -2902,8 +2897,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1.0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // штатив
@@ -2913,8 +2908,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // подставка (трегер) (#23)
@@ -2927,8 +2922,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 0, 255, 1)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#5)
@@ -2938,8 +2933,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -2949,8 +2944,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#4)
@@ -2959,8 +2954,8 @@ const TestFour = (props) => {
         coords: [161, 193, 16],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящие винты (#13)
@@ -2969,8 +2964,8 @@ const TestFour = (props) => {
         coords: [239, 181, 241, 201, 247, 200, 247, 181],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(184, 134, 11)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // цилиндрический уровень (#12)
@@ -2980,8 +2975,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(173, 255, 47)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // наводящий винт зрительной трубы (#6)
@@ -2990,8 +2985,8 @@ const TestFour = (props) => {
         coords: [167, 138, 16.5],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(127, 255, 212)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // кремальера (#9)
@@ -3000,8 +2995,8 @@ const TestFour = (props) => {
         coords: [225, 77, 17],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 255, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зажимные винты (#14)
@@ -3011,8 +3006,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(47, 79, 79)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // закрепительный винт зрительной трубы (#10)
@@ -3022,8 +3017,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // визир (#20)
@@ -3033,8 +3028,8 @@ const TestFour = (props) => {
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
 
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(0, 0, 255)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // зрительная труба (#21)
@@ -3043,8 +3038,8 @@ const TestFour = (props) => {
         coords: [102, 78, 102, 36, 175, 64, 175, 100],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(255, 69, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
       {
         // окуляр отсчетного микроскопа с диоптрийным кольцом (#15)
@@ -3053,8 +3048,8 @@ const TestFour = (props) => {
         coords: [93, 71, 93, 52, 101, 52, 101, 71],
         preFillColor: "rgba(0, 0, 0, 0)",
         fillColor: "rgba(0, 0, 0, 0)",
-        // hide: true, // Скрыть область
-        strokeColor: "rgba(128, 128, 0)",
+        hide: true, // Скрыть область
+        strokeColor: "rgba(0, 0, 0, 0)",
       },
     ],
   };
@@ -3126,7 +3121,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">подъемный винт</b>
         </div>
         <div
           style={{
@@ -3173,7 +3168,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">площадка штатива</b>
         </div>
         <div
           style={{
@@ -3218,7 +3213,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">подставка(трегер)</b>
         </div>
         <div
           style={{
@@ -3263,7 +3258,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">кремальера</b>
         </div>
         <div
           style={{
@@ -3309,7 +3304,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">зрительная труба</b>
         </div>
         <div
           style={{
@@ -3353,8 +3348,7 @@ const TestFour = (props) => {
           ) : null}
         </div>
         <div className="testTaskDiscription">
-          Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          Нажмите на изображение, где находится <b className="keyWord">визир</b>
         </div>
         <div
           style={{
@@ -3399,7 +3393,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">базовая пластина(основание)</b>
         </div>
         <div
           style={{
@@ -3444,7 +3438,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">закрепительный винт зрительной трубы</b>
         </div>
         <div
           style={{
@@ -3476,7 +3470,6 @@ const TestFour = (props) => {
           />
         </div>
       </div>
-
       {/* Task 10 */}
       <div>
         <div className="testTaskHeader">
@@ -3490,7 +3483,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">цилиндрический уровень</b>
         </div>
         <div
           style={{
@@ -3522,7 +3515,6 @@ const TestFour = (props) => {
           />
         </div>
       </div>
-
       {/* Task 11 */}
       <div>
         <div className="testTaskHeader">
@@ -3536,7 +3528,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">наводящий винт</b>
         </div>
         <div
           style={{
@@ -3581,7 +3573,9 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">
+            окуляр отсчетного микроскопа с диоптрийным кольцом
+          </b>
         </div>
         <div
           style={{
@@ -3613,7 +3607,6 @@ const TestFour = (props) => {
           />
         </div>
       </div>
-
       {/* Task 13 */}
       <div>
         <div className="testTaskHeader">
@@ -3627,7 +3620,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">зажимной(закрепительный) винт</b>
         </div>
         <div
           style={{
@@ -3653,7 +3646,7 @@ const TestFour = (props) => {
               setCoord({ x: evt.clientX, y: evt.clientY });
             }}
             onImageClick={() => {
-              setTask1("");
+              setTask13("");
               setAnswered13(true);
             }}
           />
@@ -3672,7 +3665,7 @@ const TestFour = (props) => {
         </div>
         <div className="testTaskDiscription">
           Нажмите на изображение, где находится{" "}
-          <b className="keyWord">становый винт</b>
+          <b className="keyWord">наводящий винт зрительной трубы</b>
         </div>
         <div
           style={{

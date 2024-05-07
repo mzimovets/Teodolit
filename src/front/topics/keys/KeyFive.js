@@ -11,7 +11,7 @@ import Title from "antd/es/typography/Title";
 
 const KeyFive = (props) => {
   return (
-    <div style={{ paddingLeft: "20px", paddingTop: "12px" }}>
+    <div style={{ paddingLeft: "10px", paddingTop: "12px" }}>
       <Title level={3} style={{ marginTop: "-16px" }}>
         Тест по теме №5 "Общие сведения о поверках теодолитов 2Т30П и 4Т30П"
       </Title>

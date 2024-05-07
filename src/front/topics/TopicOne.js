@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, Col, Row, Statistic, Modal, Form, Flex } from "antd";
+import { Button, Spin, Statistic, Modal, Form, Flex } from "antd";
 import {
   ClockCircleOutlined,
   AuditOutlined,
@@ -7,6 +7,7 @@ import {
   CheckCircleOutlined,
   EditOutlined,
   AimOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 import { createReactEditorJS } from "react-editor-js";
 import { EDITOR_JS_TOOLS } from "./tools";
@@ -85,6 +86,8 @@ const TopicOne = () => {
 
   const handleTestButtonClick = () => {
     setIsModalVisible(true);
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
   };
 
   const renderTest = () => {
@@ -115,6 +118,12 @@ const TopicOne = () => {
         );
     }
   };
+
+  const [loading, setLoading] = useState();
+
+  useEffect(() => {
+    // Эмуляция задержки загрузки для демонстрации
+  }, []);
 
   console.log("editor tools", article, article?.blocks, editorCore.current);
 
@@ -168,28 +177,60 @@ const TopicOne = () => {
           >
             <Button
               type="primary"
-              style={{ marginRight: "24px" }}
+              style={{
+                marginRight: "24px",
+                position: "relative",
+                width: "205px",
+              }}
               // disabled={!isTimerEnd}
               onClick={handleTestButtonClick}
             >
-              <div style={{ display: "flex", gap: "6px" }}>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "6px" }}
+              >
                 <AuditOutlined style={{ fontSize: "20px" }} />
                 <span style={{ fontSize: "14px", fontWeight: "bold" }}>
-                  Пройти тест по теме
+                  Пройти тест по теме{" "}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      right: "10px",
+                      transform: "translateY(-50%)",
+                    }}
+                  >
+                    {/* <Spin
+                      className="spinColor"
+                      spinning={loading}
+                      size="small"
+                      indicator={
+                        <LoadingOutlined style={{ fontSize: 24 }} spin />
+                      }
+                    /> */}
+                  </div>
                 </span>
               </div>
             </Button>
-            <div style={{ marginRight: "8px" }}>
-              <ClockCircleOutlined
-                style={{
-                  fontSize: "18px",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              />
-            </div>
-            <div>
-              <Countdown value={deadline} format="mm:ss" />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                width: "120px",
+                // justifyContent: "flex-end",
+              }}
+            >
+              <div style={{ marginRight: "8px" }}>
+                <ClockCircleOutlined
+                  style={{
+                    fontSize: "18px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                />
+              </div>
+              <div>
+                <Countdown value={deadline} format="mm:ss" />
+              </div>
             </div>
           </div>
           {/* </Col>

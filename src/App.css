@@ -282,3 +282,7 @@ li {
 .modalInfo > div > span {
   margin-left: 4px; /* Расстояние между иконкой и текстом */
 }
+
+.spinColor {
+  color: #f0f0f0 !important;
+}
