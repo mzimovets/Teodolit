@@ -23,7 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTopicState } from "./store/disabledStateSlice";
 
 const { Countdown } = Statistic;
-const deadline = Date.now() + 300000;
+const deadline = Date.now() + 30000;
 const ReactEditorJS = createReactEditorJS();
 
 const sizeMedium = "medium";
@@ -85,7 +85,7 @@ const TopicOne = () => {
     } else {
       setTimeout(() => {
         setTimerEnd(true);
-      }, 1000 * 60 * 5); //5 мин
+      }, 1000 * 30); //30сек
     }
   };
 
