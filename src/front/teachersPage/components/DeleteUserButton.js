@@ -1,9 +1,10 @@
 import { Modal, Form } from "antd";
 const DeleteUserButton = (props) => {
   const handleDelete = () => {
-    fetch(`/users?id=${props.id}`, { method: "DELETE" });
-    props.setIsDeleteOpen(false);
-    props.loadData();
+    fetch(`/users?id=${props.id}`, { method: "DELETE" }).then(() => {
+      props.setIsDeleteOpen(false);
+      props.loadData();
+    });
   };
 
   const handleCancelDelete = () => {

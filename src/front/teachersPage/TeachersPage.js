@@ -160,7 +160,19 @@ const TeacherPage = (props) => {
         if (data.status === "OK") {
           const studentsTestsResult = JSON.parse(data.result);
           preparedData.forEach((student, index) => {
-            const failedTests = studentsTestsResult[index].testData.find(
+            console.log(
+              "student",
+              student,
+              "studentIndex",
+              studentsTestsResult[index]
+            );
+            const curStud = studentsTestsResult.find((testResult) => {
+              return (
+                testResult.login === student.login &&
+                testResult.password === student.password
+              );
+            });
+            const failedTests = curStud?.testData.find(
               (testResult) => testResult.status === "НЕ ПРОЙДЕНО"
             );
             student.status = failedTests ? "НЕ ПРОЙДЕНО" : "ПРОЙДЕНО";
