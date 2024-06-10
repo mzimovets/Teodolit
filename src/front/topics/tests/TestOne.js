@@ -10,8 +10,11 @@ import {
 import { answer, validateAnswer } from "./TestOneValidation";
 import { fetchRequest } from "../../utils";
 import Title from "antd/es/typography/Title";
+import { useDispatch } from "react-redux";
+import { fetchTopicState } from "../store/disabledStateSlice";
 
 const TestOne = (props) => {
+  const dispatch = useDispatch();
   const [coord, setCoord] = useState();
   const [answer1, setAnswer1] = useState();
   const [answer2, setAnswer2] = useState();
@@ -301,6 +304,7 @@ const TestOne = (props) => {
       }
     ).then((data) => {
       console.log("data: ", data);
+      dispatch(fetchTopicState());
     });
     props.setIsModalVisible(false);
     clearState();

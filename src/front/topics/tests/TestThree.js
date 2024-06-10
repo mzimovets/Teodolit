@@ -11,8 +11,11 @@ import { validateAnswer, answer } from "./TestThreeValidation";
 import { fetchRequest } from "../../utils";
 import Title from "antd/es/typography/Title";
 import ImageMapper from "react-img-mapper";
+import { useDispatch } from "react-redux";
+import { fetchTopicState } from "../store/disabledStateSlice";
 
 const TestThree = (props) => {
+  const dispatch = useDispatch();
   // Состояние для блокировки полей после ответа пользователя
   const [answered1, setAnswered1] = useState(false);
   const [answered2, setAnswered2] = useState(false);
@@ -86,6 +89,7 @@ const TestThree = (props) => {
       content: "Тест успешно пройден!",
       duration: 5.5,
     });
+    dispatch(fetchTopicState());
   };
 
   const error = (correctAnswersCount) => {
@@ -127,6 +131,7 @@ const TestThree = (props) => {
       }
     ).then((data) => {
       console.log("data: ", data);
+      dispatch (fetchTopicState());
     });
     props.setIsModalVisible(false);
     clearState();

@@ -98,7 +98,7 @@ export const StudentProfile = (props) => {
       },
     },
     {
-      title: "Кол-во попыток (?)",
+      title: "Кол-во попыток",
       dataIndex: "count",
       key: "count",
     },

@@ -36,6 +36,7 @@ import { KeyTwo } from "../topics/keys/KeyTwo";
 import { KeyThree } from "../topics/keys/KeyThree";
 import { KeyFour } from "../topics/keys/KeyFour";
 import { KeyFive } from "../topics/keys/KeyFive";
+import { KeySix } from "../topics/keys/KeySix";
 import Password from "antd/es/input/Password";
 
 const TeacherPage = (props) => {
@@ -54,8 +55,8 @@ const TeacherPage = (props) => {
         return <KeyFour keyId={keyId} />;
       case 5:
         return <KeyFive keyId={keyId} />;
-      // case 6:
-      //   return <TestSix keyId={keyId} />;
+      case 6:
+        return <KeySix keyId={keyId} />;
     }
   };
 

@@ -158,7 +158,10 @@ const EditUsers = (props) => {
                 style={{ marginLeft: "8px", width: "250px" }}
                 value={props.selectedUser.login}
                 onChange={(e) => {
-                  props.setSelectedUser(e.target.value);
+                  props.setSelectedUser({
+                    ...props.selectedUser,
+                    login: e.target.value,
+                  });
                 }}
               />
             </div>
@@ -172,7 +175,10 @@ const EditUsers = (props) => {
                 style={{ marginLeft: "8px", width: "250px" }}
                 value={props.selectedUser.password}
                 onChange={(e) => {
-                  props.setSelectedUser(e.target.value);
+                  props.setSelectedUser({
+                    ...props.selectedUser,
+                    password: e.target.value,
+                  });
                 }}
               />
             </div>

@@ -80,19 +80,29 @@ const TopicOne = () => {
     }
     setIsArticleFetched(true);
     const testIndex = getTestIndex();
+    console.log("testsStatuses", testsStatuses, "testIndex", testIndex);
     if (testsStatuses[testIndex]?.status === "ПРОЙДЕНО") {
       setTimerEnd(true);
+      console.log("ПРОЙДЕНО", isTimerEnd);
     } else {
+      console.log("timeOutSet", isTimerEnd);
       setTimeout(() => {
+        console.log("timeOutComplete", isTimerEnd);
         setTimerEnd(true);
       }, 1000 * 30); //30сек
     }
   };
 
   useEffect(() => {
-    loadTopic();
     dispatch(fetchTopicState());
   }, []);
+  useEffect(() => {
+    console.log("testsStatusesOut", testsStatuses);
+    if (testsStatuses.length > 0) {
+      loadTopic();
+      console.log("testsStatusesIn", testsStatuses);
+    }
+  }, [testsStatuses]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 

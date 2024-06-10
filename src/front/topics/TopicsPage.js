@@ -85,7 +85,7 @@ const TopicsPage = (props) => {
       }
     ).then((data) => {
       console.log("data.userInfo", data.userInfo);
-      setCurrentUser(data.userInfo);
+      setCurrentUser(data.userInfo); 
     });
     console.log(location.pathname);
     if (location.pathname.includes("topicsPage"))

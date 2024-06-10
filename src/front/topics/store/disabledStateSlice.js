@@ -5,6 +5,7 @@ export const fetchTopicState = createAsyncThunk(
   "fetchTopicState",
   async (thunkAPI) => {
     const response = await fetchTestStatus();
+    console.log("response", response);
     if (response.status === "OK") {
       return JSON.parse(response.result);
     }
@@ -47,28 +48,28 @@ export const disabledStateSlice = createSlice({
       console.log("action", action);
       state.testsStatuses = action.payload.testData;
       state.topicTwo =
+        action.payload.testData[0].status === "ПРОЙДЕНО" ||
+        action.payload.testData[0].count !== 0
+          ? false
+          : true;
+      state.topicThree =
         action.payload.testData[1].status === "ПРОЙДЕНО" ||
         action.payload.testData[1].count !== 0
           ? false
           : true;
-      state.topicThree =
+      state.topicFour =
         action.payload.testData[2].status === "ПРОЙДЕНО" ||
         action.payload.testData[2].count !== 0
           ? false
           : true;
-      state.topicFour =
+      state.topicFive =
         action.payload.testData[3].status === "ПРОЙДЕНО" ||
         action.payload.testData[3].count !== 0
           ? false
           : true;
-      state.topicFive =
+      state.topicSix =
         action.payload.testData[4].status === "ПРОЙДЕНО" ||
         action.payload.testData[4].count !== 0
-          ? false
-          : true;
-      state.topicSix =
-        action.payload.testData[5].status === "ПРОЙДЕНО" ||
-        action.payload.testData[5].count !== 0
           ? false
           : true;
       //   state.entities.push(action.payload);

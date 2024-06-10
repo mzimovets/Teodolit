@@ -8,8 +8,11 @@ import {
 import { validateAnswer, answer } from "./TestFiveValidation";
 import { fetchRequest } from "../../utils";
 import Title from "antd/es/typography/Title";
+import { useDispatch } from "react-redux";
+import { fetchTopicState } from "../store/disabledStateSlice";
 
 const TestFive = (props) => {
+  const dispatch = useDispatch();
   // Состояние для блокировки полей после ответа пользователя
   const [answered1, setAnswered1] = useState(false);
   const [answered2, setAnswered2] = useState(false);
@@ -66,6 +69,7 @@ const TestFive = (props) => {
       content: "Тест успешно пройден!",
       duration: 5.5,
     });
+    dispatch(fetchTopicState());
   };
 
   const error = (correctAnswersCount) => {
@@ -107,6 +111,7 @@ const TestFive = (props) => {
       }
     ).then((data) => {
       console.log("data: ", data);
+      dispatch (fetchTopicState());
     });
     props.setIsModalVisible(false);
     clearState();
