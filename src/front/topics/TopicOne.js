@@ -72,6 +72,7 @@ const TopicOne = () => {
   };
 
   const loadTopic = async () => {
+    setIsArticleFetched(false);
     const articleRes = await getData(match.params.pageId);
     console.log("article got", articleRes);
     setArticle(articleRes?.article);
