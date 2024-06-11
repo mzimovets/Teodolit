@@ -72,7 +72,7 @@ const TopicOne = () => {
   };
 
   const loadTopic = async () => {
-    const articleRes = await getData(topicId);
+    const articleRes = await getData(match.params.pageId);
     console.log("article got", articleRes);
     setArticle(articleRes?.article);
     if (articleRes === null) {
