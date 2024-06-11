@@ -102,7 +102,7 @@ const TopicOne = () => {
       loadTopic();
       console.log("testsStatusesIn", testsStatuses);
     }
-  }, [testsStatuses]);
+  }, [testsStatuses, match]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
