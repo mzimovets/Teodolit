@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import {
   UserOutlined,
   BookOutlined,
@@ -85,7 +85,7 @@ const TopicsPage = (props) => {
       }
     ).then((data) => {
       console.log("data.userInfo", data.userInfo);
-      setCurrentUser(data.userInfo); 
+      setCurrentUser(data.userInfo);
     });
     console.log(location.pathname);
     if (location.pathname.includes("topicsPage"))
@@ -190,19 +190,19 @@ const TopicsPage = (props) => {
       <div className="siderTopic">
         <ul style={{ paddingTop: "10%", paddingLeft: "15%", fontSize: "18px" }}>
           <li>
-            <a
+            <Link
               className={selectedTopic("/topicsPage/topicOne")}
-              href="/topicsPage/topicOne"
+              to="/topicsPage/topicOne"
             >
               <BookOutlined className="bookIcon " />
               Тема №1
-            </a>
+            </Link>
             <div className="namesTopics noselect">
               Правила обращения с теодолитом
             </div>
           </li>
           <li>
-            <a
+            <Link
               className={
                 selectedTopic("/topicsPage/topicTwo")
                 // +
@@ -211,12 +211,12 @@ const TopicsPage = (props) => {
                 //   : ""
               }
               style={disabledStatesTopics.topicTwo ? disabledLinksStyles : {}}
-              href="/topicsPage/topicTwo"
+              to="/topicsPage/topicTwo"
               disabled={disabledStatesTopics.topicTwo}
             >
               <BookOutlined className="bookIcon" />
               Тема №2
-            </a>
+            </Link>
             <div className="namesTopics noselect">Основные части теодолита</div>
           </li>
           {console.log(
@@ -225,7 +225,7 @@ const TopicsPage = (props) => {
             disabledStatesTopics.topicThree
           )}
           <li>
-            <a
+            <Link
               className={
                 selectedTopic("/topicsPage/topicThree")
                 // +
@@ -235,53 +235,53 @@ const TopicsPage = (props) => {
               }
               style={disabledStatesTopics.topicThree ? disabledLinksStyles : {}}
               disabled={disabledStatesTopics.topicThree}
-              href="/topicsPage/topicThree"
+              to="/topicsPage/topicThree"
             >
               <BookOutlined className="bookIcon" />
               Тема №3
-            </a>
+            </Link>
             <div className="namesTopics noselect">
               Установка теодолита в рабочее положение
             </div>
           </li>
           <li>
-            <a
+            <Link
               className={selectedTopic("/topicsPage/topicFour")}
-              href="/topicsPage/topicFour"
+              to="/topicsPage/topicFour"
               style={disabledStatesTopics.topicFour ? disabledLinksStyles : {}}
               disabled={disabledStatesTopics.topicFour}
             >
               <BookOutlined className="bookIcon" />
               Тема №4
-            </a>
+            </Link>
             <div className="namesTopics noselect">
               Устройство и принцип работы технических теодолитов 2Т30П и 4Т30П
             </div>
           </li>
           <li>
-            <a
+            <Link
               className={selectedTopic("/topicsPage/topicFive")}
-              href="/topicsPage/topicFive"
+              to="/topicsPage/topicFive"
               style={disabledStatesTopics.topicFive ? disabledLinksStyles : {}}
               disabled={disabledStatesTopics.topicFive}
             >
               <BookOutlined className="bookIcon" />
               Тема №5
-            </a>
+            </Link>
             <div className="namesTopics noselect">
               Общие сведения о поверках теодолитов 2Т30П и 4Т30П
             </div>
           </li>
           <li>
-            <a
+            <Link
               className={selectedTopic("/topicsPage/topicSix")}
-              href="/topicsPage/topicSix"
+              to="/topicsPage/topicSix"
               style={disabledStatesTopics.topicSix ? disabledLinksStyles : {}}
               disabled={disabledStatesTopics.topicSix}
             >
               <BookOutlined className="bookIcon" />
               Тема №6
-            </a>
+            </Link>
             <div className="namesTopics noselect">
               Отсчётные устройства теодолитов 2Т30П и 4Т30П
             </div>
